@@ -54,6 +54,12 @@ payload = {
             "contentType": "HTML",
             "content": html_body
         },
+        "from": {
+            "emailAddress": {
+                "name": "EGONON SA",
+                "address": "info@egonon.ch"
+            }
+        },
         "toRecipients": [
             {"emailAddress": {"address": "ebferreri@gmail.com"}}
         ]
