@@ -4,29 +4,58 @@ import urllib.request
 
 token = os.environ["OUTLOOK_ACCESS_TOKEN"]
 
-html_body = """<p>Gentile [Nome/Spett.le Direzione],</p>
-<p>Lei gestisce ogni giorno rischi operativi complessi — forniture, margini, mercati esteri. Ma il suo patrimonio personale riflette quella stessa complessità, o la replica silenziosamente?</p>
-<p>EGONON SA è un gestore patrimoniale indipendente, autorizzato FINMA dal 2022, con track record verificabile dal 2007. Non sostituiamo la sua banca. La affianchiamo con un'analisi indipendente del rischio che la maggior parte degli imprenditori non ha mai ricevuto davvero.</p>
-<p><strong>Le offriamo un'analisi gratuita del rischio del suo portafoglio.</strong> Nessun trasferimento di fondi, nessun cambiamento di banca. Solo chiarezza.</p>
-<p>→ Richieda l'analisi: <a href="https://egonon.ch/">https://egonon.ch/</a><br>
-→ Scopra la nostra piattaforma: <a href="https://egononos.polsia.app">https://egononos.polsia.app</a></p>
+html_body = """
+<p>Gentile [Nome],</p>
+
+<p>molti portafogli sembrano solidi quando i mercati salgono. Il vero test arriva quando tutto scende.</p>
+
+<p>Durante lo shock COVID, l'MSCI World ha perso circa -34%. Nello stesso periodo, l'indice flagship EGONON Global Macro Index ha contenuto il drawdown massimo a circa -15%.</p>
+
+<p>Dall'emissione, la strategia ha generato una performance cumulata di +40,63%.</p>
+
+<p>Questi numeri non sono una promessa. Sono però una traccia concreta del nostro approccio: misurare il rischio in profondità, costruire portafogli resilienti e reagire agli shock di mercato con disciplina.</p>
+
+<p>Per questo EGONON SA, gestore patrimoniale svizzero autorizzato FINMA, mette a disposizione di un numero selezionato di investitori una analisi gratuita del rischio di portafoglio.</p>
+
+<p>L'analisi permette di capire:</p>
+<ul>
+  <li>quanto rischio sta realmente assumendo;</li>
+  <li>quanto potrebbe perdere in uno scenario di stress;</li>
+  <li>se il portafoglio è coerente con i suoi obiettivi;</li>
+  <li>dove si concentrano eventuali rischi nascosti.</li>
+</ul>
+
+<p>Può richiederla qui: <a href="https://egononos.polsia.app/rischio">https://egononos.polsia.app/rischio</a><br>
+Per conoscere EGONON SA: <a href="https://egonon.ch">https://egonon.ch</a></p>
+
 <p>Cordiali saluti,<br>
-<strong>EGONON SA</strong> | Lugano &amp; Appenzello<br>
-+41 58 566 60 69 | info@egonon.ch<br>
-<em>Autorizzata FINMA · Vigilanza OSFIN</em></p>
+<strong>Client Relations Team EGONON SA</strong><br>
+Via della Posta 7, 6900 Lugano<br>
++41 (0)58 666 00 69<br>
+<a href="mailto:info@egonon.ch">info@egonon.ch</a><br>
+<a href="https://egonon.ch">https://egonon.ch</a></p>
+
 <hr>
-<p><small>⚠️ EMAIL DI TEST — Template: PMI Industria/Pharma/Export</small></p>"""
+
+<p style="font-size:11px; color:#666;">
+Il presente messaggio ha finalità esclusivamente informative e promozionali e non costituisce consulenza personalizzata in investimenti, raccomandazione personale, offerta, invito o sollecitazione all'acquisto, alla vendita o alla sottoscrizione di strumenti finanziari o servizi di gestione patrimoniale.<br><br>
+I dati relativi a performance e drawdown sono storici, riferiti a specifici periodi di osservazione e non sono indicativi né garanzia di risultati futuri. Ogni investimento comporta rischi, inclusa la possibile perdita parziale o totale del capitale investito. EGONON SA non garantisce capitale, rendimento o protezione da perdite future.<br><br>
+Eventuali servizi di consulenza o gestione patrimoniale potranno essere prestati esclusivamente previa classificazione del cliente, verifica di appropriatezza e/o adeguatezza ove applicabile, e accettazione della relativa documentazione contrattuale.<br><br>
+Per non ricevere ulteriori comunicazioni commerciali da EGONON SA, può utilizzare il link di disiscrizione presente in questa email oppure scrivere a <a href="mailto:info@egonon.ch">info@egonon.ch</a>.
+</p>
+
+<p style="font-size:10px; color:#999;">⚠️ EMAIL DI TEST — Template Base Definitivo EGONON SA</p>
+"""
 
 payload = {
     "message": {
-        "subject": "[TEST] Il suo portafoglio personale compensa il rischio della sua azienda? — EGONON SA",
+        "subject": "Quando i mercati crollano, il vero valore è perdere meno",
         "body": {
             "contentType": "HTML",
             "content": html_body
         },
         "toRecipients": [
-            {"emailAddress": {"address": "ebferreri@gmail.com"}},
-            {"emailAddress": {"address": "ebferreri@egonon.ch"}}
+            {"emailAddress": {"address": "ebferreri@gmail.com"}}
         ]
     },
     "saveToSentItems": True
@@ -45,7 +74,7 @@ req = urllib.request.Request(
 
 try:
     with urllib.request.urlopen(req) as resp:
-        print(f"Inviato con successo. Status: {resp.status}")
+        print(f"Inviato. Status: {resp.status}")
 except urllib.error.HTTPError as e:
     body = e.read().decode()
     print(f"Errore HTTP {e.code}: {body}")
