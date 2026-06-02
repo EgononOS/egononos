@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "properties": {
+    "codice": {
+      "type": "string"
+    },
+    "azienda": {
+      "type": "string"
+    },
+    "localita": {
+      "type": "string"
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "PMI industria / pharma / export",
+        "Costruzioni / immobiliare / architettura",
+        "Hotel / hospitality / ristorazione premium",
+        "Farmacie / farmacisti titolari",
+        "Medici specialisti / cliniche",
+        "Dentisti / ortodontisti / implantologia",
+        "Cliniche veterinarie / veterinari titolari",
+        "Orologeria / gioielleria / lusso / design",
+        "Scuole private / education business",
+        "Sportivi / ex sportivi / agenti / dirigenti"
+      ]
+    },
+    "email": {
+      "type": "string"
+    },
+    "tipo_email": {
+      "type": "string"
+    },
+    "confidenza": {
+      "type": "string",
+      "enum": [
+        "Alta",
+        "Media",
+        "Bassa"
+      ]
+    },
+    "angolo_egonon": {
+      "type": "string"
+    },
+    "stato": {
+      "type": "string",
+      "enum": [
+        "Da contattare",
+        "Email inviata",
+        "Follow-up inviato",
+        "Risposto",
+        "Meeting fissato",
+        "Cliente",
+        "Non interessato"
+      ],
+      "default": "Da contattare"
+    },
+    "note": {
+      "type": "string"
+    },
+    "data_primo_contatto": {
+      "type": "string",
+      "format": "date"
+    },
+    "data_followup": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [],
+  "name": "Prospect"
+}
