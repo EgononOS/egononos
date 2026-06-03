@@ -1,0 +1,884 @@
+{
+  "date": "2026-06-03",
+  "sent_count": 146,
+  "failed_count": 0,
+  "sent": [
+    {
+      "id": "",
+      "azienda": "Alpex Pharma SA",
+      "email": "info@alpexpharma.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "ALS Swiss SA",
+      "email": "contact@als-swiss.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "ALSCO Swiss Sagl",
+      "email": "info@alsco-swiss.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Altea Hub SA",
+      "email": "hello@alteahub.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "APR Applied Pharma Research SA",
+      "email": "info@apr-pharma.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Aptar Mezzovico SA",
+      "email": "info@aptar.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Argor-Heraeus SA",
+      "email": "info@argorheraeus.com",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Ascensori Falconi SA",
+      "email": "info@falconi-ascensori.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "ATF Automation Technic Firm",
+      "email": "info@atf-automation.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Benoil SA",
+      "email": "info@benoil.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Bexsol SA",
+      "email": "info@bexsol.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Brogioli SA",
+      "email": "info@brogioli.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Carlo Volponi SA",
+      "email": "info@carlovolponi.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Casram SA",
+      "email": "info@casram.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Cattaneo Impianti SA",
+      "email": "info@cattaneoimpianti.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Cebi Micromotors Switzerland SA",
+      "email": "info@cebi-micromotors.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Cerbios-Pharma SA",
+      "email": "info@cerbios-pharma.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Chocolat Stella SA",
+      "email": "info@chocolat-stella.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Cipp\u00e0 Trasporti SA",
+      "email": "info@cippa-trasporti.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Componit SA",
+      "email": "info@componit.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "DNA Robotics SA",
+      "email": "info@dna-robotics.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "EAS Industry SA",
+      "email": "info@eas-industry.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Elmec Suisse SA",
+      "email": "info@elmec-suisse.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Euronovate SA",
+      "email": "info@euronovate.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Exten SA",
+      "email": "info@exten.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "FEMTOprint SA",
+      "email": "info@femtoprint.ch",
+      "categoria": "PMI / Industria / Pharma / Export"
+    },
+    {
+      "id": "",
+      "azienda": "Casanova SA",
+      "email": "info@casanova-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Cassina Romano SA",
+      "email": "info@cassinaromano.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Celio Costruzioni SA",
+      "email": "info@celio-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Claudio Bottega SA",
+      "email": "info@claudiobottega.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Duca Figli SA",
+      "email": "info@duca-figli.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "EDILTEAM SA",
+      "email": "info@edilteam.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Galli Costruzioni SA",
+      "email": "info@galli-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Gamboni & Salmina",
+      "email": "info@gamboni-salmina.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Ghirlanda SA",
+      "email": "info@ghirlanda.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Giovanni Quadri SA",
+      "email": "info@giovanniquet.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "GUERINI SA",
+      "email": "info@guerini-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Implenia Svizzera SA",
+      "email": "info@implenia.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Impresa Barella SA",
+      "email": "info@impresa-barella.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Impresa Cocquio SA",
+      "email": "info@impresa-cocquio.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Antonini & Ghidossi SA",
+      "email": "info@antonini-ghidossi.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Impresa Canonica SA",
+      "email": "info@impresa-canonica.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "LDA Costruzioni SA",
+      "email": "info@lda-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Mancini & Marti SA",
+      "email": "info@mancini-marti.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Muttoni Costruzioni SA",
+      "email": "info@muttoni-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Medici Dario e Eros",
+      "email": "info@medici-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Pedrazzini Costruzioni SA",
+      "email": "info@pedrazzini-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "REGAZZONI COSTRUZIONI",
+      "email": "info@regazzoni-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Taddei SA",
+      "email": "info@taddei-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Tenconi Costruzioni SA",
+      "email": "info@tenconi-costruzioni.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Studio it's Architettura",
+      "email": "info@studioits-architettura.ch",
+      "categoria": "Costruzioni / Immobiliare / Architettura"
+    },
+    {
+      "id": "",
+      "azienda": "Clinica Ars Medica",
+      "email": "info@arsmedica.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Centromedico Lugano Stazione",
+      "email": "info@centromedico-lugano.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Radiologia al Parco",
+      "email": "info@radiologia-parco.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Dr. Gionata Marazza",
+      "email": "gmarazza@ticino-dermatology.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Dr.ssa Beatrice Cattrini",
+      "email": "bcattrini@ticino-dermatology.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Dr.ssa Caroline Guillod",
+      "email": "cguillod@ticino-dermatology.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Dr. Lorenzo Pelloni",
+      "email": "lpelloni@ticino-dermatology.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Dr.ssa Enrica Maspoli Postizzi",
+      "email": "emaspoli@ticino-dermatology.ch",
+      "categoria": "Medici specialisti / cliniche"
+    },
+    {
+      "id": "",
+      "azienda": "Dr. Giulio Airoldi",
+      "email": "info@airoldi-dentista.ch",
+      "categoria": "Dentisti / ortodontisti / implantologia"
+    },
+    {
+      "id": "",
+      "azienda": "Dr.ssa Caroline Airoldi-Maeder",
+      "email": "info@airoldi-maeder-dentista.ch",
+      "categoria": "Dentisti / ortodontisti / implantologia"
+    },
+    {
+      "id": "",
+      "azienda": "Dr. Antonio Jos\u00e9 Arques Porcel",
+      "email": "arques@dentista-ticino.ch",
+      "categoria": "Dentisti / ortodontisti / implantologia"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia di Agno SA",
+      "email": "info@farmaciagno.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia San Provino SA",
+      "email": "info@farmaciasanprovino.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Boscolo SA",
+      "email": "info@farmaciaboscolo.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Pellandini",
+      "email": "info@farmaciapellandini.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Moesa",
+      "email": "info@farmaciamoesa.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia della Montagna SA",
+      "email": "info@farmaciamontagna.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Ascona",
+      "email": "info@farmaciaascona.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Muraccio",
+      "email": "info@farmaciamuraccio.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Nuova",
+      "email": "info@farmacianuova.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Dr. Camponovo",
+      "email": "info@farmaciaamponovo.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Mal\u00e8 SA",
+      "email": "info@farmaciamale.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Nazionale",
+      "email": "info@farmacianazioanale.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Nord",
+      "email": "info@farmaciarnord.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Portone",
+      "email": "info@farmaciportone.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Pharmantica Sagl",
+      "email": "info@pharmantica.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Rondi",
+      "email": "info@farmaciarndi.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Farmacia Stazione Biasca SA",
+      "email": "info@farmaciestazione-biasca.ch",
+      "categoria": "Farmacie / farmacisti titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Castello del Sole Beach Resort & SPA",
+      "email": "info@castellodelsole.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel Eden Roc Ascona",
+      "email": "info@edenrocascona.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Giardino Ascona",
+      "email": "info@giardino-ascona.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel Ascona",
+      "email": "info@hotelascona.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Casa Berno Panorama Resort",
+      "email": "info@casaberno.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel La Meridiana Lake & SPA",
+      "email": "info@lameridiana.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Villa Principe Leopoldo",
+      "email": "info@villileopoldo.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Swiss Diamond Hotel",
+      "email": "info@swissdiamondhotel.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "THE VIEW Lugano",
+      "email": "info@theviewlugano.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Grand Hotel Villa Castagnola",
+      "email": "info@villacastagnola.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Kurhaus Cademario Hotel & Spa",
+      "email": "info@kurhauscademario.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel Splendide Royal",
+      "email": "info@splendide-royal.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel LUGANODANTE",
+      "email": "info@luganodante.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel De La Paix",
+      "email": "info@delapaix.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Villa Sassa Hotel",
+      "email": "info@villasassa.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel & Lounge Lago Maggiore",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel City Lugano",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel City Locarno",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel Geranio au Lac",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel Binario Locarno-Muralto",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hotel Elvezia Ascona",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante Ecco Ascona / Giardino",
+      "email": "info@giardino-ascona.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante Seven Ascona",
+      "email": "info@seven.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante Art\u00e9 al Lago",
+      "email": "info@arte-lago.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante La Brezza Ascona",
+      "email": "info@labrezza-ascona.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante Metamorphosis",
+      "email": "info@metamorphosis-lugano.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Hospitality Ticino Group",
+      "email": "info@hospitality-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "GastroTicino",
+      "email": "info@gastroticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante Pizzeria Mama Mia",
+      "email": "info@mamami-lugano.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Ristorante Pizzeria Perbacco",
+      "email": "info@perbacco-ticino.ch",
+      "categoria": "Hotel / hospitality / ristorazione premium"
+    },
+    {
+      "id": "",
+      "azienda": "Amir Saipi - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "David von Ballmoos - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Mattia Zanotti - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Ezgjan Alioski - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Anto Grgic - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Hicham Mahou - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Mattia Bottani - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Renato Steffen - FC Lugano",
+      "email": "info@fclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Niklas Schlegel - HC Lugano",
+      "email": "info@hclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Brian Zanetti - HC Lugano",
+      "email": "info@hclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Alessio Bertaggia - HC Lugano",
+      "email": "info@hclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Luca Fazzini - HC Lugano",
+      "email": "info@hclugano.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Hockey Ticino / dirigenti e sponsor club",
+      "email": "info@hockey-ticino.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Swiss Olympic Athlete Hub - atleti italofoni",
+      "email": "info@swissolympic.ch",
+      "categoria": "Sportivi / ex sportivi / agenti / dirigenti"
+    },
+    {
+      "id": "",
+      "azienda": "Gerald Charles SA",
+      "email": "info@geraldcharles.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "GTK Timek Group SA",
+      "email": "info@gtktimek.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "Ecometal SA",
+      "email": "info@ecometal.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "MONTRELUX SA",
+      "email": "info@montrelux.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "Ronda Time Center SA",
+      "email": "info@rondatimecenter.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "Mersmann SA",
+      "email": "info@mersmann.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "Rocca 1794 Lugano",
+      "email": "info@rocca1794.ch",
+      "categoria": "Orologeria / gioielleria / lusso / design"
+    },
+    {
+      "id": "",
+      "azienda": "International School of Ticino",
+      "email": "info@ist-ticino.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "GIS International School of Lugano",
+      "email": "info@gis-lugano.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "International School of Switzerland",
+      "email": "info@sis-lugano.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "Scuola Il Piccolo Principe",
+      "email": "info@piccoloprincipe.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "Istituto Elvetico Lugano",
+      "email": "info@istitutoelvetico.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "Scuola Montessori Ticino",
+      "email": "info@montessori-ticino.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "TASIS American School",
+      "email": "info@tasis.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "Franklin University Switzerland",
+      "email": "info@franklin.ch",
+      "categoria": "Scuole private / education business"
+    },
+    {
+      "id": "",
+      "azienda": "Ticino Animal Hospital Sagl",
+      "email": "info@ticinoanimalospital.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Ospedale Veterinario La Trinit\u00e0",
+      "email": "info@trinita-veterinaria.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Centro Veterinario Cornaredo",
+      "email": "info@veterinaria-cornaredo.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "tiVet Centro Veterinario",
+      "email": "info@tivet-veterinaria.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Centro Veterinario Preluna",
+      "email": "info@preluna-veterinaria.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "ExoticVet Lugano",
+      "email": "info@exoticvet-lugano.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Studio veterinario N\u00e4geli",
+      "email": "info@nageli-veterinaria.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    },
+    {
+      "id": "",
+      "azienda": "Studio veterinario K\u00e4ppeli",
+      "email": "info@kappeli-veterinaria.ch",
+      "categoria": "Cliniche veterinarie / veterinari titolari"
+    }
+  ],
+  "failed": []
+}
