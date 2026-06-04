@@ -474,9 +474,36 @@
       .hero { grid-template-columns: 1fr; gap: 60px; }
       .metodo-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px; z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--dark); transition: all 0.2s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    .nav-mobile-menu {
+      display: none; flex-direction: column; background: var(--white);
+      border-bottom: 1px solid #e0d8cc; padding: 12px 5%;
+      position: fixed; top: 64px; left: 0; right: 0; z-index: 150;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .nav-mobile-menu a {
+      padding: 12px 0; font-size: 14px; font-family: 'Inter',sans-serif;
+      letter-spacing: 1px; text-transform: uppercase; color: var(--dark);
+      text-decoration: none; border-bottom: 1px solid #f0ebe3;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
     @media (max-width: 768px) {
       nav { padding: 0 5%; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-cta { display: none; }
       .hero { padding: 60px 5% 40px; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .track-grid, .come-grid, .footer-top { grid-template-columns: 1fr; gap: 40px; }
@@ -506,8 +533,21 @@
       <a href="#simulatore">Simulatore</a>
     </div>
   </div>
-  <a href="#analisi" class="nav-cta">Richiedi Analisi Gratuita</a>
+  <div class="nav-right">
+    <a href="#analisi" class="nav-cta">Richiedi Analisi Gratuita</a>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#approccio" onclick="closeMenu()">Il Nostro Approccio</a>
+  <a href="#track-record" onclick="closeMenu()">EGONON Global Macro Index</a>
+  <a href="#storia" onclick="closeMenu()">La Nostra Storia</a>
+  <a href="#prodotti" onclick="closeMenu()">Strumenti</a>
+  <a href="#simulatore" onclick="closeMenu()">Simulatore</a>
+  <a href="#analisi" onclick="closeMenu()" style="color:var(--crimson);font-weight:700;">Richiedi Analisi Gratuita</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -1356,6 +1396,18 @@ function simGeneraPDF(){
 }
 
 // Auto-run on load
+function toggleMenu(){
+  const btn = document.getElementById("navHamburger");
+  const menu = document.getElementById("navMobileMenu");
+  btn.classList.toggle("open");
+  menu.classList.toggle("open");
+}
+function closeMenu(){
+  const btn = document.getElementById("navHamburger");
+  const menu = document.getElementById("navMobileMenu");
+  btn.classList.remove("open");
+  menu.classList.remove("open");
+}
 window.addEventListener("DOMContentLoaded",()=>{
   // Aspetta che Chart.js sia disponibile prima di eseguire il sim iniziale
   function tryRunSim(attempts){
