@@ -1,5 +1,5 @@
 # Template Email EGONON SA — Versione Definitiva Approvata
-**Aggiornato:** 2026-06-04
+**Aggiornato:** 2026-06-05
 **Approvato da:** Emanuele Ferreri
 
 ---
@@ -29,7 +29,7 @@ Per questo EGONON SA — gestore patrimoniale svizzero autorizzato FINMA — met
 **Per richiedere l'analisi gratuita è sufficiente rispondere a questa email.** La contatteremo entro 24 ore per fissare una breve chiamata conoscitiva.
 
 Sito istituzionale: [egonon.ch](https://egonon.ch)
-App di approfondimento (anche mobile): [egononos.polsia.app](https://egononos.polsia.app)
+App di approfondimento (anche mobile): [egononos.github.io/egononos](https://egononos.github.io/egononos)
 
 Cordiali saluti,
 **Client Relations Team EGONON SA**
@@ -56,7 +56,7 @@ Per questo EGONON SA — gestore patrimoniale svizzero autorizzato FINMA — met
 **Per richiedere l'analisi gratuita è sufficiente rispondere a questa email.** La contatteremo entro 24 ore per fissare una breve chiamata conoscitiva.
 
 Sito istituzionale: [egonon.ch](https://egonon.ch)
-App di approfondimento (anche mobile): [egononos.polsia.app](https://egononos.polsia.app)
+App di approfondimento (anche mobile): [egononos.github.io/egononos](https://egononos.github.io/egononos)
 
 Cordiali saluti,
 **Client Relations Team EGONON SA**
@@ -83,7 +83,7 @@ Per questo EGONON SA — gestore patrimoniale svizzero autorizzato FINMA — met
 **Per richiedere l'analisi gratuita è sufficiente rispondere a questa email.** La contatteremo entro 24 ore per fissare una breve chiamata conoscitiva.
 
 Sito istituzionale: [egonon.ch](https://egonon.ch)
-App di approfondimento (anche mobile): [egononos.polsia.app](https://egononos.polsia.app)
+App di approfondimento (anche mobile): [egononos.github.io/egononos](https://egononos.github.io/egononos)
 
 Cordiali saluti,
 **Client Relations Team EGONON SA**
@@ -96,4 +96,4 @@ Via della Posta 7, 6900 Lugano — +41 (0)58 666 00 69
 - Mittente: EGONON SA <info@egonon.ch>
 - CTA principale: risposta diretta all'email
 - egonon.ch = sito istituzionale principale
-- egononos.polsia.app = app mobile di approfondimento
+- egononos.github.io/egononos = simulatore e app di approfondimento
