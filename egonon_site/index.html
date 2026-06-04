@@ -1010,7 +1010,10 @@
 </footer>
 
 <script>
-  document.getElementById('leadForm').addEventListener('submit', async function(e) {
+  (function() {
+  const lf = document.getElementById('leadForm');
+  if(!lf) return;
+  lf.addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
@@ -1047,6 +1050,7 @@
       btn.textContent = 'Richiedi analisi gratuita →';
     }
   });
+  })();
 </script>
 
 
@@ -1178,8 +1182,10 @@ function runSim(){
   else document.getElementById("simAth").style.display="none";
 
   // Chart
-  if(simChart)simChart.destroy();
-  const ctx=document.getElementById("simChart").getContext("2d");
+  if(simChart){try{simChart.destroy();}catch(e){}}
+  const canvas=document.getElementById("simChart");
+  if(!canvas||typeof Chart==="undefined"){console.error("Chart.js non disponibile");return;}
+  const ctx=canvas.getContext("2d");
   simChart=new Chart(ctx,{
     type:"line",
     data:{labels:navSeries.map(p=>p.lbl),datasets:[{data:navSeries.map(p=>Math.round(p.v)),borderColor:"#1a2744",backgroundColor:"rgba(26,39,68,0.07)",borderWidth:2,fill:true,pointRadius:0,tension:0.3}]},
@@ -1351,7 +1357,15 @@ function simGeneraPDF(){
 
 // Auto-run on load
 window.addEventListener("DOMContentLoaded",()=>{
-  try { runSim(); } catch(e){ console.warn("runSim init skipped:",e); }
+  // Aspetta che Chart.js sia disponibile prima di eseguire il sim iniziale
+  function tryRunSim(attempts){
+    if(typeof Chart !== "undefined"){
+      try { runSim(); } catch(e){ console.warn("runSim init error:",e); }
+    } else if(attempts > 0) {
+      setTimeout(()=>tryRunSim(attempts-1), 100);
+    }
+  }
+  tryRunSim(20);
 });
 </script>
 
