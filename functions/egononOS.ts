@@ -1213,6 +1213,7 @@ function acceptDisclaimer(){
         <a href="#approccio">Il Nostro Approccio</a>
         <a href="#track-record">Track Record</a>
         <a href="#storia">La Nostra Storia</a>
+        <a href="#prodotti">Strumenti</a>
         <a href="#simulatore">Simulatore</a>
         <a href="#analisi">Analisi Gratuita</a>
       </div>
@@ -1306,7 +1307,6 @@ function simGeneraPDF() {
   <div class="header-right">
     <strong>Report di Simulazione</strong><br>
     Generato il \${today}<br>
-    ISIN: DE000A2UG4F2
   </div>
 </div>
 

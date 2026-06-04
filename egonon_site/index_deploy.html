@@ -1209,6 +1209,7 @@ function acceptDisclaimer(){
         <a href="#approccio">Il Nostro Approccio</a>
         <a href="#track-record">Track Record</a>
         <a href="#storia">La Nostra Storia</a>
+        <a href="#prodotti">Strumenti</a>
         <a href="#simulatore">Simulatore</a>
         <a href="#analisi">Analisi Gratuita</a>
       </div>
@@ -1266,7 +1267,7 @@ function simGeneraPDF() {
 
   var today = new Date().toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'});
 
-  var html = \`<!DOCTYPE html>
+  var html = `<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -1301,37 +1302,36 @@ function simGeneraPDF() {
   </div>
   <div class="header-right">
     <strong>Report di Simulazione</strong><br>
-    Generato il \${today}<br>
-    ISIN: DE000A2UG4F2
+    Generato il ${today}<br>
   </div>
 </div>
 
-<p style="font-size:12px; margin-bottom:16px;">\${subtitle ? subtitle.textContent : ''}</p>
+<p style="font-size:12px; margin-bottom:16px;">${subtitle ? subtitle.textContent : ''}</p>
 
 <div class="section-title">KPI Principali</div>
 <div class="kpi-grid">
-  <div class="kpi-box"><div class="kpi-val">\${kpiValore ? kpiValore.textContent : '—'}</div><div class="kpi-lbl">Valore Finale</div></div>
-  <div class="kpi-box"><div class="kpi-val">\${kpiRend ? kpiRend.textContent : '—'}</div><div class="kpi-lbl">Rendimento Totale</div></div>
-  <div class="kpi-box"><div class="kpi-val">\${kpiCagr ? kpiCagr.textContent : '—'}</div><div class="kpi-lbl">CAGR</div></div>
-  <div class="kpi-box"><div class="kpi-val">\${kpiVol ? kpiVol.textContent : '—'}</div><div class="kpi-lbl">Volatilità Ann.</div></div>
-  <div class="kpi-box"><div class="kpi-val">\${kpiDD ? kpiDD.textContent : '—'}</div><div class="kpi-lbl">Max Drawdown</div></div>
-  <div class="kpi-box"><div class="kpi-val">\${kpiSharpe ? kpiSharpe.textContent : '—'}</div><div class="kpi-lbl">Sharpe Ratio</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiValore ? kpiValore.textContent : '—'}</div><div class="kpi-lbl">Valore Finale</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiRend ? kpiRend.textContent : '—'}</div><div class="kpi-lbl">Rendimento Totale</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiCagr ? kpiCagr.textContent : '—'}</div><div class="kpi-lbl">CAGR</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiVol ? kpiVol.textContent : '—'}</div><div class="kpi-lbl">Volatilità Ann.</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiDD ? kpiDD.textContent : '—'}</div><div class="kpi-lbl">Max Drawdown</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiSharpe ? kpiSharpe.textContent : '—'}</div><div class="kpi-lbl">Sharpe Ratio</div></div>
 </div>
 
 <div class="section-title">Scorecard Multi-Orizzonte</div>
-\${scorecard ? scorecard.outerHTML : '<p>—</p>'}
+${scorecard ? scorecard.outerHTML : '<p>—</p>'}
 
 <div class="section-title">Drawdown Recovery Timeline</div>
-\${ddTable ? ddTable.outerHTML : '<p>—</p>'}
+${ddTable ? ddTable.outerHTML : '<p>—</p>'}
 
 <div class="section-title">Calendario Rendimenti</div>
-\${calendar ? calendar.outerHTML : '<p>—</p>'}
+${calendar ? calendar.outerHTML : '<p>—</p>'}
 
 <div class="disclaimer">
 <strong>Comunicazione pubblicitaria.</strong> Il presente documento ha finalità esclusivamente informative e promozionali e non costituisce consulenza personalizzata in investimenti, raccomandazione personale, offerta, invito o sollecitazione all'acquisto, alla vendita o alla sottoscrizione di strumenti finanziari. I dati relativi a performance, volatilità e drawdown sono storici e non sono indicativi né garanzia di risultati futuri. Ogni investimento comporta rischi, inclusa la possibile perdita parziale o totale del capitale investito. EGONON SA non garantisce capitale, rendimento o protezione da perdite future. Per non ricevere ulteriori comunicazioni commerciali: info@egonon.ch indicando "cancellazione" nell'oggetto.
 </div>
 <div class="footer">EGONON SA · info@egonon.ch · egonon.ch · Autorizzata FINMA · LIsFi 2022</div>
-</body></html>\`;
+</body></html>`;
 
   // Download diretto come file HTML (nessun popup bloccato)
   var blob = new Blob([html], {type: 'text/html;charset=utf-8'});
