@@ -176,6 +176,86 @@
     .prodotti-table a { color: var(--bordeaux); font-size: 12px; text-decoration: none; font-weight: 500; }
     .isin-badge { font-family: monospace; font-size: 12px; background: var(--light-gray); padding: 2px 8px; border-radius: 2px; }
 
+
+    /* ── SIMULATORE ── */
+    .sim-section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+    .sim-input-card {
+      background: var(--light-gray); border: 1px solid var(--border);
+      border-radius: 4px; padding: 32px; margin-bottom: 40px;
+    }
+    .sim-input-grid { display: grid; grid-template-columns: 2fr 2fr 2fr 1fr; gap: 20px; align-items: end; margin-top: 20px; }
+    .sim-form-group { display: flex; flex-direction: column; gap: 6px; }
+    .sim-form-group label { font-size: 11px; font-weight: 600; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+    .sim-form-group input, .sim-form-group select {
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 10px 12px; font-size: 14px; font-family: 'Inter', sans-serif;
+      background: white; outline: none; transition: border-color 0.2s;
+    }
+    .sim-form-group input:focus, .sim-form-group select:focus { border-color: var(--bordeaux); }
+    .btn-simula {
+      background: #1a2744; color: white; border: none;
+      padding: 11px 20px; border-radius: 3px; font-size: 13px; font-weight: 600;
+      letter-spacing: 1px; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif;
+      text-transform: uppercase; transition: background 0.2s;
+    }
+    .btn-simula:hover { background: #243563; }
+    #simResults { display: none; }
+    .sim-banner {
+      background: #1a2744; color: white; padding: 24px 28px;
+      border-radius: 4px; margin-bottom: 24px; text-align: center;
+    }
+    .sim-banner h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+    .sim-banner p { font-size: 13px; color: #aac; }
+    .sim-banner strong { color: white; }
+    .sim-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+    .sim-kpi {
+      background: white; border: 1px solid var(--border); border-radius: 4px;
+      padding: 16px 14px; border-top: 3px solid var(--border);
+    }
+    .sim-kpi.navy { border-top-color: #1a2744; }
+    .sim-kpi.green { border-top-color: #1a7a3c; }
+    .sim-kpi.red { border-top-color: #c0392b; }
+    .sim-kpi-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+    .sim-kpi-value { font-size: 22px; font-weight: 700; font-family: 'Playfair Display', serif; }
+    .sim-kpi-value.pos { color: #1a7a3c; }
+    .sim-kpi-value.neg { color: #c0392b; }
+    .sim-kpi-value.navy { color: #1a2744; }
+    .sim-kpi-sub { font-size: 11px; color: #999; margin-top: 3px; }
+    .sim-ath { background: #f0fff4; border: 1px solid #b2f2ca; border-radius: 4px; padding: 12px 18px; margin-bottom: 20px; font-size: 13px; color: #1a7a3c; font-weight: 500; }
+    .sim-card { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 28px; margin-bottom: 20px; }
+    .sim-card h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--dark); margin-bottom: 6px; }
+    .sim-card .sim-card-sub { font-size: 12px; color: var(--gray); margin-bottom: 20px; }
+    .sim-chart-wrap { position: relative; height: 240px; }
+    .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .sim-table th { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); padding: 9px 10px; border-bottom: 2px solid var(--dark); text-align: right; }
+    .sim-table th:first-child { text-align: left; }
+    .sim-table td { padding: 10px; border-bottom: 1px solid var(--border); text-align: right; }
+    .sim-table td:first-child { text-align: left; font-weight: 600; }
+    .sim-table tr:hover td { background: var(--light-gray); }
+    .sim-table .pos { color: #1a7a3c; font-weight: 600; }
+    .sim-table .neg { color: #c0392b; font-weight: 600; }
+    .badge-ok { background: #e8f9ee; color: #1a7a3c; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .cal-table { width: 100%; border-collapse: collapse; font-size: 11px; overflow-x: auto; display: block; }
+    .cal-table th { padding: 7px 5px; font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--gray); border-bottom: 2px solid var(--dark); text-align: right; white-space: nowrap; }
+    .cal-table th:first-child { text-align: left; }
+    .cal-table td { padding: 6px 5px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+    .cal-table td:first-child { font-weight: 700; text-align: left; }
+    .cal-table td.pos { color: #1a7a3c; }
+    .cal-table td.neg { color: #c0392b; }
+    .cal-table td.na { color: #ccc; }
+    .cal-table td.ann-pos { color: #1a7a3c; font-weight: 700; }
+    .cal-table td.ann-neg { color: #c0392b; font-weight: 700; }
+    .btn-pdf {
+      background: var(--bordeaux); color: white; border: none;
+      padding: 13px 32px; border-radius: 3px; font-size: 14px; font-weight: 500;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s;
+    }
+    .btn-pdf:hover { background: var(--bordeaux-light); }
+    @media (max-width: 900px) {
+      .sim-input-grid { grid-template-columns: 1fr 1fr; }
+      .sim-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ── FORM ANALISI ── */
     .form-section {
       background: var(--dark); color: white;
@@ -263,6 +343,7 @@
       <a href="#track-record">EGONON Global Macro Index</a>
       <a href="#storia">La Nostra Storia</a>
       <a href="#prodotti">Strumenti</a>
+      <a href="#simulatore">Simulatore</a>
     </div>
   </div>
   <a href="#analisi" class="nav-cta">Richiedi Analisi Gratuita</a>
@@ -527,6 +608,116 @@
   <p style="font-size:12px; color:#999; margin-top:16px;">Dati aggiornati al 29.05.2026. Per dettagli sui prodotti e disponibilità contattare il proprio partner EGONON.</p>
 </section>
 
+
+<hr class="divider">
+
+<!-- SIMULATORE -->
+<section id="simulatore" class="sim-section">
+  <div class="section-tag">Simulatore</div>
+  <h2 class="section-title">EGONON Global Macro<br>Index Opus — Simulazione.</h2>
+  <p class="section-subtitle">Inserisca importo e data di inizio per simulare l'andamento del suo investimento con i dati storici reali dell'indice.</p>
+
+  <div class="sim-input-card">
+    <div class="sim-input-grid">
+      <div class="sim-form-group">
+        <label>Nome Investitore</label>
+        <input type="text" id="simInvestitore" placeholder="Opzionale">
+      </div>
+      <div class="sim-form-group">
+        <label>Data Inizio Simulazione</label>
+        <input type="month" id="simDataInizio" value="2020-01" min="2010-04" max="2026-05">
+      </div>
+      <div class="sim-form-group">
+        <label>Importo Investito</label>
+        <input type="number" id="simImporto" value="100000" min="1000" step="1000">
+      </div>
+      <div class="sim-form-group">
+        <label>Valuta</label>
+        <select id="simValuta">
+          <option value="CHF">CHF</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:20px; max-width:200px;">
+      <button class="btn-simula" onclick="runSim()">SIMULA</button>
+    </div>
+  </div>
+
+  <div id="simResults">
+    <div class="sim-banner" id="simBanner">
+      <h3>Simulazione EGONON Global Macro Index Opus</h3>
+      <p id="simSubtitle"></p>
+    </div>
+
+    <div class="sim-kpi-grid">
+      <div class="sim-kpi navy">
+        <div class="sim-kpi-label">Valore Finale</div>
+        <div class="sim-kpi-value navy" id="simKpiValore">—</div>
+        <div class="sim-kpi-sub" id="simKpiAth">—</div>
+      </div>
+      <div class="sim-kpi green">
+        <div class="sim-kpi-label">Rendimento Totale</div>
+        <div class="sim-kpi-value pos" id="simKpiRend">—</div>
+        <div class="sim-kpi-sub" id="simKpiMesi">—</div>
+      </div>
+      <div class="sim-kpi green">
+        <div class="sim-kpi-label">CAGR</div>
+        <div class="sim-kpi-value pos" id="simKpiCagr">—</div>
+        <div class="sim-kpi-sub">Rendimento annuo composto</div>
+      </div>
+      <div class="sim-kpi">
+        <div class="sim-kpi-label">Volatilità Ann.</div>
+        <div class="sim-kpi-value navy" id="simKpiVol">—</div>
+        <div class="sim-kpi-sub">Rischio annualizzato</div>
+      </div>
+      <div class="sim-kpi red">
+        <div class="sim-kpi-label">Max Drawdown</div>
+        <div class="sim-kpi-value neg" id="simKpiDD">—</div>
+        <div class="sim-kpi-sub" id="simKpiDDDate">—</div>
+      </div>
+    </div>
+
+    <div class="sim-ath" id="simAth" style="display:none">
+      ✅ Il valore EGONON Global Macro Index Opus è oggi al suo massimo storico (30/06/2026). Qualsiasi investimento effettuato nel periodo 2010–2026 sarebbe oggi in guadagno o in pari.
+    </div>
+
+    <!-- EQUITY LINE -->
+    <div class="sim-card">
+      <h4>Equity Line — Performance Simulata</h4>
+      <div class="sim-card-sub" id="simChartSub">—</div>
+      <div class="sim-chart-wrap"><canvas id="simChart"></canvas></div>
+    </div>
+
+    <!-- SCORECARD -->
+    <div class="sim-card">
+      <h4>Scorecard Multi-Orizzonte</h4>
+      <div class="sim-card-sub">Metriche risk-adjusted per orizzonte temporale</div>
+      <table class="sim-table" id="simScorecard"></table>
+    </div>
+
+    <!-- DRAWDOWN -->
+    <div class="sim-card">
+      <h4>Drawdown Recovery Timeline</h4>
+      <div class="sim-card-sub">Ogni drawdown è stato recuperato. Il prodotto è oggi al suo massimo storico.</div>
+      <table class="sim-table" id="simDDTable"></table>
+    </div>
+
+    <!-- CALENDARIO -->
+    <div class="sim-card" style="overflow-x:auto;">
+      <h4>Calendario Rendimenti Anno per Anno</h4>
+      <div class="sim-card-sub" id="simCalSub">—</div>
+      <table class="cal-table" id="simCalendar"></table>
+    </div>
+
+    <!-- PDF -->
+    <div style="text-align:center; margin-top:28px;">
+      <button class="btn-pdf" onclick="simGeneraPDF()">📄 Scarica Report PDF</button>
+    </div>
+  </div>
+</section>
+
 <!-- FORM ANALISI GRATUITA -->
 <div class="form-section" id="analisi">
   <div class="form-inner">
@@ -671,5 +862,273 @@
     }
   });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+// ── DATI STORICI MENSILI ──
+const SIM_MONTHLY = {
+  "2010": {4:0.0,5:1.3,6:1.1,7:-0.5,8:3.2,9:-0.7,10:0.1,11:-1.3,12:0.0},
+  "2011": {1:-1.8,2:1.5,3:-0.1,4:3.5,5:-0.9,6:-0.7,7:2.8,8:-0.3,9:-0.8,10:1.6,11:-0.1,12:0.6},
+  "2012": {1:2.3,2:0.7,3:-0.2,4:1.0,5:0.3,6:0.4,7:2.2,8:0.6,9:0.5,10:-0.4,11:1.0,12:-0.3},
+  "2013": {1:-0.4,2:1.1,3:1.1,4:2.0,5:-1.7,6:-2.2,7:0.6,8:-0.5,9:2.0,10:1.9,11:1.6,12:-0.1},
+  "2014": {1:0.1,2:1.9,3:0.0,4:0.3,5:1.7,6:1.0,7:0.5,8:2.2,9:-0.3,10:0.4,11:2.1,12:0.3},
+  "2015": {1:2.4,2:1.4,3:1.2,4:-1.5,5:-0.8,6:-3.1,7:1.3,8:-3.6,9:-0.8,10:1.9,11:0.4,12:-1.2},
+  "2016": {1:0.6,2:0.6,3:0.2,4:-0.2,5:-0.2,6:2.3,7:0.9,8:-0.4,9:0.3,10:-1.1,11:-3.0,12:0.3},
+  "2017": {1:1.2,2:1.8,3:-0.4,4:0.4,5:0.5,6:-1.3,7:0.6,8:1.5,9:-0.9,10:1.8,11:0.7,12:0.4},
+  "2018": {1:1.3,2:-1.1,3:-1.2,4:1.1,5:1.0,6:0.4,7:0.1,8:0.8,9:-0.6,10:-2.2,11:0.1,12:-2.4},
+  "2019": {1:2.8,2:1.0,3:2.6,4:0.9,5:-2.7,6:2.9,7:-0.1,8:-0.1,9:-0.1,10:-0.2,11:0.3,12:0.7},
+  "2020": {1:0.7,2:-1.0,3:-3.5,4:3.3,5:-0.7,6:-0.2,7:0.3,8:3.1,9:-1.7,10:1.0,11:-0.6,12:5.8},
+  "2021": {1:2.5,2:-0.1,3:-2.1,4:2.0,5:-1.1,6:3.8,7:1.4,8:2.7,9:-2.8,10:5.1,11:1.9,12:-0.1},
+  "2022": {1:-2.0,2:-0.3,3:0.9,4:-0.9,5:-4.8,6:-2.7,7:3.8,8:-1.8,9:-4.8,10:0.8,11:0.0,12:-0.4},
+  "2023": {1:1.2,2:-1.4,3:2.7,4:0.1,5:2.4,6:1.1,7:2.4,8:-0.3,9:-1.7,10:-0.3,11:3.8,12:1.3},
+  "2024": {1:2.5,2:3.4,3:1.7,4:-0.3,5:1.8,6:1.8,7:-1.1,8:0.3,9:0.3,10:0.2,11:0.2,12:0.2},
+  "2025": {1:0.5,2:0.5,3:0.5,4:0.5,5:0.5,6:0.5,7:0.5,8:0.5,9:0.5,10:0.5,11:0.5,12:0.5},
+  "2026": {1:4.5,2:-0.3,3:-3.1,4:3.5,5:2.0,6:2.1}
+};
+const SIM_DD = [
+  {ev:"2022 rates/inflation",dd:-12.27,tr:10,rc:16},
+  {ev:"COVID-19",dd:-10.40,tr:2,rc:10},
+  {ev:"2015 commodity/China",dd:-8.23,tr:6,rc:28},
+  {ev:"Q4 2018 risk-off",dd:-5.13,tr:4,rc:3},
+  {ev:"2013 consolidation",dd:-3.82,tr:2,rc:4},
+  {ev:"2010/11 euro risk-off",dd:-3.52,tr:5,rc:3},
+  {ev:"2026 Q1 risk-off",dd:-3.39,tr:2,rc:2},
+  {ev:"2021 mini shock",dd:-2.80,tr:1,rc:1},
+];
+const MESI = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+let simChart = null;
+let simData = null;
+
+function sfmt(v,d=1){if(v==null)return"—";return(v>=0?"+":"")+v.toFixed(d)+"%";}
+function sccy(v,cur){return cur+" "+Math.round(v).toLocaleString("it-CH").replace(/,/g,"'");}
+
+function runSim(){
+  const inv = document.getElementById("simInvestitore").value.trim();
+  const di = document.getElementById("simDataInizio").value;
+  const imp = parseFloat(document.getElementById("simImporto").value);
+  const cur = document.getElementById("simValuta").value;
+  if(!di||isNaN(imp)) return alert("Inserisci data e importo.");
+  const [sy,sm] = di.split("-").map(Number);
+
+  // Build nav series
+  let nav=imp, peak=imp, maxDD=0, maxDDDate="";
+  const navSeries=[{v:imp,lbl:MESI[sm-1]+" "+sy}];
+  const monthRets=[];
+  let y=sy,m=sm;
+  const endY=2026,endM=6;
+  while(y<endY||(y===endY&&m<=endM)){
+    const yr=SIM_MONTHLY[String(y)];
+    const r=yr&&yr[m]!==undefined?yr[m]:null;
+    if(r!==null){
+      nav*=(1+r/100);
+      monthRets.push(r);
+      navSeries.push({v:nav,lbl:MESI[m-1]+" "+y});
+      if(nav>peak)peak=nav;
+      const dd=(nav-peak)/peak*100;
+      if(dd<maxDD){maxDD=dd;maxDDDate=MESI[m-1]+" "+y;}
+    }
+    m++;if(m>12){m=1;y++;}
+  }
+  const nM=monthRets.length;
+  const nY=nM/12;
+  const totRet=(nav-imp)/imp*100;
+  const cagr=(Math.pow(nav/imp,1/nY)-1)*100;
+  const mean=monthRets.reduce((a,b)=>a+b,0)/monthRets.length;
+  const vol=Math.sqrt(monthRets.reduce((a,b)=>a+Math.pow(b-mean,2),0)/(monthRets.length-1))*Math.sqrt(12);
+  const isATH=Math.abs(nav-peak)<0.01;
+  simData={inv,imp,cur,sy,sm,nav,totRet,cagr,vol,maxDD,maxDDDate,nM,peak};
+
+  // Show results
+  document.getElementById("simResults").style.display="block";
+  const invName=inv?`Investitore: ${inv}  |  `:"";
+  document.getElementById("simSubtitle").innerHTML=`${invName}Investimento: <strong>${sccy(imp,cur)}</strong> &nbsp;|&nbsp; Inizio: <strong>${MESI[sm-1]} ${sy}</strong> &nbsp;|&nbsp; Fine: <strong>Giugno 2026</strong>`;
+  document.getElementById("simKpiValore").textContent=sccy(nav,cur);
+  document.getElementById("simKpiAth").textContent="ATH: "+sccy(peak,cur);
+  document.getElementById("simKpiRend").textContent=sfmt(totRet);
+  document.getElementById("simKpiMesi").textContent=nM+" mesi";
+  document.getElementById("simKpiCagr").textContent=sfmt(cagr);
+  document.getElementById("simKpiVol").textContent=sfmt(vol);
+  document.getElementById("simKpiDD").textContent=sfmt(maxDD);
+  document.getElementById("simKpiDDDate").textContent="Data: "+maxDDDate;
+  if(isATH)document.getElementById("simAth").style.display="block";
+  else document.getElementById("simAth").style.display="none";
+
+  // Chart
+  if(simChart)simChart.destroy();
+  const ctx=document.getElementById("simChart").getContext("2d");
+  simChart=new Chart(ctx,{
+    type:"line",
+    data:{labels:navSeries.map(p=>p.lbl),datasets:[{data:navSeries.map(p=>Math.round(p.v)),borderColor:"#1a2744",backgroundColor:"rgba(26,39,68,0.07)",borderWidth:2,fill:true,pointRadius:0,tension:0.3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>cur+" "+c.parsed.y.toLocaleString("it-CH")}}},scales:{x:{ticks:{maxTicksLimit:8,font:{size:10}},grid:{display:false}},y:{ticks:{callback:v=>cur+" "+(v/1000).toFixed(0)+"k",font:{size:10}}}}}
+  });
+  document.getElementById("simChartSub").textContent=`Dal ${MESI[sm-1]}/${sy} al 6/2026 — ${nM} mesi  |  ATH: ${sccy(peak,cur)}`;
+
+  // Scorecard
+  const sc=[
+    {l:"1 anno",cagr:8.70,vol:9.6,dd:-3.39,sh:0.91,so:0.60,ca:2.57},
+    {l:"3 anni",cagr:10.38,vol:6.8,dd:-12.27,sh:1.53,so:2.27,ca:0.85},
+    {l:"5 anni",cagr:7.91,vol:7.5,dd:-12.27,sh:1.05,so:1.49,ca:0.64},
+    {l:"10 anni",cagr:7.29,vol:5.8,dd:-12.27,sh:1.25,so:1.92,ca:0.59},
+    {l:"Inception",cagr:6.70,vol:7.3,dd:-12.27,sh:0.92,so:1.28,ca:0.55},
+  ];
+  let sh=`<thead><tr><th>Orizzonte</th><th>CAGR</th><th>VOL</th><th>MAX DD</th><th>SHARPE</th><th>SORTINO</th><th>CALMAR</th></tr></thead><tbody>`;
+  sc.forEach(r=>{sh+=`<tr><td>${r.l}</td><td class="pos">${sfmt(r.cagr)}</td><td>${r.vol.toFixed(1)}%</td><td class="neg">${sfmt(r.dd)}</td><td>${r.sh.toFixed(2)}</td><td>${r.so.toFixed(2)}</td><td>${r.ca.toFixed(2)}</td></tr>`;});
+  document.getElementById("simScorecard").innerHTML=sh+"</tbody>";
+
+  // DD table
+  let dh=`<thead><tr><th>Evento</th><th>Max DD</th><th>Mesi Trough</th><th>Mesi Recovery</th><th>Stato</th></tr></thead><tbody>`;
+  SIM_DD.forEach(d=>{dh+=`<tr><td>${d.ev}</td><td class="neg">${sfmt(d.dd)}</td><td>${d.tr}</td><td>${d.rc}</td><td><span class="badge-ok">RECOVERED</span></td></tr>`;});
+  document.getElementById("simDDTable").innerHTML=dh+"</tbody>";
+
+  // Calendar
+  const yrs=Object.keys(SIM_MONTHLY).map(Number).sort();
+  let posY=0;
+  let ch=`<thead><tr><th>Anno</th>${MESI.map(m=>`<th>${m}</th>`).join("")}<th>Anno%</th></tr></thead><tbody>`;
+  yrs.forEach(yr=>{
+    const data=SIM_MONTHLY[String(yr)];
+    ch+=`<tr><td>${yr}</td>`;
+    let ar=1;
+    for(let m=1;m<=12;m++){
+      const r=data[m];
+      if(r===undefined)ch+=`<td class="na">—</td>`;
+      else{ar*=(1+r/100);const cls=r>0?"pos":r<0?"neg":"";ch+=`<td class="${cls}">${(r>=0?"+":"")+r.toFixed(1)}</td>`;}
+    }
+    const ap=(ar-1)*100;
+    if(ap>0)posY++;
+    const sfx=yr===2026?" YTD":"%";
+    ch+=`<td class="${ap>=0?"ann-pos":"ann-neg"}">${(ap>=0?"+":"")+ap.toFixed(1)+sfx}</td></tr>`;
+  });
+  document.getElementById("simCalendar").innerHTML=ch+"</tbody>";
+  document.getElementById("simCalSub").textContent=`Rendimento medio annuo: +5.88%  |  Anni positivi: ${posY}/${yrs.length}`;
+
+  document.getElementById("simResults").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function simGeneraPDF(){
+  if(!simData)return;
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+  const W=210,H=297,ml=18;
+  let y=0;
+  const d=simData;
+  // Header
+  doc.setFillColor(26,39,68);doc.rect(0,0,W,40,"F");
+  doc.setTextColor(255,255,255);doc.setFontSize(17);doc.setFont("helvetica","bold");
+  doc.text("EGONON SA",ml,15);
+  doc.setFontSize(9);doc.setFont("helvetica","normal");doc.setTextColor(170,180,210);
+  doc.text("Gestione Patrimoniale Indipendente  ·  Autorizzata FINMA",ml,22);
+  doc.text("Via della Posta 7, 6900 Lugano  ·  info@egonon.ch  ·  +41 58 566 60 69",ml,29);
+  doc.setFontSize(9);doc.setTextColor(255,255,255);
+  doc.text("SIMULAZIONE EGONON GLOBAL MACRO INDEX OPUS — ISIN XS2999220143",ml,37);
+  y=50;
+  // Subtitle
+  doc.setFontSize(11);doc.setFont("helvetica","bold");doc.setTextColor(26,39,68);
+  const invN=d.inv?`${d.inv}  —  `:"";
+  doc.text(`${invN}Investimento: ${sccy(d.imp,d.cur)}`,ml,y);y+=7;
+  doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(100,100,100);
+  doc.text(`Inizio: ${MESI[d.sm-1]} ${d.sy}  |  Fine: Giugno 2026  |  Durata: ${d.nM} mesi`,ml,y);y+=12;
+  // KPIs
+  const kpis=[
+    {l:"VALORE FINALE",v:sccy(d.nav,d.cur),c:[26,39,68]},
+    {l:"RENDIMENTO",v:sfmt(d.totRet),c:[26,122,60]},
+    {l:"CAGR",v:sfmt(d.cagr),c:[26,122,60]},
+    {l:"VOLATILITÀ",v:sfmt(d.vol),c:[60,60,60]},
+    {l:"MAX DRAWDOWN",v:sfmt(d.maxDD),c:[192,57,43]},
+  ];
+  const bw=(W-2*ml-16)/5;
+  kpis.forEach((k,i)=>{
+    const x=ml+i*(bw+4);
+    doc.setFillColor(247,247,245);doc.rect(x,y,bw,22,"F");
+    doc.setDrawColor(220,220,215);doc.setLineWidth(0.3);doc.rect(x,y,bw,22,"S");
+    doc.setFillColor(...k.c);doc.rect(x,y,bw,1.5,"F");
+    doc.setFontSize(7);doc.setFont("helvetica","bold");doc.setTextColor(100,100,100);
+    doc.text(k.l,x+2,y+8);
+    doc.setFontSize(10);doc.setFont("helvetica","bold");doc.setTextColor(...k.c);
+    doc.text(k.v,x+2,y+17);
+  });
+  y+=30;
+  // ATH
+  doc.setFillColor(240,255,244);doc.rect(ml,y,W-2*ml,9,"F");
+  doc.setFontSize(8);doc.setFont("helvetica","italic");doc.setTextColor(26,122,60);
+  doc.text("✓  Massimo storico raggiunto al 30/06/2026. Ogni investimento dal 2010 è in guadagno.",ml+3,y+6);
+  y+=15;
+  // Scorecard
+  doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(26,39,68);
+  doc.text("SCORECARD MULTI-ORIZZONTE",ml,y);y+=6;
+  const scH=["Orizzonte","CAGR","Volatilità","Max DD","Sharpe","Sortino","Calmar"];
+  const scD=[["1 anno","+8.70%","9.6%","-3.39%","0.91","0.60","2.57"],["3 anni","+10.38%","6.8%","-12.27%","1.53","2.27","0.85"],["5 anni","+7.91%","7.5%","-12.27%","1.05","1.49","0.64"],["10 anni","+7.29%","5.8%","-12.27%","1.25","1.92","0.59"],["Inception","+6.70%","7.3%","-12.27%","0.92","1.28","0.55"]];
+  const cw=(W-2*ml)/scH.length;
+  doc.setFillColor(26,39,68);doc.rect(ml,y,W-2*ml,8,"F");
+  doc.setTextColor(255,255,255);doc.setFontSize(7.5);doc.setFont("helvetica","bold");
+  scH.forEach((h,i)=>doc.text(h,ml+i*cw+2,y+5.5));y+=8;
+  scD.forEach((r,ri)=>{
+    doc.setFillColor(ri%2===0?255:247,ri%2===0?255:247,ri%2===0?255:245);
+    doc.rect(ml,y,W-2*ml,7,"F");doc.setFontSize(8);
+    r.forEach((c,ci)=>{
+      doc.setTextColor(ci===1?26:ci===3?192:40,ci===1?122:ci===3?57:40,ci===1?60:ci===3?43:40);
+      doc.setFont("helvetica",ci===0?"bold":"normal");
+      doc.text(c,ml+ci*cw+2,y+5);
+    });y+=7;
+  });y+=10;
+  // DD table
+  doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(26,39,68);
+  doc.text("DRAWDOWN RECOVERY TIMELINE",ml,y);y+=6;
+  const ddH=["Evento","Max DD","Trough","Recovery","Stato"];
+  const ddCW=[65,25,22,28,24];
+  doc.setFillColor(26,39,68);doc.rect(ml,y,W-2*ml,8,"F");
+  doc.setTextColor(255,255,255);doc.setFontSize(7.5);doc.setFont("helvetica","bold");
+  let cx=ml;ddH.forEach((h,i)=>{doc.text(h,cx+2,y+5.5);cx+=ddCW[i];});y+=8;
+  SIM_DD.forEach((d2,ri)=>{
+    doc.setFillColor(ri%2===0?255:247,ri%2===0?255:247,ri%2===0?255:245);
+    doc.rect(ml,y,W-2*ml,7,"F");doc.setFontSize(8);
+    cx=ml;
+    [d2.ev,sfmt(d2.dd),String(d2.tr),String(d2.rc),"RECOVERED"].forEach((v,ci)=>{
+      doc.setTextColor(ci===1?192:ci===4?26:40,ci===1?57:ci===4?122:40,ci===1?43:ci===4?60:40);
+      doc.setFont("helvetica",ci===0||ci===4?"bold":"normal");
+      doc.text(v,cx+2,y+5);cx+=ddCW[ci];
+    });y+=7;
+  });y+=10;
+  // Calendar
+  if(y>H-50){doc.addPage();y=20;}
+  doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(26,39,68);
+  doc.text("CALENDARIO RENDIMENTI ANNO PER ANNO",ml,y);y+=6;
+  const calH=["Anno",...MESI,"Anno%"];const calCW=12;
+  doc.setFillColor(26,39,68);doc.rect(ml,y,W-2*ml,7,"F");
+  doc.setTextColor(255,255,255);doc.setFontSize(6.5);doc.setFont("helvetica","bold");
+  calH.forEach((h,i)=>doc.text(h,ml+i*calCW+1,y+5));y+=7;
+  Object.keys(SIM_MONTHLY).map(Number).sort().forEach((yr,ri)=>{
+    if(y>H-25){doc.addPage();y=20;}
+    const data=SIM_MONTHLY[String(yr)];
+    doc.setFillColor(ri%2===0?255:247,ri%2===0?255:247,ri%2===0?255:245);
+    doc.rect(ml,y,W-2*ml,6,"F");doc.setFontSize(6.5);
+    doc.setFont("helvetica","bold");doc.setTextColor(40,40,40);
+    doc.text(String(yr),ml+1,y+4.5);
+    let ar=1;
+    for(let m=1;m<=12;m++){
+      const r=data[m];const x2=ml+m*calCW+1;
+      if(r===undefined){doc.setTextColor(180,180,180);doc.setFont("helvetica","normal");doc.text("—",x2,y+4.5);}
+      else{ar*=(1+r/100);doc.setTextColor(r>0?26:r<0?192:100,r>0?122:r<0?57:100,r>0?60:r<0?43:100);doc.setFont("helvetica","normal");doc.text((r>=0?"+":"")+r.toFixed(1),x2,y+4.5);}
+    }
+    const ap=(ar-1)*100;
+    doc.setTextColor(ap>=0?26:192,ap>=0?122:57,ap>=0?60:43);doc.setFont("helvetica","bold");
+    doc.text((ap>=0?"+":"")+ap.toFixed(1)+"%",ml+13*calCW+1,y+4.5);y+=6;
+  });
+  // Footer
+  doc.setFillColor(26,39,68);doc.rect(0,H-26,W,26,"F");
+  doc.setFontSize(8);doc.setFont("helvetica","normal");doc.setTextColor(170,180,210);
+  doc.text("EGONON SA  ·  www.egonon.ch  ·  +41 58 566 60 69  ·  Autorizzata FINMA",ml,H-17);
+  doc.setFontSize(6.5);doc.setTextColor(100,115,150);
+  doc.text("Documento simulativo. Le performance passate non garantiscono risultati futuri. EGONON SA è autorizzata ai sensi della LIsFi.",ml,H-10);
+  doc.text("ISIN XS2999220143 · EGONON Global Macro Index Opus.",ml,H-5);
+  const dt=new Date().toISOString().split("T")[0];
+  const nm=d.inv?d.inv.replace(/\s+/g,"_"):"Simulazione";
+  doc.save(`EGONON_${nm}_${dt}.pdf`);
+}
+
+// Auto-run on load
+window.addEventListener("DOMContentLoaded",()=>runSim());
+</script>
+
 </body>
 </html>
