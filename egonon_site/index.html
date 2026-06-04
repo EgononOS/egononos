@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EGONON SA — Gestione Patrimoniale Indipendente</title>
+  <meta name="description" content="Analisi gratuita di Risk Management Istituzionale. Scopra se il suo portafoglio è davvero coerente con il suo profilo di rischio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bordeaux: #8B1A1A;
+      --bordeaux-light: #a52020;
+      --dark: #1a1a1a;
+      --gray: #555;
+      --light-gray: #f7f7f5;
+      --border: #e0ddd8;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-left { display: flex; align-items: center; gap: 32px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-box {
+      width: 44px; height: 44px;
+      background: var(--bordeaux);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 2px;
+    }
+    .nav-logo-box span { color: white; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; }
+    .nav-brand { display: flex; flex-direction: column; }
+    .nav-brand-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; color: var(--dark); }
+    .nav-brand-sub { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { text-decoration: none; font-size: 13px; color: var(--gray); letter-spacing: 0.5px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bordeaux); }
+    .nav-cta {
+      background: var(--bordeaux); color: white;
+      padding: 10px 22px; border-radius: 2px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--bordeaux-light); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 5% 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hero-tag {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 24px;
+    }
+    .hero-tag span { color: var(--bordeaux); }
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 300; line-height: 1.15;
+      color: var(--dark); margin-bottom: 8px;
+    }
+    .hero h1 em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: clamp(40px, 4.5vw, 60px);
+      color: var(--bordeaux); display: block; line-height: 1.2;
+    }
+    .hero-sub { font-size: 17px; color: var(--gray); margin: 20px 0 12px; font-weight: 400; line-height: 1.5; }
+    .hero-bullets { list-style: none; margin: 20px 0 32px; display: flex; flex-direction: column; gap: 8px; }
+    .hero-bullets li { font-size: 13px; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .hero-bullets li::before { content: '✓'; color: var(--bordeaux); font-weight: 700; font-size: 13px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--bordeaux); color: white;
+      padding: 14px 28px; border-radius: 2px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: background 0.2s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--bordeaux-light); }
+    .btn-secondary {
+      border: 1px solid var(--border); color: var(--dark);
+      padding: 14px 28px; border-radius: 2px;
+      font-size: 14px; font-weight: 400; text-decoration: none;
+      transition: border-color 0.2s; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+
+    /* ── STATS BOX ── */
+    .hero-right { display: flex; flex-direction: column; gap: 16px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .stat-box {
+      background: var(--light-gray); border: 1px solid var(--border);
+      padding: 20px 16px; text-align: center; border-radius: 2px;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700; color: var(--bordeaux);
+    }
+    .stat-label { font-size: 11px; color: var(--gray); margin-top: 4px; letter-spacing: 0.3px; }
+    .egonon-quote {
+      background: var(--dark); color: white;
+      padding: 24px; border-radius: 2px;
+    }
+    .egonon-quote strong { font-size: 13px; letter-spacing: 0.5px; }
+    .egonon-quote p { font-size: 13px; color: #aaa; margin-top: 8px; font-style: italic; line-height: 1.5; }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+
+    /* ── SECTION ── */
+    section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+    .section-tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--bordeaux); margin-bottom: 16px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-subtitle { font-size: 16px; color: var(--gray); max-width: 600px; line-height: 1.6; }
+
+    /* ── TRACK RECORD ── */
+    .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; align-items: start; }
+    .track-table { width: 100%; border-collapse: collapse; }
+    .track-table th { text-align: left; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); padding: 10px 0; border-bottom: 2px solid var(--dark); }
+    .track-table td { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+    .track-table td:last-child { font-weight: 600; color: var(--bordeaux); text-align: right; }
+    .allocation-bars { display: flex; flex-direction: column; gap: 14px; }
+    .alloc-row { display: flex; flex-direction: column; gap: 4px; }
+    .alloc-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray); }
+    .alloc-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .alloc-fill { height: 100%; background: var(--bordeaux); border-radius: 3px; }
+    .track-note { font-size: 11px; color: #999; margin-top: 20px; line-height: 1.6; }
+
+    /* ── METODO ── */
+    .metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+    .metodo-card { padding: 32px; border: 1px solid var(--border); border-radius: 2px; }
+    .metodo-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 12px; }
+    .metodo-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* ── COME FUNZIONA ── */
+    .come-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 48px; }
+    .come-card { display: flex; gap: 20px; padding: 28px; background: var(--light-gray); border-radius: 2px; }
+    .come-icon { font-size: 24px; flex-shrink: 0; }
+    .come-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .come-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ── STORIA ── */
+    .storia-timeline { display: flex; flex-direction: column; gap: 0; margin-top: 48px; max-width: 700px; }
+    .storia-item { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .storia-year { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--bordeaux); }
+    .storia-content h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .storia-content p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ── PRODOTTI ── */
+    .prodotti-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+    .prodotti-table th { text-align: left; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); padding: 12px 16px; border-bottom: 2px solid var(--dark); }
+    .prodotti-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .prodotti-table tr:hover td { background: var(--light-gray); }
+    .prodotti-table a { color: var(--bordeaux); font-size: 12px; text-decoration: none; font-weight: 500; }
+    .isin-badge { font-family: monospace; font-size: 12px; background: var(--light-gray); padding: 2px 8px; border-radius: 2px; }
+
+    /* ── FORM ANALISI ── */
+    .form-section {
+      background: var(--dark); color: white;
+      padding: 80px 5%; max-width: 100%;
+    }
+    .form-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .form-left .section-tag { color: #888; }
+    .form-left .section-title { color: white; }
+    .form-left .section-subtitle { color: #aaa; }
+    .form-promise { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .form-promise-item { display: flex; gap: 12px; align-items: flex-start; }
+    .form-promise-item span:first-child { color: var(--bordeaux); font-size: 16px; margin-top: 2px; }
+    .form-promise-item p { font-size: 14px; color: #ccc; line-height: 1.5; }
+    .form-card { background: white; color: var(--dark); padding: 40px; border-radius: 4px; }
+    .form-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+    .form-card p { font-size: 13px; color: var(--gray); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 12px; font-weight: 500; color: var(--gray); letter-spacing: 0.5px; text-transform: uppercase; }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1px solid var(--border); border-radius: 2px;
+      padding: 11px 14px; font-size: 14px; font-family: 'Inter', sans-serif;
+      color: var(--dark); background: white; outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--bordeaux); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%; background: var(--bordeaux); color: white;
+      border: none; padding: 14px; border-radius: 2px;
+      font-size: 15px; font-weight: 500; cursor: pointer;
+      transition: background 0.2s; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .form-submit:hover { background: var(--bordeaux-light); }
+    .form-submit:disabled { background: #ccc; cursor: not-allowed; }
+    .form-note { font-size: 11px; color: #999; margin-top: 12px; text-align: center; line-height: 1.5; }
+    .form-success {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .form-success .check { font-size: 48px; margin-bottom: 16px; }
+    .form-success h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 10px; color: var(--bordeaux); }
+    .form-success p { font-size: 14px; color: var(--gray); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111; color: #aaa;
+      padding: 48px 5%; text-align: center;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: 3px; color: white; margin-bottom: 8px; }
+    .footer-sub { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin-bottom: 24px; }
+    .footer-info { font-size: 13px; line-height: 2; }
+    .footer-info a { color: #aaa; text-decoration: none; }
+    .footer-info a:hover { color: white; }
+    .footer-disclaimer { font-size: 11px; color: #555; margin-top: 32px; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 48px 4%; gap: 40px; }
+      .track-grid { grid-template-columns: 1fr; }
+      .metodo-grid { grid-template-columns: 1fr; }
+      .come-grid { grid-template-columns: 1fr; }
+      .form-inner { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 60px 4%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-box"><span>BE</span></div>
+      <div class="nav-brand">
+        <span class="nav-brand-name">EGONON</span>
+        <span class="nav-brand-sub">Gestione Patrimoniale Indipendente</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#approccio">Il Nostro Approccio</a>
+      <a href="#track-record">EGONON Global Macro Index</a>
+      <a href="#storia">La Nostra Storia</a>
+      <a href="#prodotti">Strumenti</a>
+    </div>
+  </div>
+  <a href="#analisi" class="nav-cta">Richiedi Analisi Gratuita</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-tag"><span>SVIZZERA, DAL 2007</span> · AUTORIZZATA FINMA</p>
+    <h1>
+      Analisi gratuita di
+      <em>Risk Management<br>Istituzionale.</em>
+    </h1>
+    <p class="hero-sub">Scopra se il suo portafoglio è davvero coerente con il suo profilo di rischio.</p>
+    <p style="font-size:14px; color:var(--gray);">Le restituiamo un'analisi indipendente e gratuita, sviluppata con la metodologia che applichiamo alla nostra clientela istituzionale.</p>
+    <ul class="hero-bullets">
+      <li>Non deve cambiare banca.</li>
+      <li>Non deve spostare nulla.</li>
+      <li>Non deve modificare la sua struttura attuale.</li>
+    </ul>
+    <div class="hero-actions">
+      <a href="#analisi" class="btn-primary">Richiedi analisi gratuita →</a>
+      <a href="#approccio" class="btn-secondary">Scopri il metodo</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-value">+11,00%</div>
+        <div class="stat-label">Ultimo anno</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">+33,50%</div>
+        <div class="stat-label">Performance 3 anni</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">+38,73%</div>
+        <div class="stat-label">Performance 5 anni</div>
+      </div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="stat-box">
+        <div class="stat-value">1,20</div>
+        <div class="stat-label">Sharpe Ratio (1 anno)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">−4,22%</div>
+        <div class="stat-label">Max Drawdown (1 anno)</div>
+      </div>
+    </div>
+    <div class="egonon-quote">
+      <strong>EGONON SA · dal 2007</strong>
+      <p>"Etsi omnes, ego non" — "Anche se tutti, io no".<br>19 anni di storia, sempre gli stessi, fedeli al nostro nome.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TRACK RECORD -->
+<section id="track-record">
+  <div class="section-tag">Track Record</div>
+  <h2 class="section-title">Rendimenti verificabili.<br>Disciplina, non fortuna.</h2>
+  <p class="section-subtitle">Performance del Certificate Linked to Global Macro TR Index (BNP Paribas EUR, ISIN XS2999220143). Dati al 29.05.2026 · Fonte: Börse Düsseldorf.</p>
+  <div class="track-grid">
+    <div>
+      <table class="track-table">
+        <thead><tr><th>Periodo</th><th style="text-align:right">Performance</th></tr></thead>
+        <tbody>
+          <tr><td>Ultimo anno</td><td>+11,00%</td></tr>
+          <tr><td>3 anni</td><td>+33,50%</td></tr>
+          <tr><td>5 anni</td><td>+38,73%</td></tr>
+        </tbody>
+      </table>
+      <p class="track-note">Dati al 29.05.2026. Fonte: Börse Düsseldorf · EGONON Global Macro Index Opus (ISIN XS2999220143, BNP Paribas EUR). Le performance passate non sono garanzia di rendimenti futuri.</p>
+    </div>
+    <div>
+      <p style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-bottom:20px;">Asset Allocation — 30.11.2025</p>
+      <div class="allocation-bars">
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Liquidità EUR</span><span>41,7%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:41.7%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Obbligazioni EUR</span><span>16,7%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:16.7%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Azioni USA</span><span>11,4%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:11.4%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Commodities</span><span>10,8%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:10.8%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Altro</span><span>19,4%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:19.4%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- APPROCCIO / METODO -->
+<section id="approccio">
+  <div class="section-tag">Il Metodo EGONON</div>
+  <h2 class="section-title">Investire per preservare.<br>Preservare per crescere.</h2>
+  <p class="section-subtitle">Ogni decisione di portafoglio parte dal rischio, non dal rendimento. Il risultato è un metodo pensato per attraversare i cicli, non solo per beneficiarne.</p>
+  <div class="metodo-grid">
+    <div class="metodo-card">
+      <h3>Costruzione Orientata al Rischio</h3>
+      <p>La costruzione del portafoglio inizia con l'analisi degli scenari su dimensioni macro, geografiche e per classe di attivo — prima che venga assunta una singola posizione.</p>
+    </div>
+    <div class="metodo-card">
+      <h3>Ampiezza Macro Globale</h3>
+      <p>Diversificazione tra azioni, reddito fisso, materie prime, FX e strumenti alternativi — con equilibrio geografico che regge qualunque scenario si materializzi.</p>
+    </div>
+    <div class="metodo-card">
+      <h3>Precisione Strutturata</h3>
+      <p>Strumenti su misura — OTC, fondi, obbligazioni, depositi — che corrispondono a profili di rischio/rendimento specifici e a visioni di mercato esplicite, non prodotti standard.</p>
+    </div>
+    <div class="metodo-card">
+      <h3>Tecnologia Quantitativa</h3>
+      <p>Utilizziamo statistiche Pareto-Lévy e AI per misurare il rischio e ridurre i bias. Un Comitato Tecnico-Scientifico dedicato valida ogni scelta di investimento.</p>
+    </div>
+    <div class="metodo-card">
+      <h3>Gestione Basata su Dati</h3>
+      <p>Ogni decisione è ancorata a modelli quantitativi. Nessuna scelta discrezionale non supportata dai dati. Perché basarsi solo sulle opinioni quando è disponibile la scienza?</p>
+    </div>
+    <div class="metodo-card">
+      <h3>Governance del Rischio</h3>
+      <p>Monitoraggio continuo degli scenari con alert di ribilanciamento automatici. Attribuzione del rischio a ogni fattore macro — affinché si sappia sempre dove insiste l'esposizione.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COME FUNZIONA -->
+<section>
+  <div class="section-tag">Come Funziona</div>
+  <h2 class="section-title">EGONON si aggiunge —<br>non sostituisce.</h2>
+  <p class="section-subtitle">Il nostro intervento non richiede alcuna modifica alla sua struttura bancaria esistente. Analizziamo, controlliamo e affianchiamo.</p>
+  <div class="come-grid">
+    <div class="come-card">
+      <div class="come-icon">🏦</div>
+      <div>
+        <h3>Non deve cambiare banca</h3>
+        <p>Lavoriamo con qualsiasi istituto. Le banche esistenti restano operative — il nostro è un layer indipendente.</p>
+      </div>
+    </div>
+    <div class="come-card">
+      <div class="come-icon">🔒</div>
+      <div>
+        <h3>Non deve spostare il patrimonio</h3>
+        <p>Non chiediamo trasferimenti di liquidità né modifiche alla composizione attuale. Analizziamo l'esistente.</p>
+      </div>
+    </div>
+    <div class="come-card">
+      <div class="come-icon">📊</div>
+      <div>
+        <h3>Analisi indipendente e report periodici</h3>
+        <p>Le restituiamo una fotografia chiara del rischio e della performance — aggiornata, leggibile, in italiano.</p>
+      </div>
+    </div>
+    <div class="come-card">
+      <div class="come-icon">🎯</div>
+      <div>
+        <h3>Non modifica la struttura attuale</h3>
+        <p>La sua architettura patrimoniale resta intatta. EGONON aggiunge un livello di controllo, analisi e ottimizzazione.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STORIA -->
+<section id="storia">
+  <div class="section-tag">La Nostra Storia</div>
+  <h2 class="section-title">Tappe Fondamentali</h2>
+  <div class="storia-timeline">
+    <div class="storia-item">
+      <div class="storia-year">2007</div>
+      <div class="storia-content">
+        <h3>Fondazione ad Appenzello</h3>
+        <p>Nasce con focus esclusivo su clientela istituzionale previdenziale e analisi del rischio.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2021</div>
+      <div class="storia-content">
+        <h3>Apertura alla Clientela Privata</h3>
+        <p>Estensione del know-how istituzionale ai patrimoni individuali e HNW.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2022</div>
+      <div class="storia-content">
+        <h3>Autorizzazione Ufficiale FINMA</h3>
+        <p>Ottenimento della licenza come gestore patrimoniale ai sensi della LIsFi.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2024</div>
+      <div class="storia-content">
+        <h3>Crescita e Consolidamento</h3>
+        <p>Apertura della succursale di Lugano ed estensione della licenza FINMA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRODOTTI -->
+<section id="prodotti">
+  <div class="section-tag">Strumenti in Portafoglio</div>
+  <h2 class="section-title">AMC — La selezione di EGONON.</h2>
+  <p class="section-subtitle">Prodotti selezionati per profili di rischio definiti. Valute adeguate alle esigenze della clientela private svizzera.</p>
+  <table class="prodotti-table">
+    <thead>
+      <tr>
+        <th>Emittente</th>
+        <th>Nome</th>
+        <th>ISIN</th>
+        <th>Valuta</th>
+        <th>Taglio minimo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BNP Paribas</td>
+        <td>Certificate Linked to Global Macro TR Index</td>
+        <td><span class="isin-badge">XS2999220143</span></td>
+        <td>EUR</td>
+        <td>EUR 1.000</td>
+        <td><a href="#analisi">Informazioni →</a></td>
+      </tr>
+      <tr>
+        <td>BNP Paribas</td>
+        <td>Certificate Linked to Global Macro TR Index</td>
+        <td><span class="isin-badge">XS3006830379</span></td>
+        <td>USD</td>
+        <td>USD 1.000</td>
+        <td><a href="#analisi">Informazioni →</a></td>
+      </tr>
+      <tr>
+        <td>Vontobel</td>
+        <td>Certificate Linked to Egonon Global Index</td>
+        <td><span class="isin-badge">CH1408235179</span></td>
+        <td>CHF</td>
+        <td>CHF 1.000</td>
+        <td><a href="#analisi">Informazioni →</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:#999; margin-top:16px;">Dati aggiornati al 29.05.2026. Per dettagli sui prodotti e disponibilità contattare il proprio partner EGONON.</p>
+</section>
+
+<!-- FORM ANALISI GRATUITA -->
+<div class="form-section" id="analisi">
+  <div class="form-inner">
+    <div class="form-left">
+      <div class="section-tag">Analisi Gratuita</div>
+      <h2 class="section-title" style="color:white;">Richieda la sua<br>analisi gratuita.</h2>
+      <p class="section-subtitle" style="color:#aaa;">Le risponderemo entro 24 ore lavorative. Non le chiederemo mai di cambiare banca o spostare il suo patrimonio.</p>
+      <div class="form-promise">
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Analisi indipendente sviluppata con metodologia istituzionale</p>
+        </div>
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Nessun impegno, nessun trasferimento richiesto</p>
+        </div>
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Risposta entro 24 ore lavorative da un partner EGONON</p>
+        </div>
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Gestione patrimoniale svizzera autorizzata FINMA dal 2022</p>
+        </div>
+      </div>
+      <p style="margin-top:32px; font-size:13px; color:#666;">
+        Oppure scriva direttamente a <a href="mailto:info@egonon.ch" style="color:#888;">info@egonon.ch</a><br>
+        <a href="https://egononos.polsia.app" target="_blank" style="color:#888;">App di approfondimento (mobile): egononos.polsia.app</a>
+      </p>
+    </div>
+    <div class="form-right">
+      <div class="form-card">
+        <h3>Richiesta di analisi</h3>
+        <p>Compili il modulo — la contatteremo entro 24 ore.</p>
+        <div id="formContainer">
+          <form id="leadForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome *</label>
+                <input type="text" id="nome" placeholder="Mario" required>
+              </div>
+              <div class="form-group">
+                <label>Cognome *</label>
+                <input type="text" id="cognome" placeholder="Rossi" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" id="email" placeholder="mario.rossi@esempio.ch" required>
+            </div>
+            <div class="form-group">
+              <label>Telefono</label>
+              <input type="tel" id="telefono" placeholder="+41 xx xxx xx xx">
+            </div>
+            <div class="form-group">
+              <label>Professione</label>
+              <input type="text" id="professione" placeholder="es. Medico, Imprenditore, Direttore...">
+            </div>
+            <div class="form-group">
+              <label>Patrimonio stimato</label>
+              <select id="patrimonio">
+                <option value="">Selezionare...</option>
+                <option>< 200k CHF</option>
+                <option>200k – 500k CHF</option>
+                <option>500k – 1M CHF</option>
+                <option>1M – 5M CHF</option>
+                <option>> 5M CHF</option>
+                <option>Preferisco non indicarlo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Messaggio (opzionale)</label>
+              <textarea id="messaggio" placeholder="Può descrivere brevemente la sua situazione attuale o le sue domande..."></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">Richiedi analisi gratuita →</button>
+            <p class="form-note">I suoi dati sono trattati in conformità con la normativa svizzera sulla protezione dei dati. Non condividiamo mai informazioni con terzi.</p>
+          </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="check">✅</div>
+          <h3>Richiesta ricevuta.</h3>
+          <p>La contatteremo entro 24 ore lavorative.<br>Nel frattempo può approfondire su <a href="https://egonon.ch" target="_blank" style="color:var(--bordeaux)">egonon.ch</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">EGONON</div>
+  <div class="footer-sub">Gestione Patrimoniale Indipendente · Dal 2007</div>
+  <div class="footer-info">
+    Sede: Rütistrasse 20 · 9050 Appenzello &nbsp;|&nbsp;
+    Succursale: Via della Posta 7 · 6900 Lugano<br>
+    Autorizzata FINMA · Vigilanza continua OSFIN<br>
+    +41 58 566 60 69 &nbsp;·&nbsp;
+    <a href="mailto:info@egonon.ch">info@egonon.ch</a> &nbsp;·&nbsp;
+    <a href="https://egonon.ch" target="_blank">egonon.ch</a>
+  </div>
+  <div class="footer-disclaimer">
+    Tutti gli investimenti comportano rischi. La performance passata non è indicativa di risultati futuri. EGONON SA è una società di gestione patrimoniale svizzera autorizzata da FINMA. I dati di performance sono storici e riferiti a specifici periodi di osservazione.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso...';
+
+    const payload = {
+      nome: document.getElementById('nome').value.trim(),
+      cognome: document.getElementById('cognome').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      telefono: document.getElementById('telefono').value.trim(),
+      professione: document.getElementById('professione').value.trim(),
+      patrimonio_stimato: document.getElementById('patrimonio').value,
+      messaggio: document.getElementById('messaggio').value.trim(),
+    };
+
+    try {
+      const res = await fetch('https://superagent-df474b25.base44.app/functions/submitLeadAnalisi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        alert('Errore: ' + (data.error || 'Si prega di riprovare.'));
+        btn.disabled = false;
+        btn.textContent = 'Richiedi analisi gratuita →';
+      }
+    } catch (err) {
+      alert('Errore di connessione. Si prega di riprovare.');
+      btn.disabled = false;
+      btn.textContent = 'Richiedi analisi gratuita →';
+    }
+  });
+</script>
+</body>
+</html>

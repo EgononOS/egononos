@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "cognome": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "telefono": {
+      "type": "string"
+    },
+    "professione": {
+      "type": "string"
+    },
+    "patrimonio_stimato": {
+      "type": "string",
+      "enum": [
+        "< 200k CHF",
+        "200k \u2013 500k CHF",
+        "500k \u2013 1M CHF",
+        "1M \u2013 5M CHF",
+        "> 5M CHF",
+        "Preferisco non indicarlo"
+      ]
+    },
+    "banca_attuale": {
+      "type": "string"
+    },
+    "messaggio": {
+      "type": "string"
+    },
+    "fonte": {
+      "type": "string"
+    },
+    "stato": {
+      "type": "string",
+      "enum": [
+        "Nuovo",
+        "Contattato",
+        "In analisi",
+        "Cliente",
+        "Non interessato"
+      ]
+    },
+    "data_contatto": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "LeadAnalisi"
+}
