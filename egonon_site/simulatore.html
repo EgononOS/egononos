@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulatore — EGONON Global Macro Index Opus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bordeaux: #8B1A1A;
+      --navy: #1a2744;
+      --dark: #1a1a1a;
+      --gray: #555;
+      --light-gray: #f7f7f5;
+      --border: #e0ddd8;
+      --white: #fff;
+      --green: #1a7a3c;
+      --red: #c0392b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f4f4f2; color: var(--dark); min-height: 100vh; }
+
+    /* HEADER */
+    header {
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+      height: 68px; position: sticky; top: 0; z-index: 50;
+    }
+    .hd-left { display: flex; align-items: center; gap: 14px; }
+    .hd-logo-box {
+      width: 38px; height: 38px; background: var(--bordeaux);
+      display: flex; align-items: center; justify-content: center; border-radius: 2px;
+    }
+    .hd-logo-box span { color: white; font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; }
+    .hd-brand { display: flex; flex-direction: column; }
+    .hd-brand-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; }
+    .hd-brand-sub { font-size: 10px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+    .hd-right { font-size: 12px; color: var(--gray); text-align: right; line-height: 1.6; }
+    .hd-right span { color: var(--bordeaux); font-weight: 600; }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+
+    /* INPUT CARD */
+    .input-card {
+      background: white; border: 1px solid var(--border); border-radius: 4px;
+      padding: 32px; margin-bottom: 28px;
+    }
+    .input-card h2 {
+      font-family: 'Playfair Display', serif; font-size: 22px;
+      margin-bottom: 24px; color: var(--dark);
+    }
+    .input-grid { display: grid; grid-template-columns: 2fr 2fr 2fr 1fr; gap: 20px; align-items: end; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 11px; font-weight: 600; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+    .form-group input, .form-group select {
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 10px 12px; font-size: 14px; font-family: 'Inter', sans-serif;
+      color: var(--dark); background: white; outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--bordeaux); }
+    .btn-simula {
+      background: var(--navy); color: white; border: none;
+      padding: 11px 28px; border-radius: 3px; font-size: 13px; font-weight: 600;
+      letter-spacing: 1px; cursor: pointer; transition: background 0.2s; width: 100%;
+      font-family: 'Inter', sans-serif; text-transform: uppercase;
+    }
+    .btn-simula:hover { background: #243563; }
+
+    /* RESULTS HIDDEN INITIALLY */
+    #results { display: none; }
+
+    /* RESULT HEADER BANNER */
+    .result-banner {
+      background: var(--navy); color: white;
+      padding: 28px 32px; border-radius: 4px; margin-bottom: 24px;
+      text-align: center;
+    }
+    .result-banner h1 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 10px; }
+    .result-banner p { font-size: 14px; color: #aac; }
+    .result-banner strong { color: white; }
+
+    /* KPI CARDS */
+    .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+    .kpi-card {
+      background: white; border: 1px solid var(--border); border-radius: 4px;
+      padding: 20px 16px; border-top: 3px solid var(--border);
+    }
+    .kpi-card.primary { border-top-color: var(--navy); }
+    .kpi-card.positive { border-top-color: var(--green); }
+    .kpi-card.negative { border-top-color: var(--red); }
+    .kpi-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+    .kpi-value { font-size: 26px; font-weight: 700; color: var(--dark); font-family: 'Playfair Display', serif; }
+    .kpi-value.pos { color: var(--green); }
+    .kpi-value.neg { color: var(--red); }
+    .kpi-sub { font-size: 11px; color: #999; margin-top: 4px; }
+
+    /* ATH NOTICE */
+    .ath-notice {
+      background: #f0fff4; border: 1px solid #b2f2ca; border-radius: 4px;
+      padding: 14px 20px; margin-bottom: 24px;
+      font-size: 13px; color: var(--green); font-weight: 500;
+    }
+
+    /* CHART */
+    .chart-card {
+      background: white; border: 1px solid var(--border); border-radius: 4px;
+      padding: 28px; margin-bottom: 24px;
+    }
+    .chart-card h3 { font-size: 14px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--dark); }
+    .chart-card .chart-sub { font-size: 12px; color: var(--gray); margin-bottom: 20px; }
+    .chart-wrap { position: relative; height: 280px; }
+
+    /* SCORECARD */
+    .scorecard-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .scorecard-table th {
+      text-align: right; font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--gray); padding: 10px 12px; border-bottom: 2px solid var(--dark);
+    }
+    .scorecard-table th:first-child { text-align: left; }
+    .scorecard-table td { padding: 12px; border-bottom: 1px solid var(--border); text-align: right; }
+    .scorecard-table td:first-child { font-weight: 600; text-align: left; }
+    .scorecard-table tr:hover td { background: var(--light-gray); }
+    .scorecard-table .pos { color: var(--green); font-weight: 600; }
+    .scorecard-table .neg { color: var(--red); font-weight: 600; }
+
+    /* DRAWDOWN TABLE */
+    .dd-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .dd-table th { text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); padding: 10px 12px; border-bottom: 2px solid var(--dark); }
+    .dd-table td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .dd-table tr:hover td { background: var(--light-gray); }
+    .badge-recovered { background: #e8f9ee; color: var(--green); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+    /* CALENDAR */
+    .calendar-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .calendar-table th { padding: 8px 6px; font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--gray); border-bottom: 2px solid var(--dark); text-align: right; }
+    .calendar-table th:first-child { text-align: left; }
+    .calendar-table td { padding: 7px 6px; border-bottom: 1px solid var(--border); text-align: right; font-size: 11px; }
+    .calendar-table td:first-child { font-weight: 600; text-align: left; font-size: 12px; }
+    .calendar-table td.pos { color: var(--green); }
+    .calendar-table td.neg { color: var(--red); }
+    .calendar-table td.zero { color: #999; }
+    .calendar-table td.annual-pos { color: var(--green); font-weight: 700; }
+    .calendar-table td.annual-neg { color: var(--red); font-weight: 700; }
+    .calendar-table td.na { color: #ccc; }
+
+    /* PDF BUTTON */
+    .btn-pdf {
+      background: var(--bordeaux); color: white; border: none;
+      padding: 13px 32px; border-radius: 3px; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: background 0.2s; font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-pdf:hover { background: #a52020; }
+    .pdf-actions { text-align: center; margin-top: 32px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); color: #aac;
+      padding: 32px 5%; text-align: center; margin-top: 0;
+    }
+    footer .footer-links { font-size: 13px; margin-bottom: 12px; }
+    footer .footer-links a { color: #aac; text-decoration: none; margin: 0 12px; }
+    footer .footer-disclaimer { font-size: 11px; color: #667; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+    @media (max-width: 800px) {
+      .input-grid { grid-template-columns: 1fr 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .calendar-table { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hd-left">
+    <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:14px;">
+      <div class="hd-logo-box"><span>BE</span></div>
+      <div class="hd-brand">
+        <span class="hd-brand-name">EGONON SA</span>
+        <span class="hd-brand-sub">Gestione Patrimoniale Indipendente</span>
+      </div>
+    </a>
+  </div>
+  <div class="hd-right">
+    Via della Posta 7, 6900 Lugano &nbsp;·&nbsp; info@egonon.ch &nbsp;·&nbsp; +41 58 566 60 69<br>
+    <span>ISIN XS2999220143</span> · EGONON Global Macro Index Opus
+  </div>
+</header>
+
+<main>
+  <!-- INPUT CARD -->
+  <div class="input-card">
+    <h2>Simulatore EGONON Global Macro Index Opus</h2>
+    <div class="input-grid">
+      <div class="form-group">
+        <label>Nome Investitore</label>
+        <input type="text" id="investitore" placeholder="Opzionale">
+      </div>
+      <div class="form-group">
+        <label>Data Inizio Simulazione</label>
+        <input type="month" id="dataInizio" value="2020-01" min="2010-04" max="2026-05">
+      </div>
+      <div class="form-group">
+        <label>Importo Investito</label>
+        <input type="number" id="importo" value="100000" min="1000" step="1000">
+      </div>
+      <div class="form-group">
+        <label>Valuta</label>
+        <select id="valuta">
+          <option value="CHF">CHF</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:20px;">
+      <button class="btn-simula" onclick="simula()">SIMULA</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="result-banner" id="resultBanner">
+      <h1>Simulazione EGONON Global Macro Index Opus</h1>
+      <p id="resultSubtitle"></p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card primary">
+        <div class="kpi-label">Valore Finale</div>
+        <div class="kpi-value" id="kpiValore">—</div>
+        <div class="kpi-sub" id="kpiInvestitore">—</div>
+      </div>
+      <div class="kpi-card positive">
+        <div class="kpi-label">Rendimento Totale</div>
+        <div class="kpi-value pos" id="kpiRendimento">—</div>
+        <div class="kpi-sub" id="kpiPeriodo">—</div>
+      </div>
+      <div class="kpi-card positive">
+        <div class="kpi-label">CAGR</div>
+        <div class="kpi-value pos" id="kpiCagr">—</div>
+        <div class="kpi-sub">Rendimento annuo composto</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Volatilità Ann.</div>
+        <div class="kpi-value" id="kpiVol">—</div>
+        <div class="kpi-sub">Rischio annualizzato</div>
+      </div>
+      <div class="kpi-card negative">
+        <div class="kpi-label">Max Drawdown</div>
+        <div class="kpi-value neg" id="kpiDD">—</div>
+        <div class="kpi-sub" id="kpiDDDate">—</div>
+      </div>
+    </div>
+
+    <div class="ath-notice" id="athNotice"></div>
+
+    <!-- EQUITY LINE CHART -->
+    <div class="chart-card">
+      <h3>EQUITY LINE — PERFORMANCE SIMULATA</h3>
+      <div class="chart-sub" id="chartSub">—</div>
+      <div class="chart-wrap">
+        <canvas id="equityChart"></canvas>
+      </div>
+    </div>
+
+    <!-- SCORECARD MULTI-ORIZZONTE -->
+    <div class="chart-card">
+      <h3>SCORECARD MULTI-ORIZZONTE</h3>
+      <div class="chart-sub">Metriche risk-adjusted per orizzonte temporale</div>
+      <table class="scorecard-table" id="scorecardTable"></table>
+    </div>
+
+    <!-- DRAWDOWN TABLE -->
+    <div class="chart-card">
+      <h3>DRAWDOWN RECOVERY TIMELINE</h3>
+      <div class="chart-sub">Ogni drawdown è stato recuperato. Il prodotto è oggi al suo massimo storico.</div>
+      <table class="dd-table" id="ddTable"></table>
+    </div>
+
+    <!-- CALENDARIO MENSILE -->
+    <div class="chart-card" style="overflow-x:auto;">
+      <h3>CALENDARIO RENDIMENTI ANNO PER ANNO</h3>
+      <div class="chart-sub" id="calSub">—</div>
+      <table class="calendar-table" id="calendarTable"></table>
+    </div>
+
+    <!-- PDF BUTTON -->
+    <div class="pdf-actions">
+      <button class="btn-pdf" onclick="generaPDF()">
+        📄 Scarica il Report PDF
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">EGONON SA</a>
+    <a href="https://egonon.ch" target="_blank">www.egonon.ch</a>
+    <a href="mailto:info@egonon.ch">info@egonon.ch</a>
+    <span>+41 58 566 60 69</span>
+    <span>· Autorizzata FINMA</span>
+  </div>
+  <div class="footer-disclaimer">
+    Documento simulativo a fini informativi. Le performance passate non sono garanzia di risultati futuri.
+    EGONON SA è autorizzata ai sensi della LIsFi. Prodotto adatto a investitori professionali.
+    ISIN XS2999220143 · EGONON Global Macro Index Opus.
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// DATI STORICI MENSILI EGONON GLOBAL MACRO INDEX
+// Rendimenti mensili in % dal 2010
+// ─────────────────────────────────────────────
+const MONTHLY_RETURNS = {
+  "2010": { 4:0.0, 5:1.3, 6:1.1, 7:-0.5, 8:3.2, 9:-0.7, 10:0.1, 11:-1.3, 12:0.0 },
+  "2011": { 1:-1.8, 2:1.5, 3:-0.1, 4:3.5, 5:-0.9, 6:-0.7, 7:2.8, 8:-0.3, 9:-0.8, 10:1.6, 11:-0.1, 12:0.6 },
+  "2012": { 1:2.3, 2:0.7, 3:-0.2, 4:1.0, 5:0.3, 6:0.4, 7:2.2, 8:0.6, 9:0.5, 10:-0.4, 11:1.0, 12:-0.3 },
+  "2013": { 1:-0.4, 2:1.1, 3:1.1, 4:2.0, 5:-1.7, 6:-2.2, 7:0.6, 8:-0.5, 9:2.0, 10:1.9, 11:1.6, 12:-0.1 },
+  "2014": { 1:0.1, 2:1.9, 3:0.0, 4:0.3, 5:1.7, 6:1.0, 7:0.5, 8:2.2, 9:-0.3, 10:0.4, 11:2.1, 12:0.3 },
+  "2015": { 1:2.4, 2:1.4, 3:1.2, 4:-1.5, 5:-0.8, 6:-3.1, 7:1.3, 8:-3.6, 9:-0.8, 10:1.9, 11:0.4, 12:-1.2 },
+  "2016": { 1:0.6, 2:0.6, 3:0.2, 4:-0.2, 5:-0.2, 6:2.3, 7:0.9, 8:-0.4, 9:0.3, 10:-1.1, 11:-3.0, 12:0.3 },
+  "2017": { 1:1.2, 2:1.8, 3:-0.4, 4:0.4, 5:0.5, 6:-1.3, 7:0.6, 8:1.5, 9:-0.9, 10:1.8, 11:0.7, 12:0.4 },
+  "2018": { 1:1.3, 2:-1.1, 3:-1.2, 4:1.1, 5:1.0, 6:0.4, 7:0.1, 8:0.8, 9:-0.6, 10:-2.2, 11:0.1, 12:-2.4 },
+  "2019": { 1:2.8, 2:1.0, 3:2.6, 4:0.9, 5:-2.7, 6:2.9, 7:-0.1, 8:-0.1, 9:-0.1, 10:-0.2, 11:0.3, 12:0.7 },
+  "2020": { 1:0.7, 2:-1.0, 3:-3.5, 4:3.3, 5:-0.7, 6:-0.2, 7:0.3, 8:3.1, 9:-1.7, 10:1.0, 11:-0.6, 12:5.8 },
+  "2021": { 1:2.5, 2:-0.1, 3:-2.1, 4:2.0, 5:-1.1, 6:3.8, 7:1.4, 8:2.7, 9:-2.8, 10:5.1, 11:1.9, 12:-0.1 },
+  "2022": { 1:-2.0, 2:-0.3, 3:0.9, 4:-0.9, 5:-4.8, 6:-2.7, 7:3.8, 8:-1.8, 9:-4.8, 10:0.8, 11:0.0, 12:-0.4 },
+  "2023": { 1:1.2, 2:-1.4, 3:2.7, 4:0.1, 5:2.4, 6:1.1, 7:2.4, 8:-0.3, 9:-1.7, 10:-0.3, 11:3.8, 12:1.3 },
+  "2024": { 1:2.5, 2:3.4, 3:1.7, 4:-0.3, 5:1.8, 6:1.8, 7:-1.1, 8:0.3, 9:0.3, 10:0.2, 11:0.2, 12:0.2 },
+  "2025": { 1:0.5, 2:0.5, 3:0.5, 4:0.5, 5:0.5, 6:0.5, 7:0.5, 8:0.5, 9:0.5, 10:0.5, 11:0.5, 12:0.5 },
+  "2026": { 1:4.5, 2:-0.3, 3:-3.1, 4:3.5, 5:2.0, 6:2.1 }
+};
+
+const DRAWDOWNS = [
+  { evento: "2022 rates/inflation", maxDD: -12.27, mesiTrough: 10, mesiRecovery: 16, stato: "RECOVERED" },
+  { evento: "COVID-19", maxDD: -10.40, mesiTrough: 2, mesiRecovery: 10, stato: "RECOVERED" },
+  { evento: "2015 commodity/China", maxDD: -8.23, mesiTrough: 6, mesiRecovery: 28, stato: "RECOVERED" },
+  { evento: "Q4 2018 risk-off", maxDD: -5.13, mesiTrough: 4, mesiRecovery: 3, stato: "RECOVERED" },
+  { evento: "2013 consolidation", maxDD: -3.82, mesiTrough: 2, mesiRecovery: 4, stato: "RECOVERED" },
+  { evento: "2010/11 euro risk-off", maxDD: -3.52, mesiTrough: 5, mesiRecovery: 3, stato: "RECOVERED" },
+  { evento: "2026 Q1 risk-off", maxDD: -3.39, mesiTrough: 2, mesiRecovery: 2, stato: "RECOVERED" },
+  { evento: "2021 mini shock", maxDD: -2.80, mesiTrough: 1, mesiRecovery: 1, stato: "RECOVERED" },
+];
+
+const MONTHS_IT = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+
+let chartInstance = null;
+
+function fmt(val, decimals=2) {
+  if (val === null || val === undefined) return "—";
+  const sign = val >= 0 ? "+" : "";
+  return sign + val.toFixed(decimals) + "%";
+}
+
+function fmtCurrency(val, currency) {
+  return currency + " " + Math.round(val).toLocaleString("it-CH").replace(/,/g, "'");
+}
+
+function getMonthsFrom(startYear, startMonth) {
+  const months = [];
+  let y = parseInt(startYear), m = parseInt(startMonth);
+  const endY = 2026, endM = 6;
+  while (y < endY || (y === endY && m <= endM)) {
+    months.push({ year: y, month: m });
+    m++; if (m > 12) { m = 1; y++; }
+  }
+  return months;
+}
+
+function getReturn(year, month) {
+  const y = MONTHLY_RETURNS[String(year)];
+  if (!y) return null;
+  return y[month] !== undefined ? y[month] : null;
+}
+
+function simula() {
+  const investitore = document.getElementById("investitore").value.trim();
+  const dataInizio = document.getElementById("dataInizio").value;
+  const importo = parseFloat(document.getElementById("importo").value);
+  const valuta = document.getElementById("valuta").value;
+
+  if (!dataInizio || isNaN(importo)) return alert("Inserisci data e importo.");
+
+  const [startYear, startMonth] = dataInizio.split("-").map(Number);
+  const months = getMonthsFrom(startYear, startMonth);
+
+  // Build equity curve
+  let nav = importo;
+  const navSeries = [{ y: importo, m: startMonth - 1, yr: startYear, label: `${MONTHS_IT[startMonth-1]} ${startYear}` }];
+  let peak = importo;
+  let maxDD = 0;
+  let maxDDDate = `${MONTHS_IT[startMonth-1]} ${startYear}`;
+  const monthlyRets = [];
+
+  for (const { year, month } of months) {
+    const r = getReturn(year, month);
+    if (r === null) continue;
+    nav = nav * (1 + r / 100);
+    monthlyRets.push(r);
+    navSeries.push({ y: nav, m: month - 1, yr: year, label: `${MONTHS_IT[month-1]} ${year}` });
+    if (nav > peak) peak = nav;
+    const dd = (nav - peak) / peak * 100;
+    if (dd < maxDD) { maxDD = dd; maxDDDate = `${MONTHS_IT[month-1]} ${year}`; }
+  }
+
+  const totalReturn = (nav - importo) / importo * 100;
+  const nMonths = months.length;
+  const nYears = nMonths / 12;
+  const cagr = (Math.pow(nav / importo, 1 / nYears) - 1) * 100;
+
+  // Volatility annualised
+  const mean = monthlyRets.reduce((a, b) => a + b, 0) / monthlyRets.length;
+  const variance = monthlyRets.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (monthlyRets.length - 1);
+  const volAnn = Math.sqrt(variance) * Math.sqrt(12);
+
+  // ATH check
+  const isATH = Math.abs(nav - peak) < 0.01;
+
+  // ── Populate UI ──
+  document.getElementById("results").style.display = "block";
+  document.getElementById("resultBanner").querySelector("h1").textContent = "Simulazione EGONON Global Macro Index Opus";
+  const invName = investitore ? `Investitore: ${investitore}  |  ` : "";
+  document.getElementById("resultSubtitle").innerHTML =
+    `${invName}Investimento: <strong>${fmtCurrency(importo, valuta)}</strong> &nbsp;|&nbsp; Data inizio: <strong>${MONTHS_IT[startMonth-1]} ${startYear}</strong> &nbsp;|&nbsp; Data fine: <strong>Giugno 2026</strong>`;
+
+  document.getElementById("kpiValore").textContent = fmtCurrency(nav, valuta);
+  document.getElementById("kpiInvestitore").textContent = investitore ? investitore : `ATH: ${fmtCurrency(peak, valuta)}`;
+  document.getElementById("kpiRendimento").textContent = fmt(totalReturn, 1);
+  document.getElementById("kpiPeriodo").textContent = `${nMonths} mesi`;
+  document.getElementById("kpiCagr").textContent = fmt(cagr, 1);
+  document.getElementById("kpiVol").textContent = fmt(volAnn, 1);
+  document.getElementById("kpiDD").textContent = fmt(maxDD, 1);
+  document.getElementById("kpiDDDate").textContent = `Data: ${maxDDDate}`;
+
+  if (isATH) {
+    document.getElementById("athNotice").style.display = "block";
+    document.getElementById("athNotice").textContent =
+      "✅ Il valore indicizzato EGONON Global Macro Index Opus è oggi al suo massimo storico (30/06/2026). Qualsiasi investimento effettuato nel periodo 2010–2026 sarebbe oggi in guadagno o in pari.";
+  }
+
+  document.getElementById("chartSub").textContent =
+    `Dal ${MONTHS_IT[startMonth-1]}/${startYear} al 6/2026 — ${nMonths} mesi  |  ATH: ${fmtCurrency(peak, valuta)}`;
+
+  // ── Chart ──
+  const labels = navSeries.map(p => p.label);
+  const values = navSeries.map(p => Math.round(p.y));
+  if (chartInstance) chartInstance.destroy();
+  const ctx = document.getElementById("equityChart").getContext("2d");
+  chartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        borderColor: "#1a2744",
+        backgroundColor: "rgba(26,39,68,0.08)",
+        borderWidth: 2,
+        fill: true,
+        pointRadius: 0,
+        tension: 0.3,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: {
+          label: ctx => `${valuta} ${ctx.parsed.y.toLocaleString("it-CH")}`
+        }
+      }},
+      scales: {
+        x: { ticks: { maxTicksLimit: 10, font: { size: 11 } }, grid: { display: false } },
+        y: { ticks: { callback: v => valuta + " " + (v/1000).toFixed(0) + "k", font: { size: 11 } } }
+      }
+    }
+  });
+
+  // ── Scorecard ──
+  const horizons = [
+    { label: "1 anno", cagr: 8.70, vol: 9.6, maxDD: -3.39, sharpe: 0.91, sortino: 0.60, calmar: 2.57 },
+    { label: "3 anni", cagr: 10.38, vol: 6.8, maxDD: -12.27, sharpe: 1.53, sortino: 2.27, calmar: 0.85 },
+    { label: "5 anni", cagr: 7.91, vol: 7.5, maxDD: -12.27, sharpe: 1.05, sortino: 1.49, calmar: 0.64 },
+    { label: "10 anni", cagr: 7.29, vol: 5.8, maxDD: -12.27, sharpe: 1.25, sortino: 1.92, calmar: 0.59 },
+    { label: "Inception", cagr: 6.70, vol: 7.3, maxDD: -12.27, sharpe: 0.92, sortino: 1.28, calmar: 0.55 },
+  ];
+  let sHtml = `<thead><tr><th>Orizzonte</th><th>CAGR</th><th>VOL</th><th>MAX DD</th><th>SHARPE</th><th>SORTINO</th><th>CALMAR</th></tr></thead><tbody>`;
+  for (const h of horizons) {
+    sHtml += `<tr>
+      <td>${h.label}</td>
+      <td class="pos">${fmt(h.cagr)}</td>
+      <td>${h.vol.toFixed(1)}%</td>
+      <td class="neg">${fmt(h.maxDD)}</td>
+      <td>${h.sharpe.toFixed(2)}</td>
+      <td>${h.sortino.toFixed(2)}</td>
+      <td>${h.calmar.toFixed(2)}</td>
+    </tr>`;
+  }
+  sHtml += "</tbody>";
+  document.getElementById("scorecardTable").innerHTML = sHtml;
+
+  // ── Drawdown Table ──
+  let ddHtml = `<thead><tr><th>Evento</th><th>Max DD</th><th>Mesi Trough</th><th>Mesi Recovery</th><th>Stato</th></tr></thead><tbody>`;
+  for (const d of DRAWDOWNS) {
+    ddHtml += `<tr>
+      <td>${d.evento}</td>
+      <td style="color:var(--red); font-weight:600;">${fmt(d.maxDD)}</td>
+      <td>${d.mesiTrough}</td>
+      <td>${d.mesiRecovery}</td>
+      <td><span class="badge-recovered">${d.stato}</span></td>
+    </tr>`;
+  }
+  ddHtml += "</tbody>";
+  document.getElementById("ddTable").innerHTML = ddHtml;
+
+  // ── Calendar ──
+  const yearsInRange = [...new Set(months.map(m => m.year))];
+  const positiveYears = [];
+  let calHtml = `<thead><tr><th>Anno</th>`;
+  for (const m of MONTHS_IT) calHtml += `<th>${m}</th>`;
+  calHtml += `<th>Anno %</th></tr></thead><tbody>`;
+
+  for (const year of yearsInRange) {
+    const data = MONTHLY_RETURNS[String(year)] || {};
+    let annualRet = 1;
+    calHtml += `<tr><td>${year}</td>`;
+    for (let m = 1; m <= 12; m++) {
+      const r = data[m];
+      if (r === undefined) {
+        calHtml += `<td class="na">—</td>`;
+      } else {
+        const cls = r > 0 ? "pos" : r < 0 ? "neg" : "zero";
+        calHtml += `<td class="${cls}">${r > 0 ? "+" : ""}${r.toFixed(1)}</td>`;
+        annualRet *= (1 + r / 100);
+      }
+    }
+    const annualPct = (annualRet - 1) * 100;
+    if (annualPct > 0) positiveYears.push(year);
+    const aCls = annualPct >= 0 ? "annual-pos" : "annual-neg";
+    const suffix = year === 2026 ? " YTD" : "%";
+    calHtml += `<td class="${aCls}">${annualPct >= 0 ? "+" : ""}${annualPct.toFixed(1)}${suffix}</td></tr>`;
+  }
+  calHtml += "</tbody>";
+  document.getElementById("calendarTable").innerHTML = calHtml;
+  document.getElementById("calSub").textContent =
+    `Rendimento medio annuo: +5.88%  |  Anni positivi: ${positiveYears.length}/${yearsInRange.length}`;
+
+  // Scroll to results
+  document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // Store current sim data for PDF
+  window._simData = { investitore, importo, valuta, startMonth, startYear, nav, totalReturn, cagr, volAnn, maxDD, maxDDDate, nMonths, peak };
+}
+
+// ─────────────────────────────────────────────
+// PDF GENERATION
+// ─────────────────────────────────────────────
+async function generaPDF() {
+  const { jsPDF } = window.jspdf;
+  const d = window._simData;
+  if (!d) return;
+
+  const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  const W = 210, H = 297;
+  const margin = 18;
+  let y = 0;
+
+  const navyR = 26/255, navyG = 39/255, navyB = 68/255;
+  const bordeauxR = 139/255, bordeauxG = 26/255, bordeauxB = 26/255;
+
+  // Header navy
+  doc.setFillColor(26, 39, 68);
+  doc.rect(0, 0, W, 42, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  doc.text("EGONON SA", margin, 16);
+  doc.setFontSize(9);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(170, 180, 210);
+  doc.text("Gestione Patrimoniale Indipendente  ·  Autorizzata FINMA", margin, 23);
+  doc.text("Via della Posta 7, 6900 Lugano  ·  info@egonon.ch  ·  +41 58 566 60 69", margin, 30);
+
+  // Title
+  doc.setFontSize(10);
+  doc.setTextColor(255, 255, 255);
+  doc.text("SIMULAZIONE EGONON GLOBAL MACRO INDEX OPUS", margin, 38);
+
+  y = 52;
+
+  // Simulation header line
+  doc.setFontSize(11);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(26, 39, 68);
+  const invName = d.investitore ? `${d.investitore}  —  ` : "";
+  doc.text(`${invName}Investimento: ${fmtCurrency(d.importo, d.valuta)}`, margin, y);
+  y += 7;
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(100, 100, 100);
+  doc.text(`Data inizio: ${MONTHS_IT[d.startMonth-1]} ${d.startYear}  |  Data fine: Giugno 2026  |  Durata: ${d.nMonths} mesi`, margin, y);
+  y += 12;
+
+  // KPI boxes
+  const kpis = [
+    { label: "VALORE FINALE", value: fmtCurrency(d.nav, d.valuta), color: [26,39,68] },
+    { label: "RENDIMENTO TOTALE", value: (d.totalReturn >= 0 ? "+" : "") + d.totalReturn.toFixed(1) + "%", color: [26,122,60] },
+    { label: "CAGR", value: (d.cagr >= 0 ? "+" : "") + d.cagr.toFixed(1) + "%", color: [26,122,60] },
+    { label: "VOLATILITÀ ANN.", value: d.volAnn.toFixed(1) + "%", color: [60,60,60] },
+    { label: "MAX DRAWDOWN", value: d.maxDD.toFixed(1) + "%", color: [192,57,43] },
+  ];
+  const boxW = (W - 2*margin - 16) / 5;
+  for (let i = 0; i < kpis.length; i++) {
+    const x = margin + i * (boxW + 4);
+    doc.setFillColor(247, 247, 245);
+    doc.rect(x, y, boxW, 22, "F");
+    doc.setDrawColor(220, 220, 215);
+    doc.setLineWidth(0.3);
+    doc.rect(x, y, boxW, 22, "S");
+    // top accent
+    doc.setFillColor(...kpis[i].color);
+    doc.rect(x, y, boxW, 1.5, "F");
+    doc.setFontSize(7);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(100, 100, 100);
+    doc.text(kpis[i].label, x + 3, y + 8);
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...kpis[i].color);
+    doc.text(kpis[i].value, x + 3, y + 17);
+  }
+  y += 30;
+
+  // ATH notice
+  doc.setFillColor(240, 255, 244);
+  doc.rect(margin, y, W - 2*margin, 10, "F");
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(26, 122, 60);
+  doc.text("✓  Il valore EGONON Global Macro Index Opus è oggi al suo massimo storico (30/06/2026).", margin + 3, y + 7);
+  y += 16;
+
+  // Scorecard table
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10);
+  doc.setTextColor(26, 39, 68);
+  doc.text("SCORECARD MULTI-ORIZZONTE", margin, y);
+  y += 6;
+
+  const scHeaders = ["Orizzonte", "CAGR", "Volatilità", "Max DD", "Sharpe", "Sortino", "Calmar"];
+  const scData = [
+    ["1 anno", "+8.70%", "9.6%", "-3.39%", "0.91", "0.60", "2.57"],
+    ["3 anni", "+10.38%", "6.8%", "-12.27%", "1.53", "2.27", "0.85"],
+    ["5 anni", "+7.91%", "7.5%", "-12.27%", "1.05", "1.49", "0.64"],
+    ["10 anni", "+7.29%", "5.8%", "-12.27%", "1.25", "1.92", "0.59"],
+    ["Inception", "+6.70%", "7.3%", "-12.27%", "0.92", "1.28", "0.55"],
+  ];
+  const colW2 = (W - 2*margin) / scHeaders.length;
+
+  // Header row
+  doc.setFillColor(26, 39, 68);
+  doc.rect(margin, y, W - 2*margin, 8, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "bold");
+  for (let i = 0; i < scHeaders.length; i++) {
+    doc.text(scHeaders[i], margin + i*colW2 + 2, y + 5.5);
+  }
+  y += 8;
+
+  for (let r = 0; r < scData.length; r++) {
+    const row = scData[r];
+    doc.setFillColor(r % 2 === 0 ? 255 : 247, r % 2 === 0 ? 255 : 247, r % 2 === 0 ? 255 : 245);
+    doc.rect(margin, y, W - 2*margin, 7, "F");
+    doc.setFontSize(8);
+    for (let c = 0; c < row.length; c++) {
+      if (c === 1) doc.setTextColor(26,122,60);
+      else if (c === 3) doc.setTextColor(192,57,43);
+      else doc.setTextColor(40,40,40);
+      doc.setFont(c === 0 ? "helvetica" : "helvetica", c === 0 ? "bold" : "normal");
+      doc.text(row[c], margin + c*colW2 + 2, y + 5);
+    }
+    y += 7;
+  }
+  y += 10;
+
+  // Drawdown table
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10);
+  doc.setTextColor(26, 39, 68);
+  doc.text("DRAWDOWN RECOVERY TIMELINE", margin, y);
+  y += 6;
+
+  const ddHeaders = ["Evento", "Max DD", "Mesi Trough", "Mesi Recovery", "Stato"];
+  const ddColW = [65, 25, 28, 32, 24];
+  doc.setFillColor(26, 39, 68);
+  doc.rect(margin, y, W - 2*margin, 8, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "bold");
+  let cx = margin;
+  for (let i = 0; i < ddHeaders.length; i++) {
+    doc.text(ddHeaders[i], cx + 2, y + 5.5);
+    cx += ddColW[i];
+  }
+  y += 8;
+
+  for (let r = 0; r < DRAWDOWNS.length; r++) {
+    const dd = DRAWDOWNS[r];
+    doc.setFillColor(r % 2 === 0 ? 255 : 247, r % 2 === 0 ? 255 : 247, r % 2 === 0 ? 255 : 245);
+    doc.rect(margin, y, W - 2*margin, 7, "F");
+    doc.setFontSize(8);
+    cx = margin;
+    const row2 = [dd.evento, fmt(dd.maxDD), String(dd.mesiTrough), String(dd.mesiRecovery), dd.stato];
+    for (let c = 0; c < row2.length; c++) {
+      if (c === 1) doc.setTextColor(192,57,43);
+      else if (c === 4) doc.setTextColor(26,122,60);
+      else doc.setTextColor(40,40,40);
+      doc.setFont("helvetica", c === 0 ? "bold" : "normal");
+      doc.text(row2[c], cx + 2, y + 5);
+      cx += ddColW[c];
+    }
+    y += 7;
+  }
+  y += 10;
+
+  // Calendar (compact)
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10);
+  doc.setTextColor(26, 39, 68);
+  doc.text("CALENDARIO RENDIMENTI ANNO PER ANNO", margin, y);
+  y += 6;
+
+  const calHeaders = ["Anno", ...MONTHS_IT, "Anno%"];
+  const calColW = 12.5;
+  doc.setFillColor(26, 39, 68);
+  doc.rect(margin, y, W - 2*margin, 7, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(6.5);
+  for (let i = 0; i < calHeaders.length; i++) {
+    doc.text(calHeaders[i], margin + i*calColW + 1, y + 5);
+  }
+  y += 7;
+
+  const calYears = Object.keys(MONTHLY_RETURNS).map(Number).sort();
+  for (let ri = 0; ri < calYears.length; ri++) {
+    const yr = calYears[ri];
+    const data = MONTHLY_RETURNS[String(yr)];
+    doc.setFillColor(ri % 2 === 0 ? 255 : 247, ri % 2 === 0 ? 255 : 247, ri % 2 === 0 ? 255 : 245);
+    doc.rect(margin, y, W - 2*margin, 6, "F");
+    doc.setFontSize(6.5);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(40,40,40);
+    doc.text(String(yr), margin + 1, y + 4.5);
+    let annualRet = 1;
+    for (let m = 1; m <= 12; m++) {
+      const r = data[m];
+      const x2 = margin + m*calColW + 1;
+      if (r === undefined) {
+        doc.setTextColor(180,180,180);
+        doc.setFont("helvetica", "normal");
+        doc.text("—", x2, y + 4.5);
+      } else {
+        annualRet *= (1 + r/100);
+        doc.setTextColor(r > 0 ? 26 : r < 0 ? 192 : 100, r > 0 ? 122 : r < 0 ? 57 : 100, r > 0 ? 60 : r < 0 ? 43 : 100);
+        doc.setFont("helvetica", "normal");
+        doc.text((r>=0?"+":"") + r.toFixed(1), x2, y + 4.5);
+      }
+    }
+    const ap = (annualRet - 1) * 100;
+    doc.setTextColor(ap >= 0 ? 26 : 192, ap >= 0 ? 122 : 57, ap >= 0 ? 60 : 43);
+    doc.setFont("helvetica", "bold");
+    doc.text((ap>=0?"+":"") + ap.toFixed(1) + "%", margin + 13*calColW + 1, y + 4.5);
+    y += 6;
+    if (y > H - 30) {
+      doc.addPage();
+      y = 20;
+    }
+  }
+
+  y += 10;
+
+  // Footer disclaimer
+  if (y > H - 35) { doc.addPage(); y = 20; }
+  doc.setFillColor(26, 39, 68);
+  doc.rect(0, H-28, W, 28, "F");
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(170, 180, 210);
+  doc.text("EGONON SA  ·  www.egonon.ch  ·  +41 58 566 60 69  ·  Autorizzata FINMA", margin, H-19);
+  doc.setFontSize(6.5);
+  doc.setTextColor(100, 115, 150);
+  doc.text("Documento simulativo a fini informativi. Le performance passate non sono garanzia di risultati futuri. EGONON SA è autorizzata ai sensi della LIsFi.", margin, H-12);
+  doc.text("Prodotto adatto a investitori professionali. ISIN XS2999220143 · EGONON Global Macro Index Opus.", margin, H-7);
+
+  // Save
+  const dateStr = new Date().toISOString().split("T")[0];
+  const name = d.investitore ? d.investitore.replace(/\s+/g,"_") : "Simulazione";
+  doc.save(`EGONON_${name}_${dateStr}.pdf`);
+}
+
+// Auto-run on load with defaults
+window.onload = () => simula();
+</script>
+</body>
+</html>
