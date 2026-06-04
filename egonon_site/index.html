@@ -353,7 +353,8 @@
       margin-bottom: 4px; letter-spacing: 0.3px;
     }
     .sim-card .sim-card-sub { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; letter-spacing: 0.3px; }
-    .sim-chart-wrap { position: relative; height: 240px; }
+    .sim-chart-wrap { position: relative; height: 260px; width: 100%; }
+    #simChart { width: 100% !important; display: block; }
     .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .sim-table th {
       font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
@@ -1208,10 +1209,14 @@ function drawNativeChart(canvas, navSeries, cur) {
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
-  const W = canvas.offsetWidth || 800;
-  const H = canvas.offsetHeight || 280;
+  // Usa il parent per la larghezza reale
+  const rect = canvas.parentElement ? canvas.parentElement.getBoundingClientRect() : null;
+  const W = (rect && rect.width > 100) ? Math.floor(rect.width) : (canvas.offsetWidth || 900);
+  const H = 260;
   canvas.width = W;
   canvas.height = H;
+  canvas.style.width = W + "px";
+  canvas.style.height = H + "px";
 
   const vals = navSeries.map(p => p.v);
   const lbls = navSeries.map(p => p.lbl);
@@ -1238,7 +1243,7 @@ function drawNativeChart(canvas, navSeries, cur) {
   }
 
   // etichette asse X (max 8)
-  const step = Math.ceil(lbls.length / 8);
+  const step = Math.ceil(lbls.length / 6);
   ctx.fillStyle = "#888"; ctx.font = "10px Inter,sans-serif"; ctx.textAlign = "center";
   for (let i = 0; i < lbls.length; i += step) {
     const x = pad.left + (i / (navSeries.length - 1)) * gW;
@@ -1327,8 +1332,10 @@ function runSim(){
   if(isATH)document.getElementById("simAth").style.display="block";
   else document.getElementById("simAth").style.display="none";
 
-  // Grafico Canvas nativo (no librerie esterne)
-  drawNativeChart(document.getElementById("simChart"), navSeries, cur);
+  // Grafico Canvas nativo — requestAnimationFrame garantisce layout aggiornato
+  requestAnimationFrame(() => {
+    drawNativeChart(document.getElementById("simChart"), navSeries, cur);
+  });
   document.getElementById("simChartSub").textContent=`Dal ${MESI[sm-1]}/${sy} al 6/2026 — ${nM} mesi  |  ATH: ${sccy(peak,cur)}`;
 
   // Scorecard
