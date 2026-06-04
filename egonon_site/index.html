@@ -852,7 +852,41 @@
       </div>
       <div class="sim-form-group">
         <label>Data Inizio Simulazione</label>
-        <input type="month" id="simDataInizio" value="2020-01" min="2010-04" max="2026-05">
+        <div style="display:flex;gap:8px;">
+          <select id="simMese" style="flex:1;">
+            <option value="1">Gen</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">Mag</option>
+            <option value="6">Giu</option>
+            <option value="7">Lug</option>
+            <option value="8">Ago</option>
+            <option value="9">Set</option>
+            <option value="10">Ott</option>
+            <option value="11">Nov</option>
+            <option value="12">Dic</option>
+          </select>
+          <select id="simAnno" style="flex:1.5;">
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020" selected>2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+          </select>
+        </div>
       </div>
       <div class="sim-form-group">
         <label>Importo Investito</label>
@@ -868,7 +902,7 @@
       </div>
     </div>
     <div style="margin-top:20px; max-width:200px;">
-      <button class="btn-simula" onclick="runSim()">SIMULA</button>
+      <button type="button" class="btn-simula" onclick="runSim()">SIMULA</button>
     </div>
   </div>
 
@@ -1171,11 +1205,12 @@ function sccy(v,cur){return cur+" "+Math.round(v).toLocaleString("it-CH").replac
 
 function runSim(){
   const inv = document.getElementById("simInvestitore").value.trim();
-  const di = document.getElementById("simDataInizio").value;
+  const _mese = parseInt(document.getElementById("simMese").value);
+  const _anno = parseInt(document.getElementById("simAnno").value);
   const imp = parseFloat(document.getElementById("simImporto").value);
   const cur = document.getElementById("simValuta").value;
-  if(!di||isNaN(imp)) return alert("Inserisci data e importo.");
-  const [sy,sm] = di.split("-").map(Number);
+  if(!_mese||!_anno||isNaN(imp)||imp<=0) return alert("Inserisci data e importo.");
+  const sy = _anno, sm = _mese;
 
   // Build nav series
   let nav=imp, peak=imp, maxDD=0, maxDDDate="";
@@ -1410,6 +1445,12 @@ function closeMenu(){
 }
 window.addEventListener("DOMContentLoaded",()=>{
   // Aspetta che Chart.js sia disponibile prima di eseguire il sim iniziale
+  // Imposta Gen 2020 come default nei nuovi select
+  const meseEl = document.getElementById("simMese");
+  const annoEl = document.getElementById("simAnno");
+  if(meseEl) meseEl.value = "1";
+  if(annoEl) annoEl.value = "2020";
+
   function tryRunSim(attempts){
     if(typeof Chart !== "undefined"){
       try { runSim(); } catch(e){ console.warn("runSim init error:",e); }
