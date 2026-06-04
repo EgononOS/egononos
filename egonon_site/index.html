@@ -415,22 +415,22 @@
     .form-card > p { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-    .form-group.full { grid-column: 1/-1; }
-    .form-group label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-light); }
-    .form-group input, .form-group select, .form-group textarea {
+    .form-card .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-card .form-group.full { grid-column: 1/-1; }
+    .form-card .form-group label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-light); }
+    .form-card .form-group input, .form-card .form-group select, .form-card .form-group textarea {
       background: var(--ivory); border: 1px solid var(--border);
       border-bottom: 2px solid var(--border-warm);
       color: var(--dark-mid); padding: 12px 14px; font-size: 14px;
       font-family: 'Inter', sans-serif; outline: none;
       transition: border-color 0.2s, background 0.2s; border-radius: 0;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    .form-card .form-group input:focus, .form-card .form-group select:focus, .form-card .form-group textarea:focus {
       border-color: var(--crimson); background: var(--white);
     }
-    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-light); }
-    .form-group select option { background: var(--white); color: var(--dark); }
-    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-card .form-group input::placeholder, .form-card .form-group textarea::placeholder { color: var(--gray-light); }
+    .form-card .form-group select option { background: var(--white); color: var(--dark); }
+    .form-card .form-group textarea { resize: vertical; min-height: 90px; }
     .form-note { font-size: 11px; color: var(--gray-light); margin-top: 14px; line-height: 1.6; }
     .form-success { text-align: center; padding: 40px 20px; display: none; }
     .form-success .check { font-size: 40px; margin-bottom: 16px; }
@@ -1154,8 +1154,9 @@ function runSim(){
   }
   const nM=monthRets.length;
   const nY=nM/12;
+  if(nM<1){alert("Dati insufficienti per il periodo selezionato.");return;}
   const totRet=(nav-imp)/imp*100;
-  const cagr=(Math.pow(nav/imp,1/nY)-1)*100;
+  const cagr=nY>0?(Math.pow(nav/imp,1/nY)-1)*100:totRet;
   const mean=monthRets.reduce((a,b)=>a+b,0)/monthRets.length;
   const vol=Math.sqrt(monthRets.reduce((a,b)=>a+Math.pow(b-mean,2),0)/(monthRets.length-1))*Math.sqrt(12);
   const isATH=Math.abs(nav-peak)<0.01;
@@ -1349,7 +1350,9 @@ function simGeneraPDF(){
 }
 
 // Auto-run on load
-window.addEventListener("DOMContentLoaded",()=>runSim());
+window.addEventListener("DOMContentLoaded",()=>{
+  try { runSim(); } catch(e){ console.warn("runSim init skipped:",e); }
+});
 </script>
 
 </body>
