@@ -1336,12 +1336,15 @@ ${calendar ? calendar.outerHTML : '<p>—</p>'}
 <div class="footer">EGONON SA · info@egonon.ch · egonon.ch · Autorizzata FINMA · LIsFi 2022</div>
 </body></html>`;
 
-  // Apre finestra di stampa
-  var win = window.open('', '_blank', 'width=900,height=700');
-  win.document.write(html);
-  win.document.close();
-  win.focus();
-  setTimeout(function(){ win.print(); }, 600);
+  // Download diretto come file HTML (nessun popup bloccato)
+  var blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'Report_EGONON_SA.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
 }
 </script>
 
