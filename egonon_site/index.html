@@ -306,7 +306,7 @@
       border-radius: 0;
     }
     .btn-simula:hover { background: var(--crimson-deep); transform: translateY(-1px); }
-    #simResults { display: none; }
+    #simResults { visibility: hidden; opacity: 0; transition: opacity 0.3s; }
     .sim-banner {
       background: var(--dark); color: white; padding: 28px 32px;
       border-radius: 0; margin-bottom: 24px;
@@ -1242,7 +1242,10 @@ function runSim(){
   simData={inv,imp,cur,sy,sm,nav,totRet,cagr,vol,maxDD,maxDDDate,nM,peak};
 
   // Show results
-  document.getElementById("simResults").style.display="block";
+  // Mostra PRIMA il container (necessario per canvas in Chrome)
+  const simResultsEl = document.getElementById("simResults");
+  simResultsEl.style.visibility = "visible";
+  simResultsEl.style.opacity = "1";
   const invName=inv?`Investitore: ${inv}  |  `:"";
   document.getElementById("simSubtitle").innerHTML=`${invName}Investimento: <strong>${sccy(imp,cur)}</strong> &nbsp;|&nbsp; Inizio: <strong>${MESI[sm-1]} ${sy}</strong> &nbsp;|&nbsp; Fine: <strong>Giugno 2026</strong>`;
   document.getElementById("simKpiValore").textContent=sccy(nav,cur);
