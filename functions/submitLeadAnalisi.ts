@@ -23,6 +23,8 @@ Deno.serve(async (req) => {
     }
 
     const base44 = createClientFromRequest(req);
+
+    // Salva lead nel CRM
     const lead = await base44.asServiceRole.entities.LeadAnalisi.create({
       nome,
       cognome,
@@ -36,16 +38,23 @@ Deno.serve(async (req) => {
       data_contatto: new Date().toISOString().split('T')[0],
     });
 
-    const outlookToken = Deno.env.get('OUTLOOK_ACCESS_TOKEN') || '';
+    // Ottieni token Outlook fresco tramite connettore OAuth Base44
+    let outlookToken = '';
+    try {
+      const tokenResp = await base44.asServiceRole.integrations.getToken('outlook');
+      outlookToken = tokenResp?.access_token || '';
+    } catch(e) {
+      console.error('Token Outlook non disponibile:', e.message);
+    }
 
     if (outlookToken) {
       const emailPayload = {
         message: {
-          subject: `🔔 Nuova richiesta analisi gratuita — ${nome} ${cognome}`,
+          subject: `🔔 Nuova richiesta analisi — ${nome} ${cognome}`,
           body: {
             contentType: 'HTML',
             content: `
-<p><strong>Nuova richiesta di analisi gratuita ricevuta dal sito EGONON SA.</strong></p>
+<p><strong>Nuova richiesta di analisi gratuita ricevuta da EgononOS.</strong></p>
 <table style="border-collapse:collapse; font-family:Arial, sans-serif; font-size:14px;">
   <tr><td style="padding:6px 12px; font-weight:bold; color:#666;">Nome</td><td style="padding:6px 12px;">${nome} ${cognome}</td></tr>
   <tr style="background:#f9f9f9;"><td style="padding:6px 12px; font-weight:bold; color:#666;">Email</td><td style="padding:6px 12px;"><a href="mailto:${email}">${email}</a></td></tr>
@@ -57,16 +66,15 @@ Deno.serve(async (req) => {
 </table>
 <br>
 <p>Il contatto è stato salvato automaticamente nel CRM EGONON SA con stato <strong>"Nuovo"</strong>.</p>
-<p style="color:#888; font-size:12px;">Email automatica generata da EgononOS</p>
+<p style="color:#888; font-size:12px;">Email automatica generata da EgononOS — ${new Date().toISOString()}</p>
 `,
           },
           toRecipients: [{ emailAddress: { address: 'info@egonon.ch' } }],
-          from: { emailAddress: { name: 'EGONON SA', address: 'info@egonon.ch' } },
         },
         saveToSentItems: true,
       };
 
-      await fetch('https://graph.microsoft.com/v1.0/me/sendMail', {
+      const sendResp = await fetch('https://graph.microsoft.com/v1.0/me/sendMail', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${outlookToken}`,
@@ -74,6 +82,11 @@ Deno.serve(async (req) => {
         },
         body: JSON.stringify(emailPayload),
       });
+
+      if (!sendResp.ok) {
+        const errText = await sendResp.text();
+        console.error('Errore invio email Outlook:', sendResp.status, errText);
+      }
     }
 
     return Response.json(
