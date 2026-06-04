@@ -39,14 +39,12 @@
       height: 72px;
     }
     .nav-left { display: flex; align-items: center; gap: 32px; }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
     .nav-logo-box {
-      width: 44px; height: 44px;
-      background: var(--bordeaux);
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 2px;
+      height: 52px;
+      display: flex; align-items: center;
     }
-    .nav-logo-box span { color: white; font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; }
+    .nav-logo-box img { height: 52px; width: auto; display: block; }
     .nav-brand { display: flex; flex-direction: column; }
     .nav-brand-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; color: var(--dark); }
     .nav-brand-sub { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
@@ -332,10 +330,9 @@
 <nav>
   <div class="nav-left">
     <a href="#" class="nav-logo">
-      <div class="nav-logo-box"><span>EG</span></div>
+      <div class="nav-logo-box"><img src="https://media.base44.com/images/public/6a1ef83138e7426bdf474b25/b6fbfc4fd_logo4.png" alt="EGONON SA"></div>
       <div class="nav-brand">
-        <span class="nav-brand-name">EGONON</span>
-        <span class="nav-brand-sub">Gestione Patrimoniale Indipendente</span>
+        <span class="nav-brand-sub" style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);">SA &nbsp;·&nbsp; Gestione Patrimoniale Indipendente</span>
       </div>
     </a>
     <div class="nav-links">
