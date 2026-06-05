@@ -1,0 +1,74 @@
+[
+  {
+    "codice": "EG-313",
+    "categoria": "Dentisti / ortodontisti / implantologia",
+    "azienda": "Studio Ortodontico Merlo",
+    "email": "paola.merlo@studiortodonticomerlo.ch",
+    "note": "Dr.ssa Paola Merlo — Titolare studio ortodontico. Email diretta nominale da sito ufficiale. Score: valid.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Uno studio ortodontico è un'impresa sanitaria. Il patrimonio personale va separato dal rischio operativo."
+  },
+  {
+    "codice": "EG-314",
+    "categoria": "Dentisti / ortodontisti / implantologia",
+    "azienda": "Fraschina Dental Clinic",
+    "email": "dr.fraschina@bluewin.ch",
+    "note": "Dr. Fiorenzo Felice Fraschina — Titolare Fraschina Dental Clinic (nome trovato su sito ufficiale). Email nominale bluewin confermata.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Uno studio dentistico è anche un'impresa. Il patrimonio personale va separato dal rischio operativo."
+  },
+  {
+    "codice": "EG-315",
+    "categoria": "Dentisti / ortodontisti / implantologia",
+    "azienda": "DentalCure Lugano",
+    "email": "info@dentalcure.ch",
+    "note": "Dr.ssa Anna Maria Doperti — nome trovato sul sito. Email info@ — da cercare email nominale diretta. HOLD.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Clinica dentistica multi-professionista. Titolare merita analisi rischio patrimoniale."
+  },
+  {
+    "codice": "EG-316",
+    "categoria": "Hotel / hospitality premium",
+    "azienda": "Splendide Royal Lugano",
+    "email": "marco.veneruso@splendide.ch",
+    "note": "Marco Veneruso — management senior Splendide Royal (Hunter score 99, valid/deliverable 100). Splendide Royal è 5 stelle Lugano. Verificare ruolo esatto (potenzialmente GM).",
+    "stato": "Da contattare",
+    "angolo_egonon": "Nel turismo la liquidità non è inattività: è protezione. Ma va organizzata."
+  },
+  {
+    "codice": "EG-317",
+    "categoria": "Hotel / hospitality premium",
+    "azienda": "Splendide Royal Lugano",
+    "email": "massimiliano.trombetta@splendide.ch",
+    "note": "Massimiliano Trombetta — management senior Splendide Royal (Hunter score 99). Hotel 5 stelle lusso Lugano. Ruolo da verificare.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Nel turismo la liquidità non è inattività: è protezione. Ma va organizzata."
+  },
+  {
+    "codice": "EG-318",
+    "categoria": "Hotel / hospitality premium",
+    "azienda": "Hotel International Lugano",
+    "email": "schmid@hotel-international.ch",
+    "note": "Alessandra Schmid — Partner / co-proprietaria Hotel International Lugano (Hunter score 99, valid). Ruolo Partner = decision maker patrimoniale.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Per le famiglie proprietarie di strutture hospitality il patrimonio personale deve essere decorrelato dal ciclo turistico."
+  },
+  {
+    "codice": "EG-319",
+    "categoria": "Hotel / hospitality premium",
+    "azienda": "Grand Hotel Villa Castagnola",
+    "email": "massimiliano.ferrara@villacastagnola.com",
+    "note": "Massimiliano Ferrara — management senior Villa Castagnola (Hunter score 91). Hotel 5 stelle Lugano. Da distinguere da EG-301 (Laura Puricelli, Front Office).",
+    "stato": "Da contattare",
+    "angolo_egonon": "Nel turismo la liquidità non è inattività: è protezione. Ma va organizzata."
+  },
+  {
+    "codice": "EG-320",
+    "categoria": "Hotel / hospitality premium",
+    "azienda": "Hotel De La Paix Lugano",
+    "email": "caterina.treherne@delapaix.ch",
+    "note": "Caterina Treherne — management De La Paix Lugano (Hunter score 93). Da distinguere da EG-302 (Sonia Spinelli). Ruolo da verificare — potenzialmente direzione.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Nel turismo la liquidità non è inattività: è protezione. Ma va organizzata."
+  }
+]
