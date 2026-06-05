@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EGONON SA — Board Committee Report — Giugno 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bordeaux: #8B1A1A;
+    --bordeaux-dark: #5C1010;
+    --bordeaux-light: #C5302A;
+    --ivory: #FAF8F4;
+    --ivory-dark: #F0EDE6;
+    --black: #0D0D0D;
+    --grey: #4A4A4A;
+    --grey-light: #8A8A8A;
+    --gold: #C9A84C;
+    --green: #2E7D32;
+    --red-perf: #C62828;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #E8E4DC;
+    color: var(--black);
+  }
+
+  /* ===== PAGE WRAPPER ===== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--ivory);
+    margin: 20px auto;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover {
+    background: var(--black);
+    min-height: 297mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-bg-pattern {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(139,26,26,0.06) 40px,
+      rgba(139,26,26,0.06) 41px
+    );
+  }
+
+  .cover-accent-left {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: linear-gradient(180deg, var(--bordeaux), var(--gold), var(--bordeaux));
+  }
+
+  .cover-header {
+    padding: 50px 60px 0 70px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .cover-logo-mark {
+    width: 50px;
+    height: 50px;
+    background: var(--bordeaux);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  .cover-logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .cover-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--bordeaux);
+    margin: 30px 0;
+  }
+
+  .cover-doc-type {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--bordeaux-light);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .cover-main {
+    flex: 1;
+    padding: 0 60px 0 70px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+  }
+
+  .cover-title span {
+    color: var(--bordeaux-light);
+    font-style: italic;
+  }
+
+  .cover-subtitle {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+  }
+
+  .cover-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 50px;
+  }
+
+  .cover-kpi {
+    padding: 20px 16px;
+    background: rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  .cover-kpi-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .cover-kpi-value.pos { color: #81C784; }
+  .cover-kpi-value.neg { color: #EF9A9A; }
+  .cover-kpi-value.gold { color: var(--gold); }
+
+  .cover-kpi-label {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+
+  .cover-initiatives {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .cover-initiative {
+    background: rgba(139,26,26,0.2);
+    border: 1px solid rgba(139,26,26,0.3);
+    border-left: 3px solid var(--bordeaux);
+    padding: 14px;
+  }
+
+  .cover-initiative-title {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--bordeaux-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .cover-initiative-desc {
+    font-size: 9px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+
+  .cover-footer {
+    padding: 24px 70px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-footer-left {
+    font-size: 8px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  .cover-footer-right {
+    font-size: 8px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+    text-align: right;
+  }
+
+  /* ===== CONTENT PAGES ===== */
+  .content-page {
+    padding: 0;
+  }
+
+  .page-header {
+    background: var(--bordeaux);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .page-header-left {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+
+  .page-header-right {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .page-content {
+    padding: 30px 40px;
+  }
+
+  /* ===== SECTION TITLES ===== */
+  .section-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--bordeaux);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--bordeaux);
+    margin-bottom: 20px;
+  }
+
+  /* ===== TWO COLUMN ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ===== KPI BOXES ===== */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .kpi-box {
+    background: var(--ivory-dark);
+    border-top: 3px solid var(--bordeaux);
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  .kpi-box.highlight {
+    background: var(--bordeaux);
+  }
+
+  .kpi-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--bordeaux);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .kpi-box.highlight .kpi-value { color: white; }
+
+  .kpi-label {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--grey-light);
+    text-transform: uppercase;
+  }
+
+  .kpi-box.highlight .kpi-label { color: rgba(255,255,255,0.7); }
+
+  /* ===== CHART ===== */
+  .chart-container {
+    background: var(--ivory-dark);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .chart-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  canvas { display: block; }
+
+  /* ===== ANNUAL TABLE ===== */
+  .annual-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8px;
+    margin-bottom: 16px;
+  }
+
+  .annual-table th {
+    background: var(--black);
+    color: white;
+    padding: 6px 8px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 7px;
+    text-transform: uppercase;
+  }
+
+  .annual-table td {
+    padding: 5px 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .annual-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+  .pos-cell { color: var(--green); font-weight: 700; }
+  .neg-cell { color: var(--red-perf); font-weight: 700; }
+
+  /* ===== INFO BOXES ===== */
+  .info-box {
+    background: var(--ivory-dark);
+    border-left: 4px solid var(--bordeaux);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+
+  .info-box-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--bordeaux);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .info-box-text {
+    font-size: 9px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* ===== TARGET TABLE ===== */
+  .target-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8px;
+    margin-bottom: 16px;
+  }
+
+  .target-table th {
+    background: var(--bordeaux);
+    color: white;
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 7px;
+    text-transform: uppercase;
+  }
+
+  .target-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    vertical-align: top;
+  }
+
+  .target-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+  .priority-badge {
+    display: inline-block;
+    background: var(--bordeaux);
+    color: white;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 6px;
+    letter-spacing: 1px;
+  }
+
+  .priority-badge.p2 { background: #C0392B; }
+  .priority-badge.p3 { background: #8B1A1A; }
+  .priority-badge.p4 { background: #5C1010; opacity: 0.7; }
+
+  /* ===== PIPELINE ===== */
+  .pipeline {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 16px;
+  }
+
+  .pipeline-step {
+    flex: 1;
+    background: var(--ivory-dark);
+    padding: 12px 10px;
+    text-align: center;
+    position: relative;
+    border-top: 3px solid var(--bordeaux);
+  }
+
+  .pipeline-step::after {
+    content: '▶';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bordeaux);
+    font-size: 12px;
+    z-index: 10;
+  }
+
+  .pipeline-step:last-child::after { display: none; }
+
+  .pipeline-step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--bordeaux);
+    line-height: 1;
+  }
+
+  .pipeline-step-title {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--black);
+    text-transform: uppercase;
+    margin: 4px 0;
+  }
+
+  .pipeline-step-desc {
+    font-size: 7px;
+    color: var(--grey-light);
+    line-height: 1.4;
+  }
+
+  /* ===== STATUS TAGS ===== */
+  .status-live {
+    display: inline-block;
+    background: #E8F5E9;
+    color: var(--green);
+    border: 1px solid #A5D6A7;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .status-active {
+    display: inline-block;
+    background: #FFF8E1;
+    color: #F57F17;
+    border: 1px solid #FFE082;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .status-planned {
+    display: inline-block;
+    background: rgba(0,0,0,0.04);
+    color: var(--grey-light);
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== METRICS ROW ===== */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .metric-card {
+    background: var(--ivory-dark);
+    padding: 14px;
+    border-top: 2px solid var(--gold);
+  }
+
+  .metric-card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--bordeaux);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .metric-card-label {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--grey-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .metric-card-sub {
+    font-size: 8px;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* ===== ROADMAP ===== */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+  }
+
+  .roadmap-phase {
+    padding: 14px 12px;
+    border-right: 1px solid rgba(0,0,0,0.08);
+    position: relative;
+  }
+
+  .roadmap-phase:last-child { border-right: none; }
+
+  .roadmap-phase.done { background: rgba(139,26,26,0.06); }
+  .roadmap-phase.current { background: rgba(139,26,26,0.12); border-top: 3px solid var(--bordeaux); }
+  .roadmap-phase.next { background: rgba(0,0,0,0.02); }
+
+  .roadmap-phase-label {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .roadmap-phase.done .roadmap-phase-label { color: var(--green); }
+  .roadmap-phase.current .roadmap-phase-label { color: var(--bordeaux); }
+  .roadmap-phase.next .roadmap-phase-label { color: var(--grey-light); }
+
+  .roadmap-phase-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .roadmap-item {
+    font-size: 7.5px;
+    color: var(--grey);
+    padding: 3px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.1);
+    line-height: 1.4;
+  }
+
+  .roadmap-item:last-child { border-bottom: none; }
+
+  .roadmap-item.done-item::before { content: '✓ '; color: var(--green); font-weight: 700; }
+  .roadmap-item.current-item::before { content: '▶ '; color: var(--bordeaux); }
+  .roadmap-item.next-item::before { content: '○ '; color: var(--grey-light); }
+
+  /* ===== PAGE FOOTER ===== */
+  .page-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 40px;
+    background: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .page-footer-left {
+    font-size: 7px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  .page-footer-center {
+    width: 40px;
+    height: 1px;
+    background: var(--bordeaux);
+  }
+
+  .page-footer-right {
+    font-size: 7px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  /* ===== DISCLAIMER ===== */
+  .disclaimer {
+    font-size: 6.5px;
+    color: var(--grey-light);
+    line-height: 1.5;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+
+  /* ===== BAR CHART CSS ===== */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 80px;
+    padding: 0 4px;
+    background: var(--ivory-dark);
+    border: 1px solid rgba(0,0,0,0.04);
+    margin-bottom: 4px;
+  }
+
+  .bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  .bar {
+    width: 100%;
+    min-height: 2px;
+    position: relative;
+  }
+
+  .bar.pos-bar { background: var(--bordeaux); }
+  .bar.neg-bar { background: #C62828; opacity: 0.7; }
+
+  .bar-year {
+    font-size: 6px;
+    color: var(--grey-light);
+    margin-top: 3px;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .bar-val {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .bar-val.pos-bar-val { color: var(--bordeaux); }
+  .bar-val.neg-bar-val { color: #C62828; }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    background: var(--bordeaux);
+    color: white;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+
+  .highlight-box-title {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .highlight-box-text {
+    font-size: 10px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ===== NAV LINE CHART using SVG ===== */
+  .nav-svg-container {
+    background: var(--ivory-dark);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="page cover">
+  <div class="cover-bg-pattern"></div>
+  <div class="cover-accent-left"></div>
+
+  <div class="cover-header">
+    <div class="cover-logo-area">
+      <div class="cover-logo-mark">EG</div>
+      <div>
+        <div class="cover-logo-text">EGONON SA</div>
+        <div style="font-size:8px; color:rgba(255,255,255,0.25); letter-spacing:2px; font-family:'Montserrat',sans-serif; margin-top:2px;">GESTIONE PATRIMONIALE INDIPENDENTE</div>
+      </div>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-doc-type">Board Committee Report · Giugno 2026 · Confidenziale</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-title">Infrastruttura<br>Digitale &amp;<br><span>Lead Generation</span></div>
+    <div class="cover-subtitle">Stato di avanzamento · Piattaforma · Target · Automazione</div>
+
+    <div class="cover-kpi-row">
+      <div class="cover-kpi">
+        <div class="cover-kpi-value pos">+114.9%</div>
+        <div class="cover-kpi-label">Performance<br>Totale 2010–2026</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-value neg">−12.3%</div>
+        <div class="cover-kpi-label">Max Drawdown<br>vs −34% MSCI World</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-value gold">250</div>
+        <div class="cover-kpi-label">Target Email<br>Nominali · Q3 2026</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-value" style="color:white;">29</div>
+        <div class="cover-kpi-label">Prospect CRM<br>Verificati attivi</div>
+      </div>
+    </div>
+
+    <div class="cover-initiatives">
+      <div class="cover-initiative">
+        <div class="cover-initiative-title">01 · Portale Web</div>
+        <div class="cover-initiative-desc">EgononOS — simulatore interattivo, branding istituzionale e form lead generation live su GitHub Pages.</div>
+      </div>
+      <div class="cover-initiative">
+        <div class="cover-initiative-title">02 · Database Target</div>
+        <div class="cover-initiative-desc">10 categorie HNW identificate. Pipeline strutturata con enrichment nominale (Apollo, Hunter, AITI, Zefix).</div>
+      </div>
+      <div class="cover-initiative">
+        <div class="cover-initiative-title">03 · Automazione</div>
+        <div class="cover-initiative-desc">Invii email sequenziali, CRM sync automatico, notifiche real-time, campagne settimanali scalabili.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-left">EGONON SA · Appenzello &amp; Lugano · FINMA Autorizzata · LIsFi Art. 17</div>
+    <div class="cover-footer-right">Consiglio di Amministrazione · 09 Giugno 2026 · Ore 12:00<br>Documento Riservato — Uso Interno</div>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE 2: PERFORMANCE & PIATTAFORMA ==================== -->
+<div class="page content-page" style="padding-bottom: 50px;">
+  <div class="page-header">
+    <div class="page-header-left">Performance &amp; Piattaforma EgononOS</div>
+    <div class="page-header-right">EGONON SA · Sezione 01</div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- KPI ROW -->
+    <div class="kpi-row" style="margin-bottom:16px;">
+      <div class="kpi-box highlight">
+        <div class="kpi-value">+114.9%</div>
+        <div class="kpi-label">Performance 2010–2026</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value" style="color:#2E7D32;">−12.3%</div>
+        <div class="kpi-label">Max Drawdown (2022)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value">+8.8%</div>
+        <div class="kpi-label">Performance YTD 2026</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value">2.149</div>
+        <div class="kpi-label">NAV Attuale (Base 1.000)</div>
+      </div>
+    </div>
+
+    <!-- NAV CHART SVG -->
+    <div class="nav-svg-container">
+      <div class="chart-title">EGONON Global Macro Index — NAV 2010–2026 (Base: 1.000)</div>
+      <svg width="100%" height="120" viewBox="0 0 680 120" preserveAspectRatio="none" style="display:block;">
+        <defs>
+          <linearGradient id="navGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#8B1A1A;stop-opacity:0.3"/>
+            <stop offset="100%" style="stop-color:#8B1A1A;stop-opacity:0"/>
+          </linearGradient>
+        </defs>
+        <!-- Grid lines -->
+        <line x1="0" y1="100" x2="680" y2="100" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+        <line x1="0" y1="70" x2="680" y2="70" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+        <line x1="0" y1="40" x2="680" y2="40" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+        <line x1="0" y1="15" x2="680" y2="15" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+        <!-- NAV labels -->
+        <text x="3" y="13" font-size="7" fill="#8A8A8A" font-family="Montserrat">2.500</text>
+        <text x="3" y="38" font-size="7" fill="#8A8A8A" font-family="Montserrat">2.000</text>
+        <text x="3" y="68" font-size="7" fill="#8A8A8A" font-family="Montserrat">1.500</text>
+        <text x="3" y="98" font-size="7" fill="#8A8A8A" font-family="Montserrat">1.000</text>
+        <!-- Area + Line path (simplified key points) -->
+        <path d="M30,100 L60,97 L90,95 L120,94 L150,89 L180,84 L210,80 L240,77 L270,75 L300,72 L330,68 L360,65 L390,60 L420,57 L450,52 L480,48 L510,42 L540,37 L560,33 L580,28 L620,22 L650,17 L680,12 L680,110 L30,110 Z" fill="url(#navGrad)"/>
+        <path d="M30,100 L60,97 L90,95 L120,94 L150,89 L180,84 L210,80 L240,77 L270,75 L300,72 L330,68 L360,65 L390,60 L420,57 L450,52 L480,48 L510,42 L540,37 L560,33 L580,28 L620,22 L650,17 L680,12" fill="none" stroke="#8B1A1A" stroke-width="2"/>
+        <!-- COVID Marker -->
+        <line x1="505" y1="15" x2="505" y2="105" stroke="#C62828" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="508" y="24" font-size="6.5" fill="#C62828" font-family="Montserrat">COVID</text>
+        <text x="508" y="32" font-size="6.5" fill="#C62828" font-family="Montserrat">−15%</text>
+        <!-- Start/End dots -->
+        <circle cx="30" cy="100" r="4" fill="#8B1A1A"/>
+        <circle cx="680" cy="12" r="5" fill="#8B1A1A"/>
+        <text x="642" y="10" font-size="7" fill="#8B1A1A" font-weight="bold" font-family="Montserrat">2.149</text>
+        <!-- Year labels -->
+        <text x="25" y="114" font-size="6" fill="#8A8A8A" font-family="Montserrat">2010</text>
+        <text x="185" y="114" font-size="6" fill="#8A8A8A" font-family="Montserrat">2014</text>
+        <text x="345" y="114" font-size="6" fill="#8A8A8A" font-family="Montserrat">2018</text>
+        <text x="500" y="114" font-size="6" fill="#8A8A8A" font-family="Montserrat">2021</text>
+        <text x="620" y="114" font-size="6" fill="#8A8A8A" font-family="Montserrat">2025</text>
+      </svg>
+      <div style="display:flex; gap:20px; margin-top:6px;">
+        <span style="font-size:7px; color:#8A8A8A;">▬ <span style="color:#8B1A1A; font-weight:700;">EGONON Global Macro</span> | ISIN: DE000A2UG4F2 | 195 osservazioni mensili | Base NAV: 1.000 (Apr. 2010)</span>
+        <span style="font-size:7px; color:#2E7D32; font-weight:700; margin-left:auto;">COVID: −15% vs MSCI World −34%</span>
+      </div>
+    </div>
+
+    <!-- ANNUAL PERFORMANCE BAR CHART -->
+    <div class="chart-container" style="padding-bottom:8px;">
+      <div class="chart-title">Performance Annuale % — EGONON Global Macro Index</div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:72px; padding:0 2px; margin-bottom:4px;">
+        <!-- Bars for each year -->
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:18%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+3.2</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2010</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:30%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+5.3</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2011</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:48%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+8.4</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2012</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:31%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+5.4</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2013</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:62%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+10.6</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2014</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:15%; background:#C62828; opacity:0.8; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#C62828;font-weight:700;">−2.6</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2015</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:3%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+0.2</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2016</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:38%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+6.4</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2017</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:16%; background:#C62828; opacity:0.8; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#C62828;font-weight:700;">−2.8</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2018</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:48%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+8.2</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2019</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:3%; background:#C62828; opacity:0.8; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#C62828;font-weight:700;">−0.3</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2020</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:80%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+13.7</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2021</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:69%; background:#C62828; opacity:0.9; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#C62828;font-weight:700;">−11.8</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2022</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:69%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+11.7</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2023</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:67%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+11.5</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2024</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:33%; background:#8B1A1A; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#8B1A1A;font-weight:700;">+5.7</span></div>
+          <div style="font-size:5.5px; color:#8A8A8A; margin-top:2px;">2025</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;">
+          <div style="width:100%; height:51%; background:#C9A84C; position:relative;"><span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:5.5px;color:#9A7A20;font-weight:700;">+8.8</span></div>
+          <div style="font-size:5.5px; color:#C9A84C; font-weight:700; margin-top:2px;">2026</div>
+        </div>
+      </div>
+      <div style="font-size:6.5px; color:#8A8A8A; text-align:center;">2026 = YTD al 30 maggio 2026 · Dati storici verificati · 195 osservazioni mensili</div>
+    </div>
+
+    <!-- PLATFORM SECTION -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
+      <div>
+        <div class="section-label">Infrastruttura Digitale</div>
+        <div class="section-title" style="font-size:20px;">Portale EgononOS</div>
+        <div class="section-divider"></div>
+        <div class="info-box">
+          <div class="info-box-title">🌐 egononos.github.io/egononos</div>
+          <div class="info-box-text">
+            Piattaforma istituzionale EGONON SA live su GitHub Pages. Architettura Vanilla JS con Canvas API nativa — nessuna dipendenza esterna, zero problemi di Content Security Policy. Completamente responsive e cross-browser.
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--ivory-dark); font-size:8px;">
+            <span style="font-weight:600;">Simulatore Interattivo</span>
+            <span class="status-live">● LIVE</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--ivory-dark); font-size:8px;">
+            <span style="font-weight:600;">Form Lead Generation → CRM</span>
+            <span class="status-live">● LIVE</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--ivory-dark); font-size:8px;">
+            <span style="font-weight:600;">Disclaimer Legale Obbligatorio</span>
+            <span class="status-live">● LIVE</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--ivory-dark); font-size:8px;">
+            <span style="font-weight:600;">Export Report PDF Branded</span>
+            <span class="status-live">● LIVE</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--ivory-dark); font-size:8px;">
+            <span style="font-weight:600;">Notifiche Lead via Email</span>
+            <span class="status-live">● LIVE</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Funzionalità Simulatore</div>
+        <div class="section-title" style="font-size:20px;">Strumento Prospect</div>
+        <div class="section-divider"></div>
+        <div style="background:var(--ivory-dark); padding:14px; font-size:8px; line-height:1.8; color:var(--grey); border-left:3px solid var(--gold);">
+          Il simulatore permette al prospect di visualizzare:<br>
+          <strong>→</strong> Evoluzione NAV reale 2010–2026 su grafico interattivo<br>
+          <strong>→</strong> Confronto con benchmark mercato (drawdown COVID)<br>
+          <strong>→</strong> Performance personalizzata su capitale investito<br>
+          <strong>→</strong> Generazione report PDF branded scaricabile<br>
+          <strong>→</strong> Form di contatto diretto → acquisizione lead automatica<br><br>
+          <span style="color:var(--bordeaux); font-weight:700;">Obiettivo:</span> abbassare la barriera cognitiva del prospect mostrando concretamente cosa significa affidarsi a EGONON SA.
+        </div>
+        <div style="margin-top:10px; background:var(--bordeaux); color:white; padding:10px 12px; font-size:8px;">
+          <div style="font-weight:700; letter-spacing:1px; margin-bottom:4px; font-size:7px; opacity:0.7; text-transform:uppercase;">Integrazione CRM</div>
+          Ogni lead dal form viene automaticamente:<br>
+          • Salvato nel database CRM<br>
+          • Classificato per categoria professionale<br>
+          • Notificato via email a info@egonon.ch
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-left">EGONON SA — Documento Riservato CDA · Giugno 2026</div>
+    <div class="page-footer-center"></div>
+    <div class="page-footer-right">Pagina 2 / 4</div>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE 3: TARGET & CATEGORIE ==================== -->
+<div class="page content-page" style="padding-bottom: 50px;">
+  <div class="page-header">
+    <div class="page-header-left">Strategia Target &amp; Categorie HNW</div>
+    <div class="page-header-right">EGONON SA · Sezione 02</div>
+  </div>
+
+  <div class="page-content">
+
+    <div class="highlight-box" style="margin-bottom:14px;">
+      <div class="highlight-box-title">Approccio Strategico</div>
+      <div class="highlight-box-text">"La sua azienda crea valore. Il suo portafoglio lo sta proteggendo o sta correndo lo stesso rischio?" — EGONON SA si rivolge esclusivamente a professionisti e imprenditori con patrimonio personale da proteggere e ottimizzare, identificati attraverso fonti pubbliche certificate.</div>
+    </div>
+
+    <!-- TARGET TABLE -->
+    <div class="section-label" style="margin-bottom:4px;">Pipeline Prospect · 10 Categorie Industriali Prioritizzate</div>
+    <div class="section-divider" style="margin-bottom:10px;"></div>
+
+    <table class="target-table">
+      <thead>
+        <tr>
+          <th style="width:20px;">Pri.</th>
+          <th>Categoria</th>
+          <th style="width:45px; text-align:center;">Target</th>
+          <th>Claim Specifico di Categoria</th>
+          <th style="width:50px; text-align:center;">Stato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="priority-badge">P1</span></td>
+          <td style="font-weight:600; font-size:8px;">PMI Industria / Pharma / Export</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">45</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"La sua azienda crea valore. Il portafoglio deve proteggerlo."</td>
+          <td style="text-align:center;"><span class="status-active">Attivo</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p2">P2</span></td>
+          <td style="font-weight:600; font-size:8px;">Costruzioni / Immobiliare / Architettura</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">38</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Chi vive di immobili è già esposto. Il portafoglio deve fare altro."</td>
+          <td style="text-align:center;"><span class="status-active">Attivo</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p3">P3</span></td>
+          <td style="font-weight:600; font-size:8px;">Medici Specialisti / Cliniche Private</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">32</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Lei cura la salute dei pazienti. EGONON cura il suo patrimonio."</td>
+          <td style="text-align:center;"><span class="status-live">Inviato</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p3">P4</span></td>
+          <td style="font-weight:600; font-size:8px;">Hotel / Hospitality Premium (5 stelle)</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">30</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Nel turismo la liquidità non è inattività: è protezione."</td>
+          <td style="text-align:center;"><span class="status-active">Attivo</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4">P5</span></td>
+          <td style="font-weight:600; font-size:8px;">Sportivi / Ex-Sportivi / Agenti / Dirigenti</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">25</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"La carriera dura 10 anni. Il patrimonio deve durare una vita."</td>
+          <td style="text-align:center;"><span class="status-planned">Pianificato</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4">P6</span></td>
+          <td style="font-weight:600; font-size:8px;">Farmacie / Farmacisti Titolari</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">20</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"La farmacia produce stabilità. Il patrimonio la deve trasformare in continuità."</td>
+          <td style="text-align:center;"><span class="status-active">Attivo</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4">P7</span></td>
+          <td style="font-weight:600; font-size:8px;">Dentisti / Ortodontisti / Implantologia</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">25</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Uno studio dentistico è un'impresa. Il rischio operativo va separato."</td>
+          <td style="text-align:center;"><span class="status-live">Inviato</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4">P8</span></td>
+          <td style="font-weight:600; font-size:8px;">Orologeria / Gioielleria / Lusso / Design</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">15</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Nel lusso conta ciò che non si vede. Nel patrimonio anche."</td>
+          <td style="text-align:center;"><span class="status-planned">Pianificato</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4">P9</span></td>
+          <td style="font-weight:600; font-size:8px;">Scuole Private / Education Business</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">12</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Chi costruisce futuro comprende il valore della pianificazione."</td>
+          <td style="text-align:center;"><span class="status-planned">Pianificato</span></td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4">P10</span></td>
+          <td style="font-weight:600; font-size:8px;">Cliniche Veterinarie / Veterinari Titolari</td>
+          <td style="text-align:center; font-weight:700; color:var(--bordeaux);">8</td>
+          <td style="font-size:7.5px; color:var(--grey); font-style:italic;">"Una clinica veterinaria è un'impresa sanitaria. Stessa precisione."</td>
+          <td style="text-align:center;"><span class="status-live">Inviato</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PIPELINE STATUS -->
+    <div class="metrics-row" style="margin-bottom:12px;">
+      <div class="metric-card">
+        <div class="metric-card-value">250</div>
+        <div class="metric-card-label">Target Totale Email Nominali</div>
+        <div class="metric-card-sub">Obiettivo completamento: 11 luglio 2026<br>Solo contatti con email personale verificata</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-value">29</div>
+        <div class="metric-card-label">CRM Prospect Verificati</div>
+        <div class="metric-card-sub">Nominali confermati (Apollo, Hunter, Zefix, AITI)<br>Aggiornati al 05 giugno 2026</div>
+      </div>
+      <div class="metric-card" style="border-top-color:var(--bordeaux);">
+        <div class="metric-card-value" style="color:var(--bordeaux);">22</div>
+        <div class="metric-card-label">Email Inviate (Wave 1+2)</div>
+        <div class="metric-card-sub">Campagna 03/06 + campagna 09/06<br>Tasso apertura in monitoraggio</div>
+      </div>
+    </div>
+
+    <!-- FONTI ENRICHMENT -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div class="info-box">
+        <div class="info-box-title">🔍 Fonti Acquisizione Contatti</div>
+        <div class="info-box-text">
+          <strong>AITI</strong> — Associazione Industrie Ticinesi<br>
+          <strong>Zefix</strong> — Registro Commercio Svizzero<br>
+          <strong>Moneyhouse</strong> — Dati amministratori e dirigenti<br>
+          <strong>Apollo.io</strong> — Enrichment email nominale con ruolo<br>
+          <strong>Hunter.io</strong> — Verifica deliverability email<br>
+          <strong>LinkedIn</strong> — Conferma ruolo e posizione attuale<br>
+          <strong>Albi professionali</strong> — OMDCT, FMH, albi cantonali
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">✅ Regola Fondamentale — Zero Generic</div>
+        <div class="info-box-text">
+          <strong style="color:var(--bordeaux);">Politica assoluta:</strong> nessun invio a indirizzi generici (info@, booking@, reservation@, welcome@, admin@, contact@). Ogni prospect deve avere un'email nominale personale verificata prima dell'inserimento in campagna.<br><br>
+          <strong>Impatto:</strong> tasso di deliverability stimato >95% vs <40% con email generiche. Protezione della reputazione del dominio mittente.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-left">EGONON SA — Documento Riservato CDA · Giugno 2026</div>
+    <div class="page-footer-center"></div>
+    <div class="page-footer-right">Pagina 3 / 4</div>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE 4: AUTOMAZIONE & ROADMAP ==================== -->
+<div class="page content-page" style="padding-bottom: 60px;">
+  <div class="page-header">
+    <div class="page-header-left">Automazione · Pipeline · Roadmap</div>
+    <div class="page-header-right">EGONON SA · Sezione 03</div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- PIPELINE STEPS -->
+    <div class="section-label" style="margin-bottom:4px;">Flusso Operativo Automatizzato</div>
+    <div class="section-divider" style="margin-bottom:10px;"></div>
+
+    <div class="pipeline" style="margin-bottom:16px;">
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">01</div>
+        <div class="pipeline-step-title">Enrichment</div>
+        <div class="pipeline-step-desc">Scraping AITI, Zefix, Apollo, Hunter. Verifica email nominale e ruolo</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">02</div>
+        <div class="pipeline-step-title">CRM Import</div>
+        <div class="pipeline-step-desc">Prospect classificato per categoria, angolo claim, score qualità</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">03</div>
+        <div class="pipeline-step-title">Template</div>
+        <div class="pipeline-step-desc">Email personalizzata per categoria con dati performance e disclaimer legale</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">04</div>
+        <div class="pipeline-step-title">Invio Auto</div>
+        <div class="pipeline-step-desc">Dispatch programmato via Outlook OAuth (info@egonon.ch) lunedì ore 8:00</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">05</div>
+        <div class="pipeline-step-title">CRM Update</div>
+        <div class="pipeline-step-desc">Stato aggiornato a "Inviato", data registrata, follow-up schedulato</div>
+      </div>
+    </div>
+
+    <!-- AUTOMAZIONI ATTIVE -->
+    <div class="section-label" style="margin-bottom:4px;">Automazioni Attive</div>
+    <div class="section-divider" style="margin-bottom:10px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+      <div style="background:var(--ivory-dark); padding:12px; border-top:2px solid #2E7D32;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div style="font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Campagna Email Settimanale</div>
+          <span class="status-live">● Live</span>
+        </div>
+        <div style="font-size:8px; color:var(--grey); line-height:1.6;">
+          Ogni lunedì ore 08:00 · Dispatch automatico ai prospect in coda "Da contattare" · Template differenziato per categoria · Mittente: EGONON SA &lt;info@egonon.ch&gt; · OAuth Office 365
+        </div>
+      </div>
+      <div style="background:var(--ivory-dark); padding:12px; border-top:2px solid #2E7D32;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div style="font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Notifica Lead EgononOS</div>
+          <span class="status-live">● Live</span>
+        </div>
+        <div style="font-size:8px; color:var(--grey); line-height:1.6;">
+          Ogni nuovo contatto dal simulatore → CRM sync automatico + email notifica a info@egonon.ch · 2 leads ricevuti questa settimana · Token OAuth auto-rinnovato
+        </div>
+      </div>
+      <div style="background:var(--ivory-dark); padding:12px; border-top:2px solid var(--gold);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div style="font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Aggiornamento NAV Settimanale</div>
+          <span class="status-live">● Live</span>
+        </div>
+        <div style="font-size:8px; color:var(--grey); line-height:1.6;">
+          Ogni lunedì ore 08:00 · Lettura NAV certificato Börse Düsseldorf (ISIN DE000A2UG4F2) · Aggiornamento dati simulatore su GitHub · Notifica WhatsApp
+        </div>
+      </div>
+      <div style="background:var(--ivory-dark); padding:12px; border-top:2px solid var(--grey-light);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div style="font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Enrichment Prospect (Batch)</div>
+          <span class="status-active">● In corso</span>
+        </div>
+        <div style="font-size:8px; color:var(--grey); line-height:1.6;">
+          Scraping settimanale automatizzato · AITI, Zefix, Moneyhouse, Apollo · Target: +20 nominali/settimana · Obiettivo 250 entro 11 luglio 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNETTORI OAUTH -->
+    <div class="section-label" style="margin-bottom:4px;">Ecosistema Integrato — Connettori OAuth Attivi</div>
+    <div class="section-divider" style="margin-bottom:10px;"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(9, 1fr); gap:6px; margin-bottom:14px;">
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">OUTLOOK<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">GMAIL<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">G. SHEETS<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">G. DRIVE<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">G. DOCS<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">G. SLIDES<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">G. CALENDAR<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">LINKEDIN<br><span style="color:var(--green);">✓</span></div>
+      <div style="background:var(--ivory-dark); padding:8px 4px; text-align:center; font-size:6.5px; font-weight:700; letter-spacing:0.5px; color:var(--grey); border-top:2px solid var(--bordeaux);">GITHUB<br><span style="color:var(--green);">✓</span></div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="section-label" style="margin-bottom:4px;">Roadmap Strategica 2026</div>
+    <div class="section-divider" style="margin-bottom:10px;"></div>
+
+    <div class="roadmap">
+      <div class="roadmap-phase done">
+        <div class="roadmap-phase-label">✓ Completato</div>
+        <div class="roadmap-phase-title">Fase 1<br>Infrastruttura</div>
+        <div class="roadmap-item done-item">Portale EgononOS live</div>
+        <div class="roadmap-item done-item">Simulatore + PDF branded</div>
+        <div class="roadmap-item done-item">CRM + automazioni base</div>
+        <div class="roadmap-item done-item">Disclaimer legale FINMA</div>
+        <div class="roadmap-item done-item">OAuth 9 connettori</div>
+        <div class="roadmap-item done-item">Wave 1: 11 email nominali</div>
+      </div>
+      <div class="roadmap-phase current">
+        <div class="roadmap-phase-label">▶ In corso — Giu 2026</div>
+        <div class="roadmap-phase-title">Fase 2<br>Acquisizione</div>
+        <div class="roadmap-item current-item">Wave 2: 11 nominali lun 09/06</div>
+        <div class="roadmap-item current-item">Enrichment 29 prospect verificati</div>
+        <div class="roadmap-item current-item">Template 10 categorie</div>
+        <div class="roadmap-item current-item">Pipeline PMI pharma + hotel</div>
+        <div class="roadmap-item next-item">Follow-up risposta automatico</div>
+        <div class="roadmap-item next-item">NAV update settimanale auto</div>
+      </div>
+      <div class="roadmap-phase next">
+        <div class="roadmap-phase-label">○ Lug 2026</div>
+        <div class="roadmap-phase-title">Fase 3<br>Scale-up</div>
+        <div class="roadmap-item next-item">Target 250 email nominali</div>
+        <div class="roadmap-item next-item">LinkedIn outreach integrato</div>
+        <div class="roadmap-item next-item">Sequenze multi-touch</div>
+        <div class="roadmap-item next-item">Tracking aperture email</div>
+        <div class="roadmap-item next-item">Hunter.io API upgrade</div>
+        <div class="roadmap-item next-item">5 categorie nuove avviate</div>
+      </div>
+      <div class="roadmap-phase next">
+        <div class="roadmap-phase-label">○ Q4 2026</div>
+        <div class="roadmap-phase-title">Fase 4<br>Conversione</div>
+        <div class="roadmap-item next-item">CRM pipeline AUM stimato</div>
+        <div class="roadmap-item next-item">Scheduling primo appuntamento</div>
+        <div class="roadmap-item next-item">Report analytics campagne</div>
+        <div class="roadmap-item next-item">Onboarding digitale clienti</div>
+        <div class="roadmap-item next-item">Sottodominio simulatore.egonon.ch</div>
+        <div class="roadmap-item next-item">Campagne sportivi/lusso</div>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE NOTE -->
+    <div style="background:rgba(139,26,26,0.05); border:1px solid rgba(139,26,26,0.15); padding:10px 12px; font-size:7.5px; color:var(--grey); line-height:1.6; margin-top:8px;">
+      <strong style="color:var(--bordeaux); text-transform:uppercase; letter-spacing:1px; font-size:7px;">Nota FINMA — Comunicazioni 03/2026 e 04/2026:</strong> Tutte le comunicazioni commerciali includono il disclaimer legale obbligatorio EGONON SA. La documentazione di suitability per i prospect è in corso di strutturazione. L'analisi dei rischi AML/riciclaggio sarà aggiornata in linea con le indicazioni della Comunicazione 04/2026. Si raccomanda revisione con il consulente compliance prima della prossima visita OV.
+    </div>
+
+    <div class="disclaimer" style="margin-top:10px;">
+      I dati di performance storici (2010–2026) si riferiscono all'EGONON Global Macro Index (ISIN DE000A2UG4F2, certificato Opus Charter). Le performance passate non sono indicative di risultati futuri. Ogni investimento comporta rischi inclusa la possibile perdita parziale o totale del capitale. EGONON SA è autorizzata dalla FINMA come gestore patrimoniale indipendente ai sensi dell'art. 17 LIsFi. Sede: Appenzello e Lugano, Svizzera. Documento ad uso esclusivo del Consiglio di Amministrazione. Giugno 2026.
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-left">EGONON SA — Documento Riservato CDA · Giugno 2026</div>
+    <div class="page-footer-center"></div>
+    <div class="page-footer-right">Pagina 4 / 4</div>
+  </div>
+</div>
+
+</body>
+</html>
