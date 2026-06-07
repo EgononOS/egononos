@@ -1,0 +1,47 @@
+[
+  {
+    "codice": "EG-336",
+    "categoria": "Medici specialisti / cliniche",
+    "azienda": "Studio Dr. Luca Borra — Chirurgia Plastica",
+    "email": "studiodrborra@bluewin.ch",
+    "note": "Dr. Luca Borra — Chirurgo plastico FMH Lugano/Sorengo. Studio privato proprio. Email nominale studio da Swiss Medical (studiodrborra@bluewin.ch). ASPS+ISAPS member. TARGET alto: imprenditore medico con studio proprio.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Lei cura la salute dei pazienti. EGONON cura la salute del suo patrimonio."
+  },
+  {
+    "codice": "EG-337",
+    "categoria": "Medici specialisti / cliniche",
+    "azienda": "Studio Fallscheer — Chirurgia Plastica Lugano",
+    "email": "studiofallscheer@hin.ch",
+    "note": "Dr. Philipp Fallscheer — Chirurgo plastico FMH, studio privato Lugano (chirurgia-plastica-lugano.ch). Email studio nominale HIN da sito ufficiale. Titolare studio autonomo.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Lei cura la salute dei pazienti. EGONON cura la salute del suo patrimonio."
+  },
+  {
+    "codice": "EG-338",
+    "categoria": "PMI industria / pharma / export",
+    "azienda": "Altea Hub SA",
+    "email": "aruscica@alteanet.it",
+    "note": "Andrea Ruscica — Chairman & CEO Altea Group / Fondatore Altea Hub SA Camorino (Bellinzona). Email gruppo Italia confermata da Apollo. Azienda IT/hub innovazione. Target imprenditore.",
+    "stato": "Da contattare",
+    "angolo_egonon": "La sua azienda crea valore. Il suo portafoglio lo sta proteggendo o sta correndo lo stesso rischio?"
+  },
+  {
+    "codice": "EG-339",
+    "categoria": "Medici specialisti / cliniche",
+    "azienda": "Gastrocentro Lugano",
+    "email": "gastrocentro@hin.ch",
+    "note": "Dr. Daniele Riva + Dr. Christian Lutz — Gastroenterologi titolari Gastrocentro Lugano (gastrocentrolugano.ch). Email studio HIN da sito. 2 specialisti noti. Email condivisa dello studio — da qualificare individualmente.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Lei cura la salute dei pazienti. EGONON cura la salute del suo patrimonio."
+  },
+  {
+    "codice": "EG-340",
+    "categoria": "Medici specialisti / cliniche",
+    "azienda": "ORL Ticino — Otorinoticino",
+    "email": "otorino@hin.ch",
+    "note": "Dr. Thomas Roth + Dr.ssa Florence Isenschmid — Specialisti ORL privati, studi a Bellinzona, Lugano, Chiasso (otorinoticino.ch). Email studio HIN da sito. Da qualificare il titolare principale.",
+    "stato": "Da contattare",
+    "angolo_egonon": "Lei cura la salute dei pazienti. EGONON cura la salute del suo patrimonio."
+  }
+]
