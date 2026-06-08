@@ -307,10 +307,11 @@
     .sim-section { padding: 90px 6%; width: 100%; box-sizing: border-box; }
     .sim-input-card {
       background: var(--white); border: 1px solid var(--border);
-      padding: 36px; margin-bottom: 40px;
+      padding: 32px; margin-bottom: 40px;
       border-top: 3px solid var(--crimson);
+      overflow: hidden; box-sizing: border-box; width: 100%;
     }
-    .sim-input-grid { display: grid; grid-template-columns: 2fr 2fr 2fr 1fr; gap: 20px; align-items: end; margin-top: 24px; }
+    .sim-input-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,2fr) minmax(0,1.5fr) minmax(0,1fr); gap: 16px; align-items: end; margin-top: 24px; width: 100%; }
     .sim-form-group { display: flex; flex-direction: column; gap: 8px; }
     .sim-form-group label {
       font-size: 10px; font-weight: 600; color: var(--gray-light);
@@ -318,10 +319,10 @@
     }
     .sim-form-group input, .sim-form-group select {
       border: 1px solid var(--border); border-bottom: 2px solid var(--border-warm);
-      padding: 11px 14px; font-size: 15px; font-family: 'Inter', sans-serif;
+      padding: 10px 12px; font-size: 14px; font-family: 'Inter', sans-serif;
       background: var(--ivory); outline: none; transition: border-color 0.2s;
       border-radius: 0;
-    }
+     width: 100%; min-width: 0; box-sizing: border-box; }
     .sim-form-group input:focus, .sim-form-group select:focus {
       border-color: var(--crimson); border-bottom-color: var(--crimson);
       background: var(--white);
