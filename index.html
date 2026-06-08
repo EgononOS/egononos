@@ -92,7 +92,7 @@
       display: grid; grid-template-columns: 52% 48%; gap: 32px; align-items: start;
       width: 100%; box-sizing: border-box;
     }
-    .hero > * { min-width: 0; box-sizing: border-box; }
+    .hero > * { min-width: 0; box-sizing: border-box; overflow: hidden; }
     .hero-tag {
       font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
       color: var(--gray-light); margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
@@ -142,7 +142,7 @@
     .btn-secondary:hover { border-color: var(--crimson); color: var(--crimson); }
 
     /* ── HERO RIGHT — STATS ── */
-    .hero-left { min-width: 0; } .hero-right { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    .hero-left { min-width: 0; } .hero-right { display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow: hidden; }
     .stats-grid { display: grid; grid-template-columns: 1fr; gap: 1px; }
     .stat-box {
       background: var(--white); border: 1px solid var(--border);
