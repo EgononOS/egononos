@@ -50,7 +50,7 @@
       height: 76px;
       width: 100%; box-sizing: border-box;
     }
-    .nav-left { display: flex; align-items: center; gap: 48px; }
+    .nav-left { display: flex; align-items: center; gap: 32px; min-width: 0; flex-shrink: 1; }
     .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
     .nav-logo-box { height: 52px; display: flex; align-items: center; }
     .nav-logo-box img { height: 52px; width: auto; display: block; }
@@ -64,7 +64,7 @@
       font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--gray-light); font-weight: 400;
     }
-    .nav-links { display: flex; gap: 32px; }
+    .nav-links { display: flex; gap: 20px; min-width: 0; flex-shrink: 1; }
     .nav-links a {
       text-decoration: none; font-size: 12px; font-weight: 500;
       color: var(--gray); letter-spacing: 0.8px; text-transform: uppercase;
@@ -83,14 +83,37 @@
       text-decoration: none; transition: background 0.2s, transform 0.1s;
     }
     .nav-cta:hover { background: var(--crimson-deep); transform: translateY(-1px); }
+    /* ── HAMBURGER & MOBILE MENU ── */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px; z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--dark); border-radius: 2px; transition: 0.3s;
+    }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 76px; left: 0; right: 0; z-index: 99;
+      background: var(--ivory); border-bottom: 2px solid var(--crimson);
+      padding: 24px 6%; flex-direction: column; gap: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-size: 14px; font-weight: 500; letter-spacing: 0.5px;
+      color: var(--dark); text-decoration: none;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; font-weight: 700; color: var(--crimson); }
 
     /* ── HERO ── */
     .hero-wrapper {
-      width: 100%; box-sizing: border-box; padding: 80px 4% 60px;
+      width: 100%; max-width: 100%; box-sizing: border-box; padding: 80px 5% 60px;
+      overflow: hidden;
     }
     .hero {
-      display: grid; grid-template-columns: 52% 48%; gap: 32px; align-items: start;
-      width: 100%; box-sizing: border-box;
+      display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,0.8fr); gap: 40px; align-items: start;
+      width: 100%; box-sizing: border-box; max-width: 1280px; margin: 0 auto;
     }
     .hero > * { min-width: 0; box-sizing: border-box; overflow: hidden; }
     .hero-tag {
