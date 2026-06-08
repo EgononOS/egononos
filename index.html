@@ -304,14 +304,15 @@
     }
 
     /* ── SIMULATORE ── */
-    .sim-section { padding: 90px 6%; width: 100%; box-sizing: border-box; overflow-x: hidden; }
+    .sim-section { padding: 90px 4% 80px; width: 100%; box-sizing: border-box; overflow-x: hidden; }
     .sim-input-card {
       background: var(--white); border: 1px solid var(--border);
       padding: 32px; margin-bottom: 40px;
       border-top: 3px solid var(--crimson);
       overflow: hidden; box-sizing: border-box; width: 100%;
+      max-width: 100%; margin-bottom: 48px;
     }
-    .sim-input-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,2fr) minmax(0,1.5fr) minmax(0,1fr); gap: 16px; align-items: end; margin-top: 24px; width: 100%; }
+    .sim-input-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,2fr) minmax(0,1.5fr) minmax(0,0.8fr) auto; gap: 16px; align-items: end; margin-top: 24px; width: 100%; }
     .sim-form-group { display: flex; flex-direction: column; gap: 8px; }
     .sim-form-group label {
       font-size: 10px; font-weight: 600; color: var(--gray-light);
@@ -336,18 +337,14 @@
     }
     .btn-simula:hover { background: var(--crimson-deep); transform: translateY(-1px); }
     #simResults { visibility: hidden; opacity: 0; transition: opacity 0.3s; }
-    .sim-banner {
-      background: var(--dark); color: white; padding: 28px 32px;
-      border-radius: 0; margin-bottom: 24px;
-      border-left: 4px solid var(--crimson);
-    }
+    .sim-banner { background: var(--dark); color: white; padding: 32px 40px; border-radius: 0; margin-bottom: 32px; border-left: 4px solid var(--crimson); width: 100%; box-sizing: border-box; }
     .sim-banner h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px; margin-bottom: 8px; font-weight: 400; letter-spacing: 0.5px;
     }
     .sim-banner p { font-size: 13px; color: rgba(255,255,255,0.6); }
     .sim-banner strong { color: white; }
-    .sim-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-bottom: 24px; background: var(--border); }
+    .sim-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-bottom: 32px; background: var(--border); }
     .sim-kpi {
       background: var(--white); padding: 20px 16px;
       border-top: 3px solid transparent;
@@ -372,19 +369,16 @@
       padding: 14px 20px; margin-bottom: 20px;
       font-size: 13px; color: #1a7a3c; font-weight: 500;
     }
-    .sim-card {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 32px; margin-bottom: 2px;
-    }
+    .sim-card { background: var(--white); border: 1px solid var(--border); padding: 40px; margin-bottom: 2px; width: 100%; box-sizing: border-box; }
     .sim-card h4 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 20px; font-weight: 600; color: var(--dark);
       margin-bottom: 4px; letter-spacing: 0.3px;
     }
     .sim-card .sim-card-sub { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; letter-spacing: 0.3px; }
-    .sim-chart-wrap { position: relative; height: 260px; width: 100%; }
+    .sim-chart-wrap { position: relative; height: 340px; width: 100%; }
     #simChart { width: 100% !important; display: block; }
-    .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; max-width: 100%; }
+    .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; max-width: 100%; table-layout: auto; }
     .sim-table th {
       font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--gray-light); padding: 10px; border-bottom: 1px solid var(--dark);
@@ -502,6 +496,8 @@
 
   /* ── TABLET (769–1024px) ── */
   @media (max-width: 1024px) {
+    .sim-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    .sim-chart-wrap { height: 260px; }
     /* Navbar */
     .nav-links { gap: 16px; }
     .nav-links a { font-size: 11px; }
@@ -524,7 +520,7 @@
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
 
     /* Simulatore */
-    .sim-input-grid { grid-template-columns: 1fr 1fr; }
+    .sim-input-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
     .sim-kpi-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
@@ -1099,7 +1095,8 @@ function acceptDisclaimer(){
         </select>
       </div>
     </div>
-    <div style="margin-top:20px; max-width:200px;">
+    <div class="sim-form-group" style="align-self:end;">
+      <label style="visibility:hidden;">Simula</label>
       <button type="button" class="btn-simula" onclick="runSim()">SIMULA</button>
     </div>
   </div>
