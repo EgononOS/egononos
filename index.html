@@ -199,7 +199,7 @@
     .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
     /* ── SECTION WRAPPER ── */
-    section { padding: 90px 6%; width: 100%; box-sizing: border-box; }
+    section { padding: 90px 6%; width: 100%; box-sizing: border-box; overflow-x: hidden; }
     section.full-bg { max-width: none; background: var(--ivory-warm); }
     .section-tag {
       font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
@@ -214,8 +214,8 @@
     .section-subtitle { font-size: 16px; color: var(--gray); max-width: 620px; line-height: 1.7; font-weight: 300; }
 
     /* ── TRACK RECORD ── */
-    .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 56px; align-items: start; }
-    .track-table { width: 100%; border-collapse: collapse; }
+    .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 56px; align-items: start; max-width: 100%; overflow: hidden; }
+    .track-table { width: 100%; border-collapse: collapse; display: table; max-width: 100%; }
     .track-table th {
       text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--gray-light); padding: 12px 0; border-bottom: 1px solid var(--dark);
@@ -288,7 +288,7 @@
     .storia-content p { font-size: 14px; color: var(--gray); line-height: 1.7; font-weight: 300; }
 
     /* ── PRODOTTI TABLE ── */
-    .prodotti-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+    .prodotti-table { width: 100%; border-collapse: collapse; margin-top: 48px; min-width: 0; }
     .prodotti-table th {
       text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--gray-light); padding: 14px 16px; border-bottom: 1px solid var(--dark);
@@ -304,7 +304,7 @@
     }
 
     /* ── SIMULATORE ── */
-    .sim-section { padding: 90px 6%; width: 100%; box-sizing: border-box; }
+    .sim-section { padding: 90px 6%; width: 100%; box-sizing: border-box; overflow-x: hidden; }
     .sim-input-card {
       background: var(--white); border: 1px solid var(--border);
       padding: 32px; margin-bottom: 40px;
@@ -384,7 +384,7 @@
     .sim-card .sim-card-sub { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; letter-spacing: 0.3px; }
     .sim-chart-wrap { position: relative; height: 260px; width: 100%; }
     #simChart { width: 100% !important; display: block; }
-    .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; max-width: 100%; }
     .sim-table th {
       font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--gray-light); padding: 10px; border-bottom: 1px solid var(--dark);
@@ -532,6 +532,7 @@
   @media (max-width: 768px) {
     /* Navbar mobile */
     nav { padding: 0 5%; height: 64px; }
+    .nav-mobile-menu { top: 64px; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
@@ -991,7 +992,7 @@ function acceptDisclaimer(){
   <div class="section-tag">Strumenti in Portafoglio</div>
   <h2 class="section-title">AMC — La selezione di EGONON.</h2>
   <p class="section-subtitle">Prodotti selezionati per profili di rischio definiti. Valute adeguate alle esigenze della clientela private svizzera.</p>
-  <table class="prodotti-table">
+  <div style="overflow-x:auto;width:100%;"><table class="prodotti-table">
     <thead>
       <tr>
         <th>Emittente</th>
