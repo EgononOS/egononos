@@ -421,6 +421,47 @@ button,input,select,textarea{font-family:inherit;font-size:inherit}
 @media(min-width:1441px){
   :root{--pad-h:80px}
 }
+
+/* ── CANVAS RESPONSIVE FIX ── */
+canvas{max-width:100%;display:block}
+
+/* ── SIM TABLES OVERFLOW FIX ── */
+.sim-tables-wrap{width:100%;overflow-x:auto}
+
+/* ── NAVBAR OVERFLOW FIX (900-1024) ── */
+@media(max-width:900px) and (min-width:769px){
+  .navbar__links{gap:12px}
+  .navbar__links a{font-size:9px;letter-spacing:1px}
+  .navbar__cta{padding:8px 14px !important;font-size:9px !important}
+}
+
+/* ── EXTRA MOBILE FIXES ── */
+@media(max-width:480px){
+  .hero{padding-top:calc(var(--nav-h)+32px);padding-bottom:36px}
+  .hero__actions{flex-direction:column}
+  .hero__actions .btn{width:100%;text-align:center}
+  .btn-crimson-outline,.btn-primary,.btn-outline{font-size:10px;padding:12px 20px;letter-spacing:1.5px}
+  .stat-box{padding:16px 12px}
+  .prodotti-table th,.prodotti-table td{padding:10px 8px;font-size:11px}
+  .sim-kpi{padding:16px 12px}
+  .sim-input-card{padding:18px}
+  .form-card{padding:20px}
+  .claim-strip p{font-size:14px}
+  .footer-brand img{height:32px}
+}
+
+/* ── GALAXY S / 320px FIX ── */
+@media(max-width:360px){
+  :root{--pad-h:14px}
+  .h1{font-size:28px}
+  .h2{font-size:22px}
+  .sim-kpi-grid{grid-template-columns:1fr}
+  .navbar__name{font-size:11px;letter-spacing:1.5px}
+  .navbar__logo{width:32px;height:32px}
+  .stats-row{grid-template-columns:1fr}
+  .stats-row--2{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
