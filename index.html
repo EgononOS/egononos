@@ -85,10 +85,12 @@
     .nav-cta:hover { background: var(--crimson-deep); transform: translateY(-1px); }
 
     /* ── HERO ── */
+    .hero-wrapper {
+      width: 100%; box-sizing: border-box; padding: 100px 6% 80px;
+    }
     .hero {
-      padding: 100px 6% 80px;
       display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
-      width: 100%; box-sizing: border-box;
+      max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box;
     }
     .hero-tag {
       font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
@@ -657,6 +659,7 @@ function acceptDisclaimer(){
 </div>
 
 <!-- HERO -->
+<div class="hero-wrapper">
 <div class="hero">
   <div class="hero-left">
     <p class="hero-tag"><span>Svizzera, dal 2007</span>&nbsp;&nbsp;Autorizzata FINMA</p>
@@ -707,6 +710,7 @@ function acceptDisclaimer(){
     </div>
   </div>
 </div>
+</div><!-- /hero-wrapper -->
 
 <hr class="divider">
 
