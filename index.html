@@ -28,7 +28,7 @@
       --white:         #FFFFFF;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -48,6 +48,7 @@
       padding: 0 6%;
       display: flex; align-items: center; justify-content: space-between;
       height: 76px;
+      width: 100%; box-sizing: border-box;
     }
     .nav-left { display: flex; align-items: center; gap: 48px; }
     .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
@@ -138,7 +139,7 @@
     .btn-secondary:hover { border-color: var(--crimson); color: var(--crimson); }
 
     /* ── HERO RIGHT — STATS ── */
-    .hero-right { display: flex; flex-direction: column; gap: 16px; }
+    .hero-left { min-width: 0; } .hero-right { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
     .stat-box {
       background: var(--white); border: 1px solid var(--border);
