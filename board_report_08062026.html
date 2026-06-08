@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EGONON SA — Board Committee Report | 8 Giugno 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #FAF8F4;
+    color: #1a1a1a;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+  }
+
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 52px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2.5px solid #8B1A1A;
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+  }
+  .brand { }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28pt;
+    font-weight: 600;
+    color: #8B1A1A;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .brand-sub {
+    font-size: 8pt;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .doc-info {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #555;
+    line-height: 1.7;
+  }
+  .doc-info strong { color: #8B1A1A; }
+
+  /* TITOLO REPORT */
+  .report-title {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .report-title h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #0D0D0D;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .report-title .subtitle {
+    font-size: 9pt;
+    color: #666;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .report-title .confidential {
+    display: inline-block;
+    margin-top: 10px;
+    border: 1px solid #8B1A1A;
+    color: #8B1A1A;
+    font-size: 7.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+  }
+
+  /* SEZIONI */
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14pt;
+    font-weight: 600;
+    color: #8B1A1A;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .section-num {
+    font-size: 9pt;
+    color: #aaa;
+    margin-right: 8px;
+  }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-box {
+    background: white;
+    border: 1px solid #e8e4de;
+    border-top: 3px solid #8B1A1A;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .kpi-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #0D0D0D;
+    line-height: 1;
+  }
+  .kpi-value.green { color: #1a6b3a; }
+  .kpi-value.red { color: #8B1A1A; }
+  .kpi-label {
+    font-size: 7.5pt;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    margin-bottom: 16px;
+  }
+  th {
+    background: #0D0D0D;
+    color: white;
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 7.5pt;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f9f7f4; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 7pt;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-green { background: #e8f5ee; color: #1a6b3a; }
+  .badge-blue { background: #e8eef8; color: #1a3a6b; }
+  .badge-orange { background: #fff3e8; color: #8B4A1A; }
+  .badge-red { background: #f8e8e8; color: #8B1A1A; }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: #ddd;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: -21px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #8B1A1A;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #8B1A1A;
+  }
+  .timeline-dot.future { background: #ccc; }
+  .timeline-date {
+    font-size: 7.5pt;
+    color: #8B1A1A;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .timeline-title {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #0D0D0D;
+  }
+  .timeline-desc {
+    font-size: 8.5pt;
+    color: #555;
+    margin-top: 2px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: #eee;
+    border-radius: 2px;
+    height: 8px;
+    margin: 8px 0 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8B1A1A, #c0392b);
+    border-radius: 2px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #888;
+  }
+
+  /* PERF TABLE */
+  .perf-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .perf-cell {
+    flex: 1;
+    background: white;
+    border: 1px solid #e8e4de;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .perf-cell .label { font-size: 8pt; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+  .perf-cell .val { font-family: 'Cormorant Garamond', serif; font-size: 16pt; font-weight: 700; }
+  .perf-cell .val.pos { color: #1a6b3a; }
+  .perf-cell .val.neg { color: #8B1A1A; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+    padding-top: 14px;
+    font-size: 7pt;
+    color: #aaa;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .highlight-box {
+    background: #0D0D0D;
+    color: white;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 8.5pt;
+    line-height: 1.7;
+  }
+  .highlight-box strong { color: #e8c9a0; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  h3.subsection {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11pt;
+    font-weight: 600;
+    color: #333;
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p { margin-bottom: 8px; font-size: 9.5pt; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <div class="brand-name">EGONON SA</div>
+      <div class="brand-sub">Wealth Management · Lugano · FINMA Autorizzato</div>
+    </div>
+    <div class="doc-info">
+      <strong>BOARD COMMITTEE REPORT</strong><br>
+      Data: 8 Giugno 2026<br>
+      Ore: 12:30 CET<br>
+      Classificazione: Riservato<br>
+      Ref: BC-2026-06-08
+    </div>
+  </div>
+
+  <!-- TITOLO -->
+  <div class="report-title">
+    <h1>Strategia di Acquisizione HNW<br>Pipeline, Campagna Outreach & Roadmap</h1>
+    <div class="subtitle">Aggiornamento operativo per il Board Committee — Giugno 2026</div>
+    <div class="confidential">Documento Riservato — Ad uso interno</div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">01</span>Executive Summary</div>
+    <div class="highlight-box">
+      EGONON SA ha avviato in data 3 giugno 2026 la prima campagna sistematica di outreach istituzionale verso prospect HNW selezionati nel Canton Ticino e nelle regioni limitrofe. Al <strong>8 giugno 2026</strong>, il CRM interno conta <strong>185 contatti nominali</strong> profilati su 10 categorie professionali target. Nella sola giornata odierna sono state inviate <strong>43 email nominali personalizzate</strong>, ciascuna con ancora emotiva su misura per il destinatario. Il target operativo di <strong>250 invii entro l'11 luglio 2026</strong> è in linea con le proiezioni.
+    </div>
+
+    <!-- KPI principali -->
+    <div class="kpi-grid">
+      <div class="kpi-box">
+        <div class="kpi-value">185</div>
+        <div class="kpi-label">Prospect nel CRM</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value green">54</div>
+        <div class="kpi-label">Email nominali inviate</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value">10</div>
+        <div class="kpi-label">Categorie target</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value red">196</div>
+        <div class="kpi-label">Mancanti al target 250</div>
+      </div>
+    </div>
+
+    <div class="progress-label">
+      <span>Avanzamento target 250 email nominali</span>
+      <span>54 / 250 — 21.6%</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-fill" style="width: 21.6%"></div>
+    </div>
+  </div>
+
+  <!-- IL PASSATO -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">02</span>Il Passato — Costruzione della Pipeline (Mag–Giu 2026)</div>
+
+    <h3 class="subsection">Fasi di sviluppo completate</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Maggio 2026</div>
+        <div class="timeline-title">Setup infrastruttura tecnologica</div>
+        <div class="timeline-desc">Integrazione OAuth completa: Microsoft 365 (info@egonon.ch con permesso Send As), Google Workspace, LinkedIn, GitHub. Deploy EgononOS su GitHub Pages con simulatore NAV interattivo e form di lead generation collegato al CRM.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">1–2 Giugno 2026</div>
+        <div class="timeline-title">Prima fase di enrichment</div>
+        <div class="timeline-desc">Scraping certificato da fonti pubbliche (AITI, Zefix, Albo Imprese TI, Moneyhouse, Apollo.io). Prima tranche di prospect nominali su PMI manifatturiere, costruzioni, medici specialisti. CRM portato a ~100 contatti.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">3 Giugno 2026</div>
+        <div class="timeline-title">Wave 1 — Primo invio campagna</div>
+        <div class="timeline-desc">29 email inviate (mix nominali e di studio). Risultato: auto-reply ricevuti da Antonini & Ghidossi e Implenia. Identificati e corretti errori tecnici su 6 indirizzi da reinviare.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">5–7 Giugno 2026 (Weekend)</div>
+        <div class="timeline-title">Expert Mode — Enrichment intensivo</div>
+        <div class="timeline-desc">+26 prospect nominali premium aggiunti: Cardiocentro Ticino (3 primari), Splendide Royal / Roberto Naldi Collection, Alpex Pharma SA, Argor-Heraeus SA, chirurghi plastici, ginecologhe, neurologa, dermatologa. Fonte: Hunter.io, Apollo.io, siti istituzionali.</div>
+      </div>
+    </div>
+
+    <h3 class="subsection">Prospect di massimo profilo acquisiti (selezione)</h3>
+    <table>
+      <tr>
+        <th>Codice</th>
+        <th>Nome / Ruolo</th>
+        <th>Azienda</th>
+        <th>Categoria</th>
+        <th>Fonte</th>
+      </tr>
+      <tr><td>EG-326</td><td>Robin Kolvenbach — Co-CEO</td><td>Argor-Heraeus SA</td><td>PMI Export/Metalli</td><td><span class="badge badge-green">Apollo ⭐</span></td></tr>
+      <tr><td>EG-325</td><td>Shahbaz Ardalan — MD</td><td>Alpex Pharma SA</td><td>PMI Pharma</td><td><span class="badge badge-green">Apollo ⭐</span></td></tr>
+      <tr><td>EG-324</td><td>Adele Naldi — CEO</td><td>Roberto Naldi Collection</td><td>Hospitality</td><td><span class="badge badge-green">Apollo ⭐</span></td></tr>
+      <tr><td>EG-327</td><td>Prof. Marco Valgimigli — Primario</td><td>Cardiocentro Ticino</td><td>Medici Specialisti</td><td><span class="badge badge-green">Apollo ⭐</span></td></tr>
+      <tr><td>EG-329</td><td>Dr. Massimo Manserra — Dir.</td><td>Cardiocentro Ticino</td><td>Medici Specialisti</td><td><span class="badge badge-green">Apollo ⭐</span></td></tr>
+      <tr><td>EG-311</td><td>Nicoletta Casanova — CEO</td><td>FEMTOprint SA</td><td>PMI Deeptech</td><td><span class="badge badge-blue">Hunter 100</span></td></tr>
+      <tr><td>EG-307</td><td>Flavio Petraglio — CEO</td><td>Artisa Group SA</td><td>Costruzioni</td><td><span class="badge badge-blue">Hunter 100</span></td></tr>
+    </table>
+  </div>
+
+  <!-- OGGI -->
+  <div class="page-break"></div>
+
+  <div class="header" style="margin-top: 0;">
+    <div class="brand">
+      <div class="brand-name">EGONON SA</div>
+      <div class="brand-sub">Wealth Management · Lugano · FINMA Autorizzato</div>
+    </div>
+    <div class="doc-info">
+      <strong>BOARD COMMITTEE REPORT</strong><br>
+      Data: 8 Giugno 2026 — pag. 2<br>
+      Ref: BC-2026-06-08
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-num">03</span>Il Presente — Campagna Odierna (8 Giugno 2026)</div>
+
+    <p>Nella giornata dell'8 giugno 2026 è stata eseguita la <strong>Wave 3</strong> dell'outreach istituzionale, con un totale di <strong>43 email nominali personalizzate</strong> inviate tramite infrastruttura Microsoft 365 (info@egonon.ch). Ogni comunicazione è stata redatta individualmente con anchor emotiva e psicologica su misura per il profilo del destinatario, mantenendo il tono formale e istituzionale di EGONON SA.</p>
+
+    <h3 class="subsection">Email inviate oggi per categoria</h3>
+    <table>
+      <tr>
+        <th>Categoria</th>
+        <th>N°</th>
+        <th>Profili di spicco</th>
+        <th>Ancora emotiva utilizzata</th>
+      </tr>
+      <tr>
+        <td><strong>Medici specialisti</strong></td>
+        <td>13</td>
+        <td>Valgimigli, Conte, Manserra (Cardiocentro), Tasciotti, Borra, Fallscheer, Naeff, Riva, Garcia, Ruf + 3 EOC</td>
+        <td>"Lei cura i pazienti. EGONON cura il suo patrimonio." / Logica clinica applicata al rischio finanziario</td>
+      </tr>
+      <tr>
+        <td><strong>Hotel / Hospitality</strong></td>
+        <td>8</td>
+        <td>Adele Naldi (CEO Roberto Naldi), Brugnatelli (GM Splendide Royal), Schmid, Ferrara, Treherne + Splendide mgmt</td>
+        <td>Decorrelazione dal ciclo turistico / Memoria COVID hospitality / Eredità familiare</td>
+      </tr>
+      <tr>
+        <td><strong>PMI Industria / Export</strong></td>
+        <td>8</td>
+        <td>Kolvenbach (Argor-Heraeus), Ardalan (Alpex Pharma), Casanova (FEMTOprint), Petraglio & Artioli (Artisa), Rocchetto, Sutto, Ruscica</td>
+        <td>Zero tolleranza per l'errore / Riserva di valore vs oro fisico / Fondatore = patrimonio da proteggere</td>
+      </tr>
+      <tr>
+        <td><strong>Costruzioni</strong></td>
+        <td>4</td>
+        <td>Ghirlanda, Muttoni, Brogioli, + Artisa Group</td>
+        <td>Decorrelazione da immobili e tassi / Rischio ciclo edilizio</td>
+      </tr>
+      <tr>
+        <td><strong>Dentisti</strong></td>
+        <td>5</td>
+        <td>Airoldi ×2, Arques Porcel, Merlo, Fraschina</td>
+        <td>Studio = impresa. Il patrimonio personale va separato dal rischio operativo</td>
+      </tr>
+      <tr>
+        <td><strong>Veterinari</strong></td>
+        <td>1</td>
+        <td>Dr. Nägeli</td>
+        <td>Clinica veterinaria = impresa sanitaria</td>
+      </tr>
+    </table>
+
+    <h3 class="subsection">Performance EGONON Global Macro Index — aggiornamento 8 giugno 2026</h3>
+    <div class="perf-row">
+      <div class="perf-cell">
+        <div><div class="label">Max Drawdown COVID-19</div><div class="val neg">–15%</div></div>
+        <div style="font-size:7.5pt;color:#aaa;text-align:right">vs MSCI World<br><strong style="color:#8B1A1A">–34%</strong></div>
+      </div>
+      <div class="perf-cell">
+        <div><div class="label">Performance cumulata</div><div class="val pos">+40,63%</div></div>
+        <div style="font-size:7.5pt;color:#aaa;text-align:right">dall'emissione</div>
+      </div>
+      <div class="perf-cell">
+        <div><div class="label">1 Anno</div><div class="val pos">+12,25%</div></div>
+      </div>
+      <div class="perf-cell">
+        <div><div class="label">3 Anni</div><div class="val pos">+35,01%</div></div>
+      </div>
+    </div>
+
+    <h3 class="subsection">Contatore totale campagna al 8 giugno 2026</h3>
+    <div class="kpi-grid">
+      <div class="kpi-box">
+        <div class="kpi-value green">54</div>
+        <div class="kpi-label">Nominali inviate totale</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value">43</div>
+        <div class="kpi-label">Inviate oggi</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value">185</div>
+        <div class="kpi-label">Prospect CRM totali</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-value red">196</div>
+        <div class="kpi-label">Mancanti al target</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IL FUTURO -->
+  <div class="page-break"></div>
+
+  <div class="header" style="margin-top: 0;">
+    <div class="brand">
+      <div class="brand-name">EGONON SA</div>
+      <div class="brand-sub">Wealth Management · Lugano · FINMA Autorizzato</div>
+    </div>
+    <div class="doc-info">
+      <strong>BOARD COMMITTEE REPORT</strong><br>
+      Data: 8 Giugno 2026 — pag. 3<br>
+      Ref: BC-2026-06-08
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-num">04</span>Il Futuro — Roadmap Operativa (Giu–Lug 2026)</div>
+
+    <h3 class="subsection">Piano di acquisizione — 5 settimane al target</h3>
+    <table>
+      <tr>
+        <th>Settimana</th>
+        <th>Periodo</th>
+        <th>Target nuovi prospect</th>
+        <th>Categorie prioritarie</th>
+        <th>Invii previsti</th>
+      </tr>
+      <tr>
+        <td><strong>Sett. 1</strong> ✅</td>
+        <td>2–8 Giu</td>
+        <td>30–40</td>
+        <td>PMI, Costruzioni, Medici, Hotel</td>
+        <td><span class="badge badge-green">54 inviati</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sett. 2</strong></td>
+        <td>9–15 Giu</td>
+        <td>35–40</td>
+        <td>Dentisti OMDCT, Farmacie titolari, Chirurghi</td>
+        <td><span class="badge badge-orange">~40 pianificati</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sett. 3</strong></td>
+        <td>16–22 Giu</td>
+        <td>35–40</td>
+        <td>Hotel Locarno/Ascona, PMI export AITI</td>
+        <td><span class="badge badge-orange">~40 pianificati</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sett. 4</strong></td>
+        <td>23–29 Giu</td>
+        <td>30–35</td>
+        <td>Orologeria/Lusso, Sportivi/Agenti</td>
+        <td><span class="badge badge-orange">~35 pianificati</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sett. 5</strong></td>
+        <td>30 Giu–6 Lug</td>
+        <td>30–35</td>
+        <td>Scuole private, Veterinari titolari, follow-up</td>
+        <td><span class="badge badge-orange">~35 pianificati</span></td>
+      </tr>
+      <tr style="font-weight:600; background:#f0ece6 !important;">
+        <td><strong>TOTALE</strong></td>
+        <td>Entro 11 Lug</td>
+        <td><strong>~200</strong></td>
+        <td>Tutte le 10 categorie</td>
+        <td><span class="badge badge-blue">TARGET 250</span></td>
+      </tr>
+    </table>
+
+    <h3 class="subsection">10 Categorie target — stato avanzamento</h3>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Categoria</th>
+        <th>Target</th>
+        <th>CRM attuale</th>
+        <th>Inviati</th>
+        <th>Stato</th>
+      </tr>
+      <tr><td>1</td><td>PMI industria / pharma / export</td><td>45</td><td>~25</td><td>12</td><td><span class="badge badge-orange">In corso</span></td></tr>
+      <tr><td>2</td><td>Costruzioni / immobiliare</td><td>38</td><td>~20</td><td>10</td><td><span class="badge badge-orange">In corso</span></td></tr>
+      <tr><td>3</td><td>Medici specialisti / cliniche</td><td>32</td><td>~30</td><td>18</td><td><span class="badge badge-green">Avanzato</span></td></tr>
+      <tr><td>4</td><td>Hotel / hospitality premium</td><td>30</td><td>~18</td><td>10</td><td><span class="badge badge-orange">In corso</span></td></tr>
+      <tr><td>5</td><td>Sportivi / dirigenti club</td><td>25</td><td>~15</td><td>0</td><td><span class="badge badge-red">Da avviare</span></td></tr>
+      <tr><td>6</td><td>Farmacie / farmacisti titolari</td><td>20</td><td>0</td><td>0</td><td><span class="badge badge-red">Da avviare</span></td></tr>
+      <tr><td>7</td><td>Dentisti / ortodontisti</td><td>25</td><td>~8</td><td>5</td><td><span class="badge badge-orange">In corso</span></td></tr>
+      <tr><td>8</td><td>Orologeria / lusso / design</td><td>15</td><td>~5</td><td>0</td><td><span class="badge badge-red">Da avviare</span></td></tr>
+      <tr><td>9</td><td>Scuole private / education</td><td>12</td><td>~8</td><td>0</td><td><span class="badge badge-red">Da avviare</span></td></tr>
+      <tr><td>10</td><td>Cliniche veterinarie</td><td>8</td><td>~5</td><td>1</td><td><span class="badge badge-orange">Avviato</span></td></tr>
+    </table>
+
+    <h3 class="subsection">Follow-up strategy — prospect già contattati</h3>
+    <p>Per i 54 prospect già contattati, è previsto un <strong>secondo contatto personalizzato</strong> a 14 giorni dall'invio iniziale (attorno al 22–29 giugno 2026), con un testo di follow-up breve e non invasivo che fa leva sulla scarsità dell'offerta ("analisi disponibile per un numero limitato di professionisti"). I prospect che risponderanno positivamente saranno gestiti direttamente da Emanuele Ferreri per il processo di onboarding e classificazione FINMA.</p>
+
+    <h3 class="subsection">Strumenti e fonti — piano enrichment settimane 2–5</h3>
+    <div class="two-col">
+      <div>
+        <p><strong>Fonti primarie certificate:</strong></p>
+        <ul style="padding-left:16px; font-size:8.5pt; color:#444; line-height:1.8;">
+          <li>Albo OMDCT — dentisti Ticino</li>
+          <li>Farmacie cantone Ticino (registro ufficiale)</li>
+          <li>AITI — imprenditori manifatturieri</li>
+          <li>Zefix / Moneyhouse — CEO verificati</li>
+          <li>Swiss Hospitality Association</li>
+          <li>Albo FMH — medici specialisti privati</li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>Strumenti di enrichment:</strong></p>
+        <ul style="padding-left:16px; font-size:8.5pt; color:#444; line-height:1.8;">
+          <li>Apollo.io — verifica nominale CEO/MD</li>
+          <li>Hunter.io — verifica email &amp; deliverability</li>
+          <li>LinkedIn — conferma ruolo attuale</li>
+          <li>RocketReach — email pattern aziendale</li>
+          <li>Siti istituzionali — email dirette studio</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIATTAFORMA TECNOLOGICA -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">05</span>Piattaforma Tecnologica EGONON SA</div>
+    <table>
+      <tr><th>Componente</th><th>Stato</th><th>Descrizione</th></tr>
+      <tr><td>EgononOS — Simulatore NAV</td><td><span class="badge badge-green">Attivo</span></td><td>App web su GitHub Pages con simulatore interattivo 2010–2026, form lead generation, branding istituzionale</td></tr>
+      <tr><td>CRM interno</td><td><span class="badge badge-green">Attivo</span></td><td>185 prospect profilati, 10 categorie, stati campagna, note qualitative per ogni contatto</td></tr>
+      <tr><td>Infrastruttura email (M365)</td><td><span class="badge badge-green">Attivo</span></td><td>info@egonon.ch via Microsoft 365, permesso Send As da ebferreri@egonon.ch, OAuth integrato</td></tr>
+      <tr><td>EGONON Global Macro Index</td><td><span class="badge badge-green">Aggiornato</span></td><td>Aggiornamento settimanale automatico ogni lunedì ore 08:00 — valore corrente EUR 1.405,74</td></tr>
+      <tr><td>Lead Notification System</td><td><span class="badge badge-green">Attivo</span></td><td>Notifica automatica a info@egonon.ch ad ogni compilazione form EgononOS</td></tr>
+      <tr><td>Automazioni campagna</td><td><span class="badge badge-blue">Operativo</span></td><td>Invio schedulato, aggiornamento CRM, notifica WhatsApp post-campagna</td></tr>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>EGONON SA</strong> — Via della Posta 7, 6900 Lugano, Svizzera — Tel. +41 (0)58 666 00 69 — info@egonon.ch — egonon.ch<br>
+    Gestore patrimoniale indipendente autorizzato FINMA ai sensi della LIsFi. Numero autorizzazione: [FINMA-ID].<br>
+    Il presente documento è classificato riservato e destinato esclusivamente ai membri del Board Committee di EGONON SA.<br>
+    Documento generato automaticamente dal sistema EgononOS AI — 8 giugno 2026 ore 12:30 CET
+  </div>
+
+</div>
+</body>
+</html>
