@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EGONON SA — Gestione Patrimoniale Indipendente</title>
+  <meta name="description" content="Analisi gratuita di Risk Management Istituzionale. Scopra se il suo portafoglio è davvero coerente con il suo profilo di rischio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── Palette ispirata al logo EGONON ── */
+      --crimson:       #8B1A1A;   /* bordeaux logo */
+      --crimson-deep:  #6B1212;   /* hover profondo */
+      --crimson-light: #A52828;   /* accento chiaro */
+      --gold:          #C9A84C;   /* oro caldo per dettagli premium */
+      --gold-light:    #E8D5A3;   /* gold tenue */
+      --ivory:         #FAF8F4;   /* sfondo caldo, non bianco puro */
+      --ivory-warm:    #F2EEE8;   /* sezioni alternate */
+      --dark:          #0D0D0D;   /* quasi nero — titoli */
+      --dark-mid:      #1A1A1A;   /* testi principali */
+      --gray:          #5A5A5A;   /* testi secondari */
+      --gray-light:    #8A8A8A;   /* note, caption */
+      --border:        #DDD8D0;   /* separatori */
+      --border-warm:   #C8C0B4;   /* bordi enfatizzati */
+      --white:         #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark-mid);
+      background: var(--ivory);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,244,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
+    }
+    .nav-left { display: flex; align-items: center; gap: 48px; }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo-box { height: 52px; display: flex; align-items: center; }
+    .nav-logo-box img { height: 52px; width: auto; display: block; }
+    .nav-brand { display: flex; flex-direction: column; gap: 1px; }
+    .nav-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; letter-spacing: 3px;
+      color: var(--dark); text-transform: uppercase;
+    }
+    .nav-brand-sub {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray-light); font-weight: 400;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      text-decoration: none; font-size: 12px; font-weight: 500;
+      color: var(--gray); letter-spacing: 0.8px; text-transform: uppercase;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--crimson); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--crimson); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--crimson); color: var(--white);
+      padding: 11px 26px; border-radius: 1px;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; transition: background 0.2s, transform 0.1s;
+    }
+    .nav-cta:hover { background: var(--crimson-deep); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 100px 6% 80px;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .hero-tag {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gray-light); margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tag::before {
+      content: ''; display: inline-block; width: 32px; height: 1px; background: var(--crimson);
+    }
+    .hero-tag span { color: var(--crimson); font-weight: 600; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 4.5vw, 66px);
+      font-weight: 300; line-height: 1.1;
+      color: var(--dark); margin-bottom: 10px; letter-spacing: -0.5px;
+    }
+    .hero h1 em {
+      font-style: italic; font-weight: 400;
+      color: var(--crimson); display: block; line-height: 1.15;
+    }
+    .hero-sub {
+      font-size: 18px; color: var(--gray); margin: 24px 0 10px;
+      font-weight: 300; line-height: 1.6;
+    }
+    .hero-body { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 28px; }
+    .hero-bullets { list-style: none; margin: 0 0 36px; display: flex; flex-direction: column; gap: 10px; }
+    .hero-bullets li {
+      font-size: 14px; color: var(--gray); display: flex; align-items: center; gap: 12px;
+    }
+    .hero-bullets li::before {
+      content: ''; width: 18px; height: 1px; background: var(--crimson); flex-shrink: 0;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--crimson); color: var(--white);
+      padding: 15px 32px; border-radius: 1px;
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-block; box-shadow: 0 4px 20px rgba(139,26,26,0.25);
+    }
+    .btn-primary:hover { background: var(--crimson-deep); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,26,26,0.35); }
+    .btn-secondary {
+      border: 1px solid var(--border-warm); color: var(--dark-mid);
+      padding: 14px 32px; border-radius: 1px;
+      font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--crimson); color: var(--crimson); }
+
+    /* ── HERO RIGHT — STATS ── */
+    .hero-right { display: flex; flex-direction: column; gap: 16px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+    .stat-box {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 24px 18px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .stat-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--crimson);
+    }
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 600; color: var(--crimson); letter-spacing: -0.5px;
+    }
+    .stat-label { font-size: 10px; color: var(--gray-light); margin-top: 6px; letter-spacing: 1px; text-transform: uppercase; }
+    .egonon-quote {
+      background: #ffffff; color: var(--dark);
+      padding: 28px 32px; border: 1px solid #e0e0e0;
+      border-radius: 4px;
+    }
+    .egonon-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-style: normal; color: var(--dark);
+      margin: 0; line-height: 1.75; font-weight: 400;
+    }
+    .egonon-quote p strong {
+      font-family: inherit; font-style: normal; font-weight: 700;
+      color: var(--dark); font-size: 17px;
+    }
+    .egonon-quote p em {
+      font-style: italic; color: var(--crimson);
+    }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 90px 6%; max-width: 1280px; margin: 0 auto; }
+    section.full-bg { max-width: none; background: var(--ivory-warm); }
+    .section-tag {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 600;
+    }
+    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--crimson); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 3.2vw, 50px); font-weight: 300; line-height: 1.15;
+      margin-bottom: 20px; color: var(--dark); letter-spacing: -0.3px;
+    }
+    .section-subtitle { font-size: 16px; color: var(--gray); max-width: 620px; line-height: 1.7; font-weight: 300; }
+
+    /* ── TRACK RECORD ── */
+    .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 56px; align-items: start; }
+    .track-table { width: 100%; border-collapse: collapse; }
+    .track-table th {
+      text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray-light); padding: 12px 0; border-bottom: 1px solid var(--dark);
+    }
+    .track-table td { padding: 18px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+    .track-table td:last-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; color: var(--crimson); text-align: right; letter-spacing: -0.3px;
+    }
+    .allocation-bars { display: flex; flex-direction: column; gap: 16px; }
+    .alloc-row { display: flex; flex-direction: column; gap: 6px; }
+    .alloc-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray); }
+    .alloc-label span:last-child { font-weight: 600; color: var(--dark-mid); font-size: 12px; }
+    .alloc-bar { height: 3px; background: var(--border); overflow: hidden; }
+    .alloc-fill { height: 100%; background: linear-gradient(90deg, var(--crimson), var(--crimson-light)); }
+    .track-note { font-size: 11px; color: var(--gray-light); margin-top: 24px; line-height: 1.7; }
+
+    /* ── METODO CARDS ── */
+    .metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 56px; background: var(--border); }
+    .metodo-card {
+      background: var(--ivory); padding: 36px 32px;
+      transition: background 0.2s;
+    }
+    .metodo-card:hover { background: var(--white); }
+    .metodo-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; font-weight: 300; color: var(--gold-light);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .metodo-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 600; margin-bottom: 12px; color: var(--dark);
+    }
+    .metodo-card p { font-size: 14px; color: var(--gray); line-height: 1.75; font-weight: 300; }
+
+    /* ── COME FUNZIONA ── */
+    .come-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 56px; background: var(--border); }
+    .come-card {
+      display: flex; gap: 24px; padding: 36px 32px;
+      background: var(--white); transition: background 0.2s;
+    }
+    .come-card:hover { background: var(--ivory-warm); }
+    .come-icon {
+      flex-shrink: 0; width: 48px; height: 48px;
+      border: 1px solid var(--border-warm);
+      display: flex; align-items: center; justify-content: center;
+      background: transparent;
+    }
+    .come-icon svg { width: 22px; height: 22px; stroke: var(--crimson); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    .come-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--dark); letter-spacing: 0.2px; }
+    .come-card p { font-size: 14px; color: var(--gray); line-height: 1.7; font-weight: 300; }
+
+    /* ── STORIA ── */
+    .storia-timeline { display: flex; flex-direction: column; margin-top: 56px; max-width: 720px; }
+    .storia-item {
+      display: grid; grid-template-columns: 90px 1fr;
+      gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .storia-item::before {
+      content: ''; position: absolute; left: 78px; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .storia-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 600; color: var(--crimson); line-height: 1;
+      padding-top: 4px;
+    }
+    .storia-content h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.2px; }
+    .storia-content p { font-size: 14px; color: var(--gray); line-height: 1.7; font-weight: 300; }
+
+    /* ── PRODOTTI TABLE ── */
+    .prodotti-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+    .prodotti-table th {
+      text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray-light); padding: 14px 16px; border-bottom: 1px solid var(--dark);
+    }
+    .prodotti-table td { padding: 18px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .prodotti-table tr:hover td { background: var(--ivory-warm); }
+    .prodotti-table a { color: var(--crimson); font-size: 12px; text-decoration: none; font-weight: 600; letter-spacing: 0.5px; }
+    .isin-badge {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px; background: var(--ivory-warm);
+      border: 1px solid var(--border); padding: 3px 10px; border-radius: 2px;
+      color: var(--dark-mid);
+    }
+
+    /* ── SIMULATORE ── */
+    .sim-section { padding: 90px 6%; max-width: 1280px; margin: 0 auto; }
+    .sim-input-card {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 36px; margin-bottom: 40px;
+      border-top: 3px solid var(--crimson);
+    }
+    .sim-input-grid { display: grid; grid-template-columns: 2fr 2fr 2fr 1fr; gap: 20px; align-items: end; margin-top: 24px; }
+    .sim-form-group { display: flex; flex-direction: column; gap: 8px; }
+    .sim-form-group label {
+      font-size: 10px; font-weight: 600; color: var(--gray-light);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .sim-form-group input, .sim-form-group select {
+      border: 1px solid var(--border); border-bottom: 2px solid var(--border-warm);
+      padding: 11px 14px; font-size: 15px; font-family: 'Inter', sans-serif;
+      background: var(--ivory); outline: none; transition: border-color 0.2s;
+      border-radius: 0;
+    }
+    .sim-form-group input:focus, .sim-form-group select:focus {
+      border-color: var(--crimson); border-bottom-color: var(--crimson);
+      background: var(--white);
+    }
+    .btn-simula {
+      background: var(--crimson); color: white; border: none;
+      padding: 13px 20px; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif;
+      text-transform: uppercase; transition: background 0.2s, transform 0.1s;
+      border-radius: 0;
+    }
+    .btn-simula:hover { background: var(--crimson-deep); transform: translateY(-1px); }
+    #simResults { visibility: hidden; opacity: 0; transition: opacity 0.3s; }
+    .sim-banner {
+      background: var(--dark); color: white; padding: 28px 32px;
+      border-radius: 0; margin-bottom: 24px;
+      border-left: 4px solid var(--crimson);
+    }
+    .sim-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; margin-bottom: 8px; font-weight: 400; letter-spacing: 0.5px;
+    }
+    .sim-banner p { font-size: 13px; color: rgba(255,255,255,0.6); }
+    .sim-banner strong { color: white; }
+    .sim-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-bottom: 24px; background: var(--border); }
+    .sim-kpi {
+      background: var(--white); padding: 20px 16px;
+      border-top: 3px solid transparent;
+    }
+    .sim-kpi.navy { border-top-color: var(--dark); }
+    .sim-kpi.green { border-top-color: #1a7a3c; }
+    .sim-kpi.red { border-top-color: var(--crimson); }
+    .sim-kpi-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gray-light); margin-bottom: 8px;
+    }
+    .sim-kpi-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 600; line-height: 1;
+    }
+    .sim-kpi-value.pos { color: #1a7a3c; }
+    .sim-kpi-value.neg { color: var(--crimson); }
+    .sim-kpi-value.navy { color: var(--dark); }
+    .sim-kpi-sub { font-size: 10px; color: var(--gray-light); margin-top: 6px; }
+    .sim-ath {
+      background: #f0fff4; border: 1px solid #b2f2ca;
+      padding: 14px 20px; margin-bottom: 20px;
+      font-size: 13px; color: #1a7a3c; font-weight: 500;
+    }
+    .sim-card {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 32px; margin-bottom: 2px;
+    }
+    .sim-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: var(--dark);
+      margin-bottom: 4px; letter-spacing: 0.3px;
+    }
+    .sim-card .sim-card-sub { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; letter-spacing: 0.3px; }
+    .sim-chart-wrap { position: relative; height: 260px; width: 100%; }
+    #simChart { width: 100% !important; display: block; }
+    .sim-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .sim-table th {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray-light); padding: 10px; border-bottom: 1px solid var(--dark);
+      text-align: right;
+    }
+    .sim-table th:first-child { text-align: left; }
+    .sim-table td { padding: 12px 10px; border-bottom: 1px solid var(--border); text-align: right; }
+    .sim-table td:first-child { text-align: left; font-weight: 500; }
+    .sim-table tr:hover td { background: var(--ivory-warm); }
+    .sim-table .pos { color: #1a7a3c; font-weight: 600; }
+    .sim-table .neg { color: var(--crimson); font-weight: 600; }
+    .badge-ok {
+      background: #e8f9ee; color: #1a7a3c;
+      padding: 3px 12px; font-size: 10px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .cal-table { width: 100%; border-collapse: collapse; font-size: 11px; overflow-x: auto; display: block; }
+    .cal-table th {
+      padding: 8px 5px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gray-light); border-bottom: 1px solid var(--dark); text-align: right; white-space: nowrap;
+    }
+    .cal-table th:first-child { text-align: left; }
+    .cal-table td { padding: 7px 5px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+    .cal-table td:first-child { font-weight: 700; text-align: left; }
+    .cal-table td.pos { color: #1a7a3c; }
+    .cal-table td.neg { color: var(--crimson); }
+    .cal-table td.na { color: var(--border-warm); }
+    .cal-table td.ann-pos { color: #1a7a3c; font-weight: 700; }
+    .cal-table td.ann-neg { color: var(--crimson); font-weight: 700; }
+    .btn-pdf {
+      background: transparent; color: var(--crimson);
+      border: 2px solid var(--crimson); padding: 15px 40px;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+    .btn-pdf:hover { background: var(--crimson); color: white; }
+
+    /* ── FORM ANALISI ── */
+    .form-section { background: var(--dark); padding: 100px 6%; }
+    .form-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 3vw, 48px); font-weight: 300; color: var(--white);
+      line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.3px;
+    }
+    .form-subtitle { font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 40px; line-height: 1.6; font-weight: 300; }
+    .form-left .section-tag { color: var(--crimson); }
+    .form-promise { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+    .form-promise-item { display: flex; gap: 14px; align-items: flex-start; }
+    .form-promise-item span { color: var(--crimson); font-size: 16px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .form-promise-item p { font-size: 14px; color: rgba(255,255,255,0.78); line-height: 1.65; font-weight: 300; }
+    .form-left a { color: rgba(255,255,255,0.55) !important; transition: color 0.2s; }
+    .form-left a:hover { color: var(--white) !important; }
+    .form-left > p, .form-left p { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 32px; line-height: 1.7; }
+    .form-card { background: var(--ivory); padding: 40px; border-top: 3px solid var(--crimson); }
+    .form-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+    .form-card > p { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-card .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-card .form-group.full { grid-column: 1/-1; }
+    .form-card .form-group label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-light); }
+    .form-card .form-group input, .form-card .form-group select, .form-card .form-group textarea {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-bottom: 2px solid var(--border-warm);
+      color: var(--dark-mid); padding: 12px 14px; font-size: 14px;
+      font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color 0.2s, background 0.2s; border-radius: 0;
+    }
+    .form-card .form-group input:focus, .form-card .form-group select:focus, .form-card .form-group textarea:focus {
+      border-color: var(--crimson); background: var(--white);
+    }
+    .form-card .form-group input::placeholder, .form-card .form-group textarea::placeholder { color: var(--gray-light); }
+    .form-card .form-group select option { background: var(--white); color: var(--dark); }
+    .form-card .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-note { font-size: 11px; color: var(--gray-light); margin-top: 14px; line-height: 1.6; }
+    .form-success { text-align: center; padding: 40px 20px; display: none; }
+    .form-success .check { font-size: 40px; margin-bottom: 16px; }
+    .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--dark); margin-bottom: 10px; }
+    .form-success p { font-size: 14px; color: var(--gray); }
+    .btn-submit {
+      width: 100%; margin-top: 8px;
+      background: var(--crimson); color: white; border: none;
+      padding: 16px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(139,26,26,0.3); border-radius: 0;
+    }
+    .btn-submit:hover { background: var(--crimson-light); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(139,26,26,0.45); }
+    .form-privacy { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 16px; line-height: 1.6; }
+    @media (max-width: 768px) { .form-inner { grid-template-columns: 1fr; gap: 40px; } .form-row { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ivory-warm); border-top: 1px solid var(--border);
+      padding: 60px 6% 40px;
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 13px; color: var(--gray); margin-top: 12px; line-height: 1.7; max-width: 320px; }
+    .footer-col h4 {
+      font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gray-light); margin-bottom: 16px;
+    }
+    .footer-col a { display: block; font-size: 13px; color: var(--gray); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--crimson); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+    }
+    .footer-legal { font-size: 11px; color: var(--gray-light); line-height: 1.7; max-width: 800px; }
+    .footer-finma { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light); white-space: nowrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; gap: 60px; }
+      .metodo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px; z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--dark); transition: all 0.2s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    .nav-mobile-menu {
+      display: none; flex-direction: column; background: var(--white);
+      border-bottom: 1px solid #e0d8cc; padding: 12px 5%;
+      position: fixed; top: 64px; left: 0; right: 0; z-index: 150;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .nav-mobile-menu a {
+      padding: 12px 0; font-size: 14px; font-family: 'Inter',sans-serif;
+      letter-spacing: 1px; text-transform: uppercase; color: var(--dark);
+      text-decoration: none; border-bottom: 1px solid #f0ebe3;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    @media (max-width: 768px) {
+      nav { padding: 0 5%; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .hero { padding: 60px 5% 40px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .track-grid, .come-grid, .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .metodo-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .sim-input-grid { grid-template-columns: 1fr 1fr; }
+      .sim-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ DISCLAIMER POPUP LEGALE EGONON SA ══ -->
+<div id="disclaimerOverlay" style="
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(13,13,13,0.75);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  backdrop-filter:blur(4px);
+">
+  <div style="
+    background:#FFFFFF;
+    border-radius:6px;
+    max-width:560px; width:100%;
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    overflow:hidden;
+    font-family:'Inter',sans-serif;
+  ">
+    <!-- Header -->
+    <div style="padding:28px 32px 16px;">
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:#0D0D0D; margin:0 0 12px;">Disclaimer EGONON SA</h2>
+      <div style="height:2px; background:#8B1A1A; width:100%;"></div>
+    </div>
+    <!-- Testo scrollabile -->
+    <div style="
+      margin:0 32px;
+      padding:16px;
+      background:#F8F6F2;
+      border:1px solid #DDD8D0;
+      border-radius:4px;
+      max-height:260px;
+      overflow-y:auto;
+      font-size:14px;
+      line-height:1.75;
+      color:#1A1A1A;
+    ">
+      <p style="margin-bottom:12px;"><strong>Comunicazione pubblicitaria.</strong> Il presente messaggio ha finalità esclusivamente informative e promozionali e non costituisce consulenza personalizzata in investimenti, raccomandazione personale, offerta, invito, collocamento o sollecitazione all'acquisto, alla vendita o alla sottoscrizione di strumenti finanziari, né proposta di conclusione di un mandato di consulenza o gestione patrimoniale.</p>
+      <p style="margin-bottom:12px;">I dati relativi a performance, volatilità e drawdown sono storici, riferiti a specifici periodi di osservazione e/o alla strategia indicata, e non sono indicativi né garanzia di risultati futuri. Ogni investimento comporta rischi, inclusa la possibile perdita parziale o totale del capitale investito. EGONON SA non garantisce capitale, rendimento o protezione da perdite future.</p>
+      <p style="margin-bottom:12px;">Eventuali servizi potranno essere prestati esclusivamente previa classificazione del cliente, verifica di appropriatezza e/o adeguatezza ove applicabile, messa a disposizione della documentazione informativa e contrattuale richiesta, inclusi, ove previsti, FIB/KID, prospetto o altra documentazione rilevante, e accettazione della relativa documentazione contrattuale.</p>
+      <p>Il presente messaggio è destinato esclusivamente a soggetti per i quali la ricezione sia consentita dalla normativa applicabile. Per non ricevere ulteriori comunicazioni commerciali da EGONON SA, può scrivere a <a href="mailto:info@egonon.ch" style="color:#8B1A1A;">info@egonon.ch</a> indicando "cancellazione" nell'oggetto.</p>
+    </div>
+    <!-- Checkbox -->
+    <div style="padding:20px 32px 8px; display:flex; align-items:center; gap:10px;">
+      <input type="checkbox" id="disclaimerCheck" style="
+        width:18px; height:18px; cursor:pointer;
+        accent-color:#8B1A1A;
+        border:2px solid #8B1A1A;
+        flex-shrink:0;
+      ">
+      <label for="disclaimerCheck" style="font-size:14px; color:#1A1A1A; cursor:pointer; user-select:none;">
+        Accetto le condizioni di cui sopra
+      </label>
+    </div>
+    <!-- Bottone ACCEDI -->
+    <div style="padding:12px 32px 28px;">
+      <button id="disclaimerBtn" disabled onclick="acceptDisclaimer()" style="
+        width:100%;
+        padding:14px;
+        background:#BBBBBB;
+        color:#FFFFFF;
+        border:none;
+        border-radius:4px;
+        font-family:'Inter',sans-serif;
+        font-size:13px;
+        font-weight:600;
+        letter-spacing:0.12em;
+        text-transform:uppercase;
+        cursor:not-allowed;
+        transition:background 0.2s, cursor 0.2s;
+      ">ACCEDI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Blocca scroll mentre popup è aperto
+  document.body.style.overflow = 'hidden';
+
+  var check = document.getElementById('disclaimerCheck');
+  var btn   = document.getElementById('disclaimerBtn');
+
+  check.addEventListener('change', function(){
+    if(this.checked){
+      btn.disabled = false;
+      btn.style.background = '#8B1A1A';
+      btn.style.cursor     = 'pointer';
+    } else {
+      btn.disabled = true;
+      btn.style.background = '#BBBBBB';
+      btn.style.cursor     = 'not-allowed';
+    }
+  });
+})();
+
+function acceptDisclaimer(){
+  var overlay = document.getElementById('disclaimerOverlay');
+  overlay.style.opacity = '0';
+  overlay.style.transition = 'opacity 0.3s';
+  setTimeout(function(){
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
+</script>
+<!-- ══ FINE DISCLAIMER POPUP ══ -->
+
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-box"><img src="https://media.base44.com/images/public/6a1ef83138e7426bdf474b25/3b8f8b7ac_logo4.png" alt="EGONON SA"></div>
+      <div class="nav-brand">
+        <span class="nav-brand-name">EGONON</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#approccio">Il Nostro Approccio</a>
+      <a href="#storia">La Nostra Storia</a>
+      <a href="#track-record">EGONON Global Macro Index</a>
+      <a href="#simulatore">Simulatore</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <a href="#analisi" class="nav-cta">Richiedi Analisi Gratuita</a>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#approccio" onclick="closeMenu()">Il Nostro Approccio</a>
+  <a href="#storia" onclick="closeMenu()">La Nostra Storia</a>
+  <a href="#track-record" onclick="closeMenu()">EGONON Global Macro Index</a>
+  <a href="#simulatore" onclick="closeMenu()">Simulatore</a>
+  <a href="#analisi" onclick="closeMenu()" style="color:var(--crimson);font-weight:700;">Richiedi Analisi Gratuita</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-tag"><span>Svizzera, dal 2007</span>&nbsp;&nbsp;Autorizzata FINMA</p>
+    <h1>
+      Analisi gratuita di
+      <em>Risk Management<br>Istituzionale.</em>
+    </h1>
+    <p class="hero-sub">Scopra se il suo portafoglio è davvero coerente con il suo profilo di rischio.</p>
+    <p class="hero-body">Le restituiamo un'analisi indipendente e gratuita, sviluppata con la metodologia che applichiamo alla nostra clientela istituzionale.</p>
+    <ul class="hero-bullets">
+      <li>Non deve cambiare banca.</li>
+      <li>Non deve spostare nulla.</li>
+      <li>Non deve modificare la sua struttura attuale.</li>
+    </ul>
+    <div class="hero-actions">
+      <a href="#analisi" class="btn-primary">Richiedi analisi gratuita →</a>
+      <a href="#approccio" class="btn-secondary">Scopri il metodo</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-value">+13,54%</div>
+        <div class="stat-label">Performance 12 mesi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">+36,43%</div>
+        <div class="stat-label">Performance 3 anni</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">+42,03%</div>
+        <div class="stat-label">Performance 5 anni</div>
+      </div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="stat-box">
+        <div class="stat-value">1,63</div>
+        <div class="stat-label">Sharpe Ratio (1 anno)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">−3,39%</div>
+        <div class="stat-label">Max Drawdown (1 anno)</div>
+      </div>
+    </div>
+    <div class="egonon-quote">
+      <p><strong>EGONON</strong> nasce nel 2007, 19 anni di storia, sempre gli stessi, fedeli al nostro nome. <em>"Etsi omnes, ego non"</em> <em>"Anche se tutti, io no"</em>. <strong>EGONON</strong></p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TRACK RECORD -->
+<section id="track-record">
+  <div class="section-tag">Track Record</div>
+  <h2 class="section-title">Rendimenti verificabili.<br>Disciplina, non fortuna.</h2>
+  <p class="section-subtitle">Performance del Certificate Linked to EGONON Global Macro Index Opus · ISIN: DE000A2UG4F2 · Fonte: Börse Düsseldorf.</p>
+  <div class="track-grid">
+    <div>
+      <table class="track-table">
+        <thead><tr><th>Periodo</th><th style="text-align:right">Performance</th></tr></thead>
+        <tbody>
+          <tr><td>Ultimo anno</td><td>+13,54%</td></tr>
+          <tr><td>3 anni</td><td>+36,43%</td></tr>
+          <tr><td>5 anni</td><td>+42,03%</td></tr>
+        </tbody>
+      </table>
+      <p class="track-note">Dati al 30.06.2026. Fonte: Börse Düsseldorf · EGONON Global Macro Index Opus (ISIN XS2999220143, BNP Paribas EUR). Le performance passate non sono garanzia di rendimenti futuri.</p>
+    </div>
+    <div>
+            <p style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-bottom:20px;">Asset Allocation — 22.06.2026</p>
+      <div class="allocation-bars">
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Liquidità EUR</span><span>21.26%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:21.26%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Obbligazioni EUR</span><span>34.57%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:24.56%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Azioni USA</span><span>8.03%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:8.03%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Commodities</span><span>7.35%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:7.35%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Altro</span><span>28.79%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:38.80%"></div></div>
+        </div>
+      </div>
+    </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Obbligazioni EUR</span><span>34.57%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:24.56%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Azioni USA</span><span>8.03%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:8.03%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Commodities</span><span>7.35%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:7.35%"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Altro</span><span>28.79%</span></div>
+          <div class="alloc-bar"><div class="alloc-fill" style="width:38.80%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- APPROCCIO / METODO -->
+<section id="approccio">
+  <div class="section-tag">Il Metodo EGONON</div>
+  <h2 class="section-title">Investire per preservare.<br>Preservare per crescere.</h2>
+  <p class="section-subtitle">Ogni decisione di portafoglio parte dal rischio, non dal rendimento. Il risultato è un metodo pensato per attraversare i cicli, non solo per beneficiarne.</p>
+  <div class="metodo-grid">
+    <div class="metodo-card">
+      <div class="metodo-card-num">01</div>
+      <h3>Costruzione Orientata al Rischio</h3>
+      <p>La costruzione del portafoglio inizia con l'analisi degli scenari su dimensioni macro, geografiche e per classe di attivo — prima che venga assunta una singola posizione.</p>
+    </div>
+    <div class="metodo-card">
+      <div class="metodo-card-num">02</div>
+      <h3>Ampiezza Macro Globale</h3>
+      <p>Diversificazione tra azioni, reddito fisso, materie prime, FX e strumenti alternativi — con equilibrio geografico che regge qualunque scenario si materializzi.</p>
+    </div>
+    <div class="metodo-card">
+      <div class="metodo-card-num">03</div>
+      <h3>Precisione Strutturata</h3>
+      <p>Strumenti su misura — OTC, fondi, obbligazioni, depositi — che corrispondono a profili di rischio/rendimento specifici e a visioni di mercato esplicite, non prodotti standard.</p>
+    </div>
+    <div class="metodo-card">
+      <div class="metodo-card-num">04</div>
+      <h3>Tecnologia Quantitativa</h3>
+      <p>Utilizziamo il modello Pareto-Lévy e il sistema proprietario RedES™, con gestione attiva del rischio e drawdown controllato, integrati con AI per misurare il rischio e ridurre i bias. Un Comitato Tecnico-Scientifico dedicato valida ogni scelta di investimento.</p>
+    </div>
+    <div class="metodo-card">
+      <div class="metodo-card-num">05</div>
+      <h3>Gestione Basata su Dati</h3>
+      <p>Ogni decisione è ancorata a modelli quantitativi. Nessuna scelta discrezionale non supportata dai dati. Perché basarsi solo sulle opinioni quando è disponibile la scienza?</p>
+    </div>
+    <div class="metodo-card">
+      <div class="metodo-card-num">06</div>
+      <h3>Governance del Rischio</h3>
+      <p>Monitoraggio continuo degli scenari con alert di ribilanciamento automatici. Attribuzione del rischio a ogni fattore macro — affinché si sappia sempre dove insiste l'esposizione.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COME FUNZIONA -->
+<section>
+  <div class="section-tag">Come Funziona</div>
+  <h2 class="section-title">EGONON si aggiunge —<br>non sostituisce.</h2>
+  <p class="section-subtitle">Il nostro intervento non richiede alcuna modifica alla sua struttura bancaria esistente. Analizziamo, controlliamo e affianchiamo.</p>
+  <div class="come-grid">
+    <div class="come-card">
+      <div class="come-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <polyline points="3 10 12 3 21 10"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  <line x1="5" y1="10" x2="5" y2="19"/>
+  <line x1="9" y1="10" x2="9" y2="19"/>
+  <line x1="15" y1="10" x2="15" y2="19"/>
+  <line x1="19" y1="10" x2="19" y2="19"/>
+  <line x1="3" y1="19" x2="21" y2="19"/>
+</svg></div>
+      <div>
+        <h3>Non deve cambiare banca</h3>
+        <p>Lavoriamo con qualsiasi istituto. Le banche esistenti restano operative — il nostro è un layer indipendente.</p>
+      </div>
+    </div>
+    <div class="come-card">
+      <div class="come-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2 L20 5 L20 11 C20 16 16 20 12 22 C8 20 4 16 4 11 L4 5 Z"/>
+</svg></div>
+      <div>
+        <h3>Non deve spostare il patrimonio</h3>
+        <p>Non chiediamo trasferimenti di liquidità né modifiche alla composizione attuale. Analizziamo l'esistente.</p>
+      </div>
+    </div>
+    <div class="come-card">
+      <div class="come-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <polyline points="3 18 8 11 13 14 18 6"/>
+  <circle cx="18" cy="6" r="1.5" fill="var(--crimson)" stroke="none"/>
+  <line x1="3" y1="21" x2="21" y2="21"/>
+</svg></div>
+      <div>
+        <h3>Analisi indipendente e report periodici</h3>
+        <p>Le restituiamo una fotografia chiara del rischio e della performance — aggiornata, leggibile, in italiano.</p>
+      </div>
+    </div>
+    <div class="come-card">
+      <div class="come-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="5" r="2"/>
+  <circle cx="5" cy="19" r="2"/>
+  <circle cx="19" cy="19" r="2"/>
+  <line x1="12" y1="7" x2="5" y2="17"/>
+  <line x1="12" y1="7" x2="19" y2="17"/>
+  <line x1="7" y1="19" x2="17" y2="19"/>
+</svg></div>
+      <div>
+        <h3>Non modifica la struttura attuale</h3>
+        <p>La sua architettura patrimoniale resta intatta. EGONON aggiunge un livello di controllo, analisi e ottimizzazione.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STORIA -->
+<section id="storia">
+  <div class="section-tag">La Nostra Storia</div>
+  <h2 class="section-title">Tappe Fondamentali</h2>
+  <div class="storia-timeline">
+    <div class="storia-item">
+      <div class="storia-year">2007</div>
+      <div class="storia-content">
+        <h3>Fondazione ad Appenzello</h3>
+        <p>Nasce con focus esclusivo su clientela istituzionale previdenziale e analisi del rischio.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2021</div>
+      <div class="storia-content">
+        <h3>Apertura alla Clientela Privata</h3>
+        <p>Estensione del know-how istituzionale ai patrimoni individuali e HNW.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2022</div>
+      <div class="storia-content">
+        <h3>Autorizzazione Ufficiale FINMA</h3>
+        <p>Ottenimento della licenza come gestore patrimoniale ai sensi della LIsFi.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2024</div>
+      <div class="storia-content">
+        <h3>Crescita e Consolidamento</h3>
+        <p>Apertura della succursale di Lugano ed estensione della licenza FINMA.</p>
+      </div>
+    </div>
+    <div class="storia-item">
+      <div class="storia-year">2025</div>
+      <div class="storia-content">
+        <h3>Gestione Patrimoni Previdenziali</h3>
+        <p>Estensione dell'attività alla gestione di patrimoni di istituti di previdenza, entro le soglie previste dall'art. 24 cpv. 2 lett. b LIsFi / FINIG.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRODOTTI -->
+<section id="prodotti">
+  <div class="section-tag">Strumenti in Portafoglio</div>
+  <h2 class="section-title">AMC — La selezione di EGONON.</h2>
+  <p class="section-subtitle">Prodotti selezionati per profili di rischio definiti. Valute adeguate alle esigenze della clientela private Svizzera.</p>
+  <table class="prodotti-table">
+    <thead>
+      <tr>
+        <th>Emittente</th>
+        <th>Nome</th>
+        <th>ISIN</th>
+        <th>Valuta</th>
+        <th>Taglio minimo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BNP Paribas</td>
+        <td>Certificate Linked to Global Macro TR Index</td>
+        <td><span class="isin-badge">XS2999220143</span></td>
+        <td>EUR</td>
+        <td>EUR 1.000</td>
+        <td><a href="#analisi">Informazioni →</a></td>
+      </tr>
+      <tr>
+        <td>BNP Paribas</td>
+        <td>Certificate Linked to Global Macro TR Index</td>
+        <td><span class="isin-badge">XS3006830379</span></td>
+        <td>USD</td>
+        <td>USD 1.000</td>
+        <td><a href="#analisi">Informazioni →</a></td>
+      </tr>
+      <tr>
+        <td>Vontobel</td>
+        <td>Certificate Linked to Egonon Global Index</td>
+        <td><span class="isin-badge">CH1408235179</span></td>
+        <td>CHF</td>
+        <td>CHF 1.000</td>
+        <td><a href="#analisi">Informazioni →</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px; color:var(--gray-light); margin-top:16px;">Dati aggiornati al 29.05.2026. Per dettagli sui prodotti e disponibilità contattare il proprio partner EGONON.</p>
+</section>
+
+
+<hr class="divider">
+
+<!-- SIMULATORE -->
+<section id="simulatore" class="sim-section">
+  <div class="section-tag">Simulatore</div>
+  <h2 class="section-title">EGONON Global Macro<br>Index Opus — Simulazione.</h2>
+  <p class="section-subtitle">Inserisca importo e data di inizio per simulare l'andamento del suo investimento con i dati storici reali dell'indice.</p>
+
+  <div class="sim-input-card">
+    <div class="sim-input-grid">
+      <div class="sim-form-group">
+        <label>Nome Investitore</label>
+        <input type="text" id="simInvestitore" placeholder="Opzionale">
+      </div>
+      <div class="sim-form-group">
+        <label>Data Inizio Simulazione</label>
+        <div style="display:flex;gap:8px;">
+          <select id="simMese" style="flex:1;">
+            <option value="1">Gen</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">Mag</option>
+            <option value="6">Giu</option>
+            <option value="7">Lug</option>
+            <option value="8">Ago</option>
+            <option value="9">Set</option>
+            <option value="10">Ott</option>
+            <option value="11">Nov</option>
+            <option value="12">Dic</option>
+          </select>
+          <select id="simAnno" style="flex:1.5;">
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020" selected>2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+          </select>
+        </div>
+      </div>
+      <div class="sim-form-group">
+        <label>Importo Investito</label>
+        <input type="number" id="simImporto" value="100000" min="1000" step="1000">
+      </div>
+      <div class="sim-form-group">
+        <label>Valuta</label>
+        <select id="simValuta">
+          <option value="CHF">CHF</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:20px; max-width:200px;">
+      <button type="button" class="btn-simula" onclick="runSim()">SIMULA</button>
+    </div>
+  </div>
+
+  <div id="simResults">
+    <div class="sim-banner" id="simBanner">
+      <h3>Simulazione EGONON Global Macro Index Opus</h3>
+      <p id="simSubtitle"></p>
+    </div>
+
+    <div class="sim-kpi-grid">
+      <div class="sim-kpi navy">
+        <div class="sim-kpi-label">Valore Finale</div>
+        <div class="sim-kpi-value navy" id="simKpiValore">—</div>
+        <div class="sim-kpi-sub" id="simKpiAth">—</div>
+      </div>
+      <div class="sim-kpi green">
+        <div class="sim-kpi-label">Rendimento Totale</div>
+        <div class="sim-kpi-value pos" id="simKpiRend">—</div>
+        <div class="sim-kpi-sub" id="simKpiMesi">—</div>
+      </div>
+      <div class="sim-kpi green">
+        <div class="sim-kpi-label">CAGR</div>
+        <div class="sim-kpi-value pos" id="simKpiCagr">—</div>
+        <div class="sim-kpi-sub">Rendimento annuo composto</div>
+      </div>
+      <div class="sim-kpi">
+        <div class="sim-kpi-label">Volatilità Ann.</div>
+        <div class="sim-kpi-value navy" id="simKpiVol">—</div>
+        <div class="sim-kpi-sub">Rischio annualizzato</div>
+      </div>
+      <div class="sim-kpi red">
+        <div class="sim-kpi-label">Max Drawdown</div>
+        <div class="sim-kpi-value neg" id="simKpiDD">—</div>
+        <div class="sim-kpi-sub" id="simKpiDDDate">—</div>
+      </div>
+    </div>
+
+    <div class="sim-ath" id="simAth" style="display:none">
+      ✅ Il valore EGONON Global Macro Index Opus è oggi al suo massimo storico (30/06/2026). Qualsiasi investimento effettuato in questo strumento nel periodo 2010–2026 sarebbe oggi in guadagno o in pari.
+    </div>
+
+    <!-- EQUITY LINE -->
+    <div class="sim-card">
+      <h4>Equity Line — Performance Simulata</h4>
+      <div class="sim-card-sub" id="simChartSub">—</div>
+      <div class="sim-chart-wrap"><canvas id="simChart"></canvas></div>
+      
+    </div>
+
+    <!-- SCORECARD -->
+    <div class="sim-card">
+      <h4>Scorecard Multi-Orizzonte</h4>
+      <div class="sim-card-sub">Metriche risk-adjusted per orizzonte temporale</div>
+      <table class="sim-table" id="simScorecard"></table>
+    </div>
+
+    <!-- DRAWDOWN -->
+    <div class="sim-card">
+      <h4>Drawdown Recovery Timeline</h4>
+      <div class="sim-card-sub">Ogni drawdown è stato recuperato. Il prodotto è oggi al suo massimo storico.</div>
+      <table class="sim-table" id="simDDTable"></table>
+    </div>
+
+    <!-- CALENDARIO -->
+    <div class="sim-card" style="overflow-x:auto;">
+      <h4>Calendario Rendimenti Anno per Anno</h4>
+      <div class="sim-card-sub" id="simCalSub">—</div>
+      <table class="cal-table" id="simCalendar"></table>
+    </div>
+
+    <!-- PDF -->
+    <div style="text-align:center; margin-top:28px;">
+      <button class="btn-pdf" onclick="simGeneraPDF()">📄 Scarica Report PDF</button>
+    </div>
+  </div>
+</section>
+
+<!-- FORM ANALISI GRATUITA -->
+<div class="form-section" id="analisi">
+  <div class="form-inner">
+    <div class="form-left">
+      <div class="section-tag">Analisi Gratuita</div>
+      <h2 class="section-title" style="color:white;">Richieda la sua<br>analisi gratuita.</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.6);">Le risponderemo entro 24 ore lavorative. Non le chiederemo mai di cambiare banca o spostare il suo patrimonio.</p>
+      <div class="form-promise">
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Analisi indipendente sviluppata con metodologia istituzionale</p>
+        </div>
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Nessun impegno, nessun trasferimento richiesto</p>
+        </div>
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Risposta entro 24 ore lavorative da un partner EGONON</p>
+        </div>
+        <div class="form-promise-item">
+          <span>✓</span>
+          <p>Gestione patrimoniale svizzera autorizzata FINMA dal 2022</p>
+        </div>
+      </div>
+      <p style="margin-top:32px; font-size:13px; color:#666;">
+        Oppure scriva direttamente a <a href="mailto:info@egonon.ch" >info@egonon.ch</a><br>
+      </p>
+    </div>
+    <div class="form-right">
+      <div class="form-card">
+        <h3>Richiesta di analisi</h3>
+        <p>Compili il modulo — la contatteremo entro 24 ore.</p>
+        <div id="formContainer">
+          <form id="leadForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome *</label>
+                <input type="text" id="nome" placeholder="Mario" required>
+              </div>
+              <div class="form-group">
+                <label>Cognome *</label>
+                <input type="text" id="cognome" placeholder="Rossi" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" id="email" placeholder="mario.rossi@esempio.ch" required>
+            </div>
+            <div class="form-group">
+              <label>Telefono</label>
+              <input type="tel" id="telefono" placeholder="+41 xx xxx xx xx">
+            </div>
+            <div class="form-group">
+              <label>Professione</label>
+              <input type="text" id="professione" placeholder="es. Medico, Imprenditore, Direttore...">
+            </div>
+            <div class="form-group">
+              <label>Patrimonio stimato</label>
+              <select id="patrimonio">
+                <option value="">Selezionare...</option>
+                <option>< 200k CHF</option>
+                <option>200k – 500k CHF</option>
+                <option>500k – 1M CHF</option>
+                <option>1M – 5M CHF</option>
+                <option>> 5M CHF</option>
+                <option>Preferisco non indicarlo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Messaggio (opzionale)</label>
+              <textarea id="messaggio" placeholder="Può descrivere brevemente la sua situazione attuale o le sue domande..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit" id="submitBtn">Richiedi analisi gratuita →</button>
+            <p class="form-note">I suoi dati sono trattati in conformità con la normativa svizzera sulla protezione dei dati. Non condividiamo mai informazioni con terzi.</p>
+          </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="check">✅</div>
+          <h3>Richiesta ricevuta.</h3>
+          <p>La contatteremo entro 24 ore lavorative.<br>Nel frattempo può approfondire su <a href="https://egonon.ch" target="_blank" style="color:var(--bordeaux)">egonon.ch</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">EGONON</div>
+  <div class="footer-sub">Gestione Patrimoniale Indipendente · Dal 2007</div>
+  <div class="footer-info">
+    Sede: Rütistrasse 20 · 9050 Appenzello &nbsp;|&nbsp;
+    Succursale: Via della Posta 7 · 6900 Lugano<br>
+    Autorizzata FINMA · Vigilanza continua OSFIN<br>
+    +41 58 566 60 69 &nbsp;·&nbsp;
+    <a href="mailto:info@egonon.ch">info@egonon.ch</a> &nbsp;·&nbsp;
+    <a href="https://egonon.ch" target="_blank">egonon.ch</a>
+  </div>
+  <div class="footer-disclaimer">
+    Tutti gli investimenti comportano rischi. La performance passata non è indicativa di risultati futuri. EGONON SA è una società di gestione patrimoniale svizzera autorizzata da FINMA. I dati di performance sono storici e riferiti a specifici periodi di osservazione.
+  </div>
+</footer>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://media.base44.com/images/public/6a1ef83138e7426bdf474b25/3b8f8b7ac_logo4.png" alt="EGONON SA" style="height:56px;">
+        <p>Gestione Patrimoniale Indipendente autorizzata FINMA ai sensi della LIsFi. Sede: Appenzello - Lugano, Svizzera.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigazione</h4>
+        <a href="#approccio">Il Nostro Approccio</a>
+        <a href="#track-record">Track Record</a>
+        <a href="#storia">La Nostra Storia</a>
+        <a href="#simulatore">Simulatore</a>
+        <a href="#analisi">Analisi Gratuita</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contatti</h4>
+        <a href="mailto:info@egonon.ch">info@egonon.ch</a>
+        <a href="tel:+41585666069">+41 58 566 60 69</a>
+        <a href="https://egonon.ch" target="_blank">egonon.ch</a>
+        <a href="#analisi" style="color:var(--crimson); font-weight:600; margin-top:8px;">→ Richiedi Analisi</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        EGONON SA · Via della Posta 7 · 6900 Lugano · Svizzera · C.F./P.IVA: CHE-484.846.830<br>
+        Il presente sito ha finalità esclusivamente informative e non costituisce consulenza d'investimento né offerta di servizi finanziari. Le performance storiche non sono garanzia di risultati futuri. Ogni investimento comporta rischi, inclusa la possibile perdita del capitale. Per informazioni: <a href="mailto:info@egonon.ch" style="color:var(--crimson)">info@egonon.ch</a>
+      </div>
+      <div class="footer-finma">Autorizzata FINMA<br>LIsFi 2022</div>
+    </div>
+  </div>
+</footer>
+
+</script>
+
+<style id="pdf-print-style">
+@media print {
+  body > *:not(#pdf-print-frame) { display: none !important; }
+  #pdf-print-frame {
+    display: block !important;
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 99999;
+    background: white;
+  }
+}
+</style>
+
+<script>
+function simGeneraPDF() {
+  // Raccoglie i dati dal simulatore
+  var subtitle = document.getElementById('simSubtitle');
+  var kpiValore = document.getElementById('simKpiValore');
+  var kpiRend   = document.getElementById('simKpiRend');
+  var kpiDD     = document.getElementById('simKpiDD');
+  var kpiSharpe = document.getElementById('simKpiSharpe');
+  var kpiCagr   = document.getElementById('simKpiCagr');
+  var kpiVol    = document.getElementById('simKpiVol');
+  var scorecard = document.getElementById('simScorecard');
+  var ddTable   = document.getElementById('simDDTable');
+  var calendar  = document.getElementById('simCalendar');
+
+  if (!kpiValore || !kpiValore.textContent || kpiValore.textContent === '—') {
+    alert('Prima esegua la simulazione per generare il report.');
+    return;
+  }
+
+  var today = new Date().toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'});
+
+  var html = `<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Report EGONON SA</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; color: #1A1A1A; background: #fff; padding: 40px; font-size: 13px; }
+  .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #8B1A1A; padding-bottom: 16px; margin-bottom: 24px; }
+  .header-left h1 { font-size: 22px; color: #8B1A1A; font-weight: 700; letter-spacing: 0.05em; }
+  .header-left p { font-size: 11px; color: #666; margin-top: 4px; }
+  .header-right { text-align: right; font-size: 11px; color: #666; }
+  .section-title { font-size: 14px; font-weight: 700; color: #8B1A1A; margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid #DDD; padding-bottom: 6px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .kpi-box { background: #FAF8F4; border: 1px solid #DDD; border-radius: 4px; padding: 12px; text-align: center; }
+  .kpi-val { font-size: 20px; font-weight: 700; color: #8B1A1A; }
+  .kpi-lbl { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 16px; }
+  th { background: #8B1A1A; color: white; padding: 6px 8px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 5px 8px; border-bottom: 1px solid #EEE; }
+  tr:nth-child(even) td { background: #FAF8F4; }
+  .disclaimer { font-size: 9px; color: #888; line-height: 1.5; border-top: 1px solid #DDD; padding-top: 12px; margin-top: 24px; }
+  .footer { text-align: center; font-size: 10px; color: #AAA; margin-top: 12px; }
+  .pos { color: #1a7a1a; } .neg { color: #8B1A1A; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <h1>EGONON SA</h1>
+    <p>Gestione Patrimoniale Indipendente · Autorizzata FINMA ai sensi della LIsFi</p>
+    <p>Sede: Appenzello – Lugano, Svizzera</p>
+  </div>
+  <div class="header-right">
+    <strong>Report di Simulazione</strong><br>
+    Generato il ${today}<br>
+  </div>
+</div>
+
+<p style="font-size:12px; margin-bottom:16px;">${subtitle ? subtitle.textContent : ''}</p>
+
+<div class="section-title">KPI Principali</div>
+<div class="kpi-grid">
+  <div class="kpi-box"><div class="kpi-val">${kpiValore ? kpiValore.textContent : '—'}</div><div class="kpi-lbl">Valore Finale</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiRend ? kpiRend.textContent : '—'}</div><div class="kpi-lbl">Rendimento Totale</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiCagr ? kpiCagr.textContent : '—'}</div><div class="kpi-lbl">CAGR</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiVol ? kpiVol.textContent : '—'}</div><div class="kpi-lbl">Volatilità Ann.</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiDD ? kpiDD.textContent : '—'}</div><div class="kpi-lbl">Max Drawdown</div></div>
+  <div class="kpi-box"><div class="kpi-val">${kpiSharpe ? kpiSharpe.textContent : '—'}</div><div class="kpi-lbl">Sharpe Ratio</div></div>
+</div>
+
+<div class="section-title">Scorecard Multi-Orizzonte</div>
+${scorecard ? scorecard.outerHTML : '<p>—</p>'}
+
+<div class="section-title">Drawdown Recovery Timeline</div>
+${ddTable ? ddTable.outerHTML : '<p>—</p>'}
+
+<div class="section-title">Calendario Rendimenti</div>
+${calendar ? calendar.outerHTML : '<p>—</p>'}
+
+<div class="disclaimer">
+<strong>Comunicazione pubblicitaria.</strong> Il presente documento ha finalità esclusivamente informative e promozionali e non costituisce consulenza personalizzata in investimenti, raccomandazione personale, offerta, invito o sollecitazione all'acquisto, alla vendita o alla sottoscrizione di strumenti finanziari. I dati relativi a performance, volatilità e drawdown sono storici e non sono indicativi né garanzia di risultati futuri. Ogni investimento comporta rischi, inclusa la possibile perdita parziale o totale del capitale investito. EGONON SA non garantisce capitale, rendimento o protezione da perdite future. Per non ricevere ulteriori comunicazioni commerciali: info@egonon.ch indicando "cancellazione" nell'oggetto.
+</div>
+<div class="footer">EGONON SA · info@egonon.ch · egonon.ch · Autorizzata FINMA · LIsFi 2022</div>
+</body></html>`;
+
+  // Download diretto come file HTML (nessun popup bloccato)
+  var blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'Report_EGONON_SA.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+}
+</script>
+
+<script src="https://superagent-df474b25.base44.app/functions/egononJS"></script>
+</body>
+</html>
