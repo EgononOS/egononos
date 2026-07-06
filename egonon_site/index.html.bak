@@ -681,25 +681,25 @@ function acceptDisclaimer(){
   <div class="hero-right">
     <div class="stats-grid">
       <div class="stat-box">
-        <div class="stat-value">+4,13%</div>
+        <div class="stat-value">+12,19%</div>
         <div class="stat-label">Performance 12 mesi</div>
       </div>
       <div class="stat-box">
-        <div class="stat-value">+10,86%</div>
+        <div class="stat-value">+34,95%</div>
         <div class="stat-label">Performance 3 anni</div>
       </div>
       <div class="stat-box">
-        <div class="stat-value">+9,64%</div>
+        <div class="stat-value">+36,83%</div>
         <div class="stat-label">Performance 5 anni</div>
       </div>
     </div>
     <div class="stats-grid" style="grid-template-columns:1fr 1fr;">
       <div class="stat-box">
-        <div class="stat-value">+1,41</div>
+        <div class="stat-value">1,63</div>
         <div class="stat-label">Sharpe Ratio (1 anno)</div>
       </div>
       <div class="stat-box">
-        <div class="stat-value">−12,27%</div>
+        <div class="stat-value">−3,39%</div>
         <div class="stat-label">Max Drawdown (1 anno)</div>
       </div>
     </div>
