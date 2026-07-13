@@ -1,34 +1,16 @@
-═══════════════════════════════════════════════════════════════
-  EGONON SA — Aggiornamento Settimanale NAV & KPI
-  Lunedì 6 luglio 2026, 08:01 UTC+2
-═══════════════════════════════════════════════════════════════
-
-✓ STATO: COMPLETATO (pronto al push GitHub)
-
-📊 KPI AGGIORNATI (data: 2026-06-30):
-  • Inception Return (2010–now):     +114,90%
-  • YTD 2026:                         +4,13%
-  • 1 Year:                           +10,86%
-  • 3 Years (annualized):             +9,64%
-  • 5 Years (annualized):             +6,18%
-  • Volatility (annualized, 36mo):    5,82%
-  • Sharpe Ratio:                     1,41
-  • Max Drawdown (storico):           −12,27%
-  • Current NAV:                      2.149,01
-
-📁 FILE AGGIORNATI:
-  ✓ egonon_site/index.html           [KPI stats aggiornat nelle righe 684, 688, 692, 698, 702]
-  ✓ functions/egononJS.ts            [SIM_MONTHLY data fino a 2026-06-30]
-  ✓ .agents/egonon_nav_database.csv  [Formato convertito da DOS → Unix]
-
-🔄 PROSSIMO PASSO MANUALE (richiede GitHub token):
-  cd /tmp && git clone https://github.com/egononos/egononos.git
-  cp /app/egonon_site/index.html <repo>/
-  cp /app/functions/egononJS.ts <repo>/path-to-simulator-data/
-  git add . && git commit -m "chore: NAV update 2026-07-06" && git push origin main
-
-⚠️  NOTA: La fonte unica di verità rimane:
-    - .agents/egonon_nav_database.csv (NAV mensuali storici, ISIN DE000A2UG4F2)
-    - Börse Düsseldorf API (per NAV live futuro — attualmente bloccato da 402)
-
-📅 PROSSIMO CICLO: Lunedì 13 luglio 2026, 08:00
+{
+  "timestamp": "2026-07-13T06:03:22.239551",
+  "status": "success",
+  "kpi": {
+    "inception": 114.9,
+    "ytd": 4.13,
+    "one_year": 10.86,
+    "volatility": 7.6,
+    "max_dd": -12.27,
+    "sharpe": 1.03,
+    "nav_current": 2149.01,
+    "nav_date": "2026-07-13"
+  },
+  "records_total": 195,
+  "month_changed": true
+}
