@@ -114,7 +114,14 @@ def calc_kpi(rows):
         candidates = [r for r in rows if r['Date'].startswith(prefix_y)]
         return float(candidates[-1]['NAV_Reconstructed_From_Rounded_Returns']) if candidates else None
 
-    nav_1y = nav_n_years_ago(1)
+    # Performance 12 mesi: lug anno-1 → giu anno corrente (regola fissa EGONON)
+    nav_1y = None
+    july_prefix = f"{last_date.year - 1}-07"
+    for row in rows:
+        if row['Date'].startswith(july_prefix):
+            nav_1y = float(row['NAV_Reconstructed_From_Rounded_Returns'])
+            break
+    # Performance 3Y/5Y: giu N-n → giu N (stesso mese)
     nav_3y = nav_n_years_ago(3)
     nav_5y = nav_n_years_ago(5)
     nav_inception = float(rows[0]['NAV_Reconstructed_From_Rounded_Returns'])
@@ -161,11 +168,88 @@ def update_html(kpi):
         (r'(<td>5 anni<\/td><td>)[+\-][\d,]+%(<\/td>)',      f'\\g<1>{fmt(kpi["p5y"])}\\2'),
         (r'Dati aggiornati al \d{2}\.\d{2}\.\d{4}\.',        f'Dati aggiornati al {kpi["formatted_date"]}.'),
         (r'Dati al \d{2}\.\d{2}\.\d{4}\.',                   f'Dati al {kpi["formatted_date"]}.'),
+        # Sharpe Ratio
+        (r'(<div class="stat-value">)[+\-][\d,]+(</div>\s*<div class="stat-label">Sharpe)', f'\\g<1>+{kpi["sharpe"]:.2f}'.replace('.', ',') + '\\2'),
     ]
     for pat, rep in subs:
         c = re.sub(pat, rep, c)
     with open(INDEX_PATH, 'w', encoding='utf-8') as f:
         f.write(c)
+
+# ─── 5b. AGGIORNA SCORECARD egononos.js ────────────────────────────────────
+def update_scorecard_js(rows, kpi):
+    """Aggiorna la scorecard in egononos.js con KPI ricalcolati."""
+    import math
+    returns = [float(r['Monthly_Return_Decimal']) for r in rows]
+    drawdowns = [float(r['Drawdown_From_Rounded_NAV']) for r in rows]
+    rf = 0.04/12
+    
+    def calc_metrics(rets, dds):
+        n = len(rets)
+        mean_r = sum(rets)/n
+        excess = [r-rf for r in rets]
+        ex_mean = sum(excess)/n
+        ex_std = math.sqrt(sum((e-ex_mean)**2 for e in excess)/(n-1))
+        sharpe = ex_mean/ex_std*math.sqrt(12) if ex_std > 0 else 0
+        downside = [e for e in excess if e < 0]
+        if len(downside) > 1:
+            ds_std = math.sqrt(sum(e**2 for e in downside)/len(downside))
+            sortino = ex_mean/ds_std*math.sqrt(12) if ds_std > 0 else 0
+        else:
+            sortino = 0
+        cum = 1
+        for r in rets: cum *= (1+r)
+        yrs = n/12
+        cagr = (cum**(1/yrs) - 1)*100 if yrs > 0 else 0
+        vol = math.sqrt(sum((r-mean_r)**2 for r in rets)/(n-1))*math.sqrt(12)*100
+        mdd = min(dds)*100 if dds else 0
+        calmar = cagr/abs(mdd) if mdd != 0 else 0
+        return {'cagr': round(cagr,2), 'vol': round(vol,1), 'dd': round(mdd,2),
+                'sh': round(sharpe,2), 'so': round(sortino,2), 'ca': round(calmar,2)}
+    
+    sc = {
+        '1Y': calc_metrics(returns[-12:], drawdowns[-12:]),
+        '3Y': calc_metrics(returns[-36:], drawdowns[-36:]),
+        '5Y': calc_metrics(returns[-60:], drawdowns[-60:]),
+        '10Y': calc_metrics(returns[-120:], drawdowns[-120:]) if len(returns) >= 120 else calc_metrics(returns, drawdowns),
+        'INC': calc_metrics(returns, drawdowns),
+    }
+    
+    with open('egonon_site/egononos.js', 'r', encoding='utf-8') as f:
+        c = f.read()
+    
+    labels = {'1Y': '1 anno', '3Y': '3 anni', '5Y': '5 anni', '10Y': '10 anni', 'INC': 'Inception'}
+    for key, label in labels.items():
+        m = sc[key]
+        pattern = f'{{l:"{label}",cagr:[\d.]+,vol:[\d.]+,dd:[\-\d.]+,sh:[\d.]+,so:[\d.]+,ca:[\d.]+}}'
+        repl = f'{{l:"{label}",cagr:{m["cagr"]},vol:{m["vol"]},dd:{m["dd"]},sh:{m["sh"]},so:{m["so"]},ca:{m["ca"]}}}'
+        c = re.sub(pattern, repl, c)
+    
+    with open('egonon_site/egononos.js', 'w', encoding='utf-8') as f:
+        f.write(c)
+    print("   ✅ Scorecard egononos.js aggiornata")
+
+# ─── 5c. AGGIORNA SIMULATORE.HTML (MONTHLY_RETURNS) ─────────────────────────
+def update_simulatore_html(rows):
+    """Aggiorna MONTHLY_RETURNS in simulatore.html dai dati CSV."""
+    from collections import defaultdict
+    sim = defaultdict(dict)
+    for row in rows:
+        sim[row['Year']][int(row['Month_Number'])] = float(row['Monthly_Return_Pct_Displayed'])
+    
+    lines = ['const MONTHLY_RETURNS = {']
+    for yr in sorted(sim.keys()):
+        ms = ','.join(f'{m}:{v}' for m,v in sorted(sim[yr].items()))
+        lines.append(f'  "{yr}": {{{ms}}},')
+    lines.append('};')
+    sim_js = '\n'.join(lines)
+    
+    with open('egonon_site/simulatore.html', 'r', encoding='utf-8') as f:
+        c = f.read()
+    c = re.sub(r'const MONTHLY_RETURNS = \{[\s\S]*?\};', sim_js, c)
+    with open('egonon_site/simulatore.html', 'w', encoding='utf-8') as f:
+        f.write(c)
+    print("   ✅ Simulatore.html MONTHLY_RETURNS aggiornato")
 
 # ─── 6. AGGIORNA FUNCTION (SIM_MONTHLY + scorecard) ─────────────────────────
 def update_function(rows, kpi):
@@ -242,6 +326,8 @@ if __name__ == '__main__':
 
     # Aggiorna HTML e function
     update_html(kpi)
+    update_scorecard_js(rows, kpi)
+    update_simulatore_html(rows)
     print(f"\n✅ index.html aggiornato")
     update_function(rows, kpi)
     print(f"✅ egononJS.ts aggiornato (SIM_MONTHLY)")
