@@ -429,7 +429,7 @@ function simula() {
   document.getElementById("resultBanner").querySelector("h1").textContent = "Simulazione EGONON Global Macro Index Opus";
   const invName = investitore ? `Investitore: ${investitore}  |  ` : "";
   document.getElementById("resultSubtitle").innerHTML =
-    `${invName}Investimento: <strong>${fmtCurrency(importo, valuta)}</strong> &nbsp;|&nbsp; Data inizio: <strong>${MONTHS_IT[startMonth-1]} ${startYear}</strong> &nbsp;|&nbsp; Data fine: <strong>Giugno 2026</strong>`;
+    `${invName}Investimento: <strong>${fmtCurrency(importo, valuta)}</strong> &nbsp;|&nbsp; Data inizio: <strong>${MONTHS_IT[startMonth-1]} ${startYear}</strong> &nbsp;|&nbsp; Data fine: <strong>Giugno 2026
 
   document.getElementById("kpiValore").textContent = fmtCurrency(nav, valuta);
   document.getElementById("kpiInvestitore").textContent = investitore ? investitore : `ATH: ${fmtCurrency(peak, valuta)}`;
@@ -604,7 +604,7 @@ async function generaPDF() {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.setTextColor(100, 100, 100);
-  doc.text(`Data inizio: ${MONTHS_IT[d.startMonth-1]} ${d.startYear}  |  Data fine: Giugno 2026  |  Durata: ${d.nMonths} mesi`, margin, y);
+  doc.text(`Data inizio: ${MONTHS_IT[d.startMonth-1]} ${d.startYear}  |  Data fine: Giugno 2026
   y += 12;
 
   // KPI boxes
