@@ -1,0 +1,7 @@
+# Optional engines. Do not install blindly in the production runtime.
+# Validate in an isolated Python 3.12/3.13 environment before promotion.
+skfolio==0.20.1
+pandera[pandas]
+pyfolio-reloaded
+# cvxportfolio is GPLv3 and should remain isolated unless legal/architecture review approves it.
+# riskfolio-lib is optional and dependency-heavy; test separately.
