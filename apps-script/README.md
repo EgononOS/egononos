@@ -102,16 +102,39 @@ registerCanonicalDeliverable('GOOGLE_DRIVE_FILE_ID', {
 
 The file must be directly contained in the configured canonical deliverables folder.
 
+## Initial private deployment
+
+The manifest restricts both the web app and Apps Script Execution API to the deploying user. Create the first deployment from the trusted local Mac:
+
+```bash
+cd "$HOME/egononos/apps-script"
+npx clasp push --force
+npx clasp create-deployment --description "EGONON OS private production"
+npx clasp list-deployments
+```
+
+Record the deployment ID without committing it. The stable deployment is updated by GitHub Actions; subsequent runs must not create additional production deployments.
+
 ## GitHub Actions deployment
 
-The workflow `.github/workflows/apps-script-deploy.yml` requires two encrypted repository secrets:
+The workflow `.github/workflows/apps-script-deploy.yml` is manual, restricted to `main`, and requires three encrypted repository secrets:
 
 - `CLASPRC_JSON`: the private contents of the authenticated `~/.clasprc.json` file;
-- `CLASP_JSON`: the private contents of the project's `.clasp.json` file.
+- `CLASP_JSON`: the private contents of the project's `.clasp.json` file;
+- `CLASP_DEPLOYMENT_ID`: the deployment ID returned by the initial private deployment.
 
-These secrets must be added through GitHub's encrypted secrets interface. They must never be committed or printed in workflow logs.
+With GitHub CLI authenticated for this repository, the secrets can be loaded without printing their contents:
 
-The deployment workflow is manual and restricted to `main` until production governance is approved.
+```bash
+cd "$HOME/egononos"
+gh secret set CLASPRC_JSON < "$HOME/.clasprc.json"
+gh secret set CLASP_JSON < apps-script/.clasp.json
+gh secret set CLASP_DEPLOYMENT_ID --body "PASTE_DEPLOYMENT_ID_LOCALLY"
+```
+
+Never commit these values, paste them into chat, place them in Drive documents, or print them in workflow logs. Rotate the `clasp` refresh token if the local machine or GitHub repository credentials are suspected to be compromised.
+
+After the three secrets are present, run the `Deploy EGONON Apps Script` workflow manually from `main`. The workflow pushes the repository source and updates the existing private deployment to a new immutable Apps Script version.
 
 ## Source of truth
 
