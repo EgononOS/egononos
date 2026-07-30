@@ -1,6 +1,8 @@
 # EGONON OS Market Data Redundancy Policy
 
-Status: mandatory for Bottleneck Portfolio CIO and Challenger Lab.
+Status: mandatory system-wide. This policy applies first to the default AI-Driven Core and then to every one of the nine optional named strategies: Bottleneck CIO, EMANUELE Portfolio / VITA, Macro Allocation, Global Equity Scanner, ETF Optimizer, Risk Manager, Event Driven / Special Situations, Deep Value, and Quality Compounders.
+
+No named strategy has privileged status. Bottleneck CIO is one optional methodology among nine. The market-data layer is shared infrastructure governed by the Investment Operating System and must be applied consistently across all ten operating modes.
 
 ## 1. Principle
 
