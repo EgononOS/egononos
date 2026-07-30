@@ -35,18 +35,27 @@ npm install
 npm run clasp:login
 ```
 
-`clasp login --no-localhost` opens a Google OAuth consent flow and asks for a returned authorization code. Complete this step only in a trusted terminal. Never paste `.clasprc.json`, refresh tokens, OAuth client secrets or authorization codes into chat, GitHub issues, Drive documents or source files.
+On a local Mac, `clasp login` opens the Google OAuth consent flow and completes the callback through a temporary localhost port. Use `--no-localhost` only for a trusted remote terminal that cannot receive a local browser callback. Never paste `.clasprc.json`, refresh tokens, OAuth client secrets or authorization codes into chat, GitHub issues, Drive documents or source files.
 
 ## Create the Apps Script project
 
-After login:
+After login, create a standalone project. A standalone project can still be deployed later as a web app:
 
 ```bash
-npx clasp create-script --title "EGONON OS Automation Bridge" --type webapp --rootDir .
-npx clasp push
+mkdir -p "$HOME/egonon-clasp-bootstrap"
+cd "$HOME/egonon-clasp-bootstrap"
+npx clasp create-script --title "EGONON OS Automation Bridge" --type standalone
 ```
 
-The command creates a local `.clasp.json` containing the remote Script ID. Keep that file private.
+Copy the generated private project settings into this directory, then push the repository source:
+
+```bash
+cp "$HOME/egonon-clasp-bootstrap/.clasp.json" .clasp.json
+npx clasp show-file-status
+npx clasp push --force
+```
+
+The `.clasp.json` file contains the remote Script ID and must remain private.
 
 ## Configure Drive and registry IDs
 
