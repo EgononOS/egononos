@@ -1,10 +1,10 @@
 {
   "name": "egonon-os-apps-script-bridge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Google Apps Script bridge for EGONON OS Drive automation and document registry workflows.",
   "scripts": {
-    "clasp:login": "clasp login --no-localhost",
+    "clasp:login": "clasp login",
     "clasp:list": "clasp list-scripts",
     "clasp:push": "clasp push",
     "clasp:pull": "clasp pull",
