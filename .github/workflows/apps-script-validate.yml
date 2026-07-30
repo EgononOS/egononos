@@ -1,0 +1,46 @@
+name: Validate EGONON Apps Script
+
+on:
+  pull_request:
+    paths:
+      - 'apps-script/**'
+      - '.github/workflows/apps-script-*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: apps-script
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install clasp dependency
+        run: npm install --no-audit --no-fund
+
+      - name: Verify clasp version
+        run: npx clasp --version
+
+      - name: Validate Apps Script JavaScript syntax
+        run: |
+          mkdir -p /tmp/egonon-apps-script-check
+          for file in src/*.gs; do
+            target="/tmp/egonon-apps-script-check/$(basename "${file%.gs}").js"
+            cp "$file" "$target"
+            node --check "$target"
+          done
+
+      - name: Validate manifest JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('appsscript.json', 'utf8'))"
