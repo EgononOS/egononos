@@ -24,14 +24,14 @@ The bridge connects the shared Google Drive library with the EGONON document reg
 - Node.js 22 or later.
 - Google Apps Script API enabled for the Google account that owns the scripts.
 - Access to the EGONON shared Drive library and registry spreadsheet.
-- `@google/clasp` 3.3.0, installed through `npm ci`.
+- `@google/clasp` 3.3.0, installed through `npm install`.
 
 ## One-time authorization
 
 From this directory:
 
 ```bash
-npm ci
+npm install
 npm run clasp:login
 ```
 
