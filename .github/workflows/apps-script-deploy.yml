@@ -31,16 +31,20 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Restore clasp credentials
+      - name: Restore private clasp settings
         env:
           CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
           CLASP_JSON: ${{ secrets.CLASP_JSON }}
+          CLASP_DEPLOYMENT_ID: ${{ secrets.CLASP_DEPLOYMENT_ID }}
         run: |
           test -n "$CLASPRC_JSON"
           test -n "$CLASP_JSON"
+          test -n "$CLASP_DEPLOYMENT_ID"
           printf '%s' "$CLASPRC_JSON" > "$HOME/.clasprc.json"
           printf '%s' "$CLASP_JSON" > .clasp.json
           chmod 600 "$HOME/.clasprc.json" .clasp.json
+          printf '%s' "$CLASP_DEPLOYMENT_ID" > /tmp/egonon-clasp-deployment-id
+          chmod 600 /tmp/egonon-clasp-deployment-id
 
       - name: Verify local project status
         run: npx clasp show-file-status
@@ -48,9 +52,11 @@ jobs:
       - name: Push Apps Script source
         run: npx clasp push --force
 
-      - name: Create immutable Apps Script version
-        run: npx clasp create-version "GitHub ${GITHUB_SHA}"
+      - name: Update private Apps Script deployment
+        run: |
+          deployment_id="$(cat /tmp/egonon-clasp-deployment-id)"
+          npx clasp update-deployment "$deployment_id" --description "GitHub ${GITHUB_SHA}"
 
-      - name: Remove credentials
+      - name: Remove private settings
         if: always()
-        run: rm -f "$HOME/.clasprc.json" .clasp.json
+        run: rm -f "$HOME/.clasprc.json" .clasp.json /tmp/egonon-clasp-deployment-id
