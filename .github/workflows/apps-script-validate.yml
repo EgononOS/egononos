@@ -42,5 +42,23 @@ jobs:
             node --check "$target"
           done
 
-      - name: Validate manifest JSON
-        run: node -e "JSON.parse(require('fs').readFileSync('appsscript.json', 'utf8'))"
+      - name: Validate manifest structure
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const manifest = JSON.parse(fs.readFileSync('appsscript.json', 'utf8'));
+          const validAccess = new Set(['MYSELF', 'DOMAIN', 'ANYONE', 'ANYONE_ANONYMOUS']);
+          const validExecuteAs = new Set(['USER_ACCESSING', 'USER_DEPLOYING']);
+          if (!manifest.webapp || !validAccess.has(manifest.webapp.access)) {
+            throw new Error('webapp.access is missing or invalid');
+          }
+          if (!validExecuteAs.has(manifest.webapp.executeAs)) {
+            throw new Error('webapp.executeAs is missing or invalid');
+          }
+          if (!manifest.executionApi || !validAccess.has(manifest.executionApi.access)) {
+            throw new Error('executionApi.access is missing or invalid');
+          }
+          if (!Array.isArray(manifest.oauthScopes) || manifest.oauthScopes.length === 0) {
+            throw new Error('oauthScopes must be a non-empty array');
+          }
+          NODE
