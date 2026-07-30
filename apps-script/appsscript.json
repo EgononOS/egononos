@@ -4,7 +4,8 @@
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "webapp": {
-    "access": "MYSELF"
+    "access": "MYSELF",
+    "executeAs": "USER_DEPLOYING"
   },
   "executionApi": {
     "access": "MYSELF"
