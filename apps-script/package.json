@@ -1,0 +1,20 @@
+{
+  "name": "egonon-os-apps-script-bridge",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Google Apps Script bridge for EGONON OS Drive automation and document registry workflows.",
+  "scripts": {
+    "clasp:login": "clasp login",
+    "clasp:list": "clasp list-scripts",
+    "clasp:push": "clasp push",
+    "clasp:pull": "clasp pull",
+    "clasp:status": "clasp show-file-status",
+    "clasp:deploy": "clasp create-deployment --description \"EGONON OS automated deployment\""
+  },
+  "devDependencies": {
+    "@google/clasp": "3.3.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
