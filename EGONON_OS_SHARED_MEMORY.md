@@ -2,9 +2,9 @@
 
 ## Decision
 
-EGONON OS is the single user-facing project and control plane. TradingAgents, Vibe-Trading, NautilusTrader, Backtrader, and Fincept Terminal are routed as specialist engines behind one shared, versioned memory contract.
+EGONON OS is the single user-facing project and control plane. **EGONON Terminal** is the native visual and analytical surface and replaces Fincept.
 
-The engines must not be installed into one dependency environment. Use one project, one memory, one engine registry, and separate virtual environments, caches, logs, and permissions.
+The user sees one project. Internally, every dependency group remains isolated, versioned, auditable, and connected through the shared-memory contract.
 
 ## Architecture
 
@@ -17,17 +17,24 @@ EGONON OS AI-Driven Core
 | mandates | portfolios | decisions | run receipts |
 +------------------------------------------------+
         |
-Engine Router
+EGONON Terminal
+  | terminal-ui    -> Dash + FinanceToolkit + FinanceDatabase + jQuantStats
+  | portfolio-lab  -> skfolio + Riskfolio-Lib
+  | qlib-lab       -> Qlib AI/ML research
+  | openbb-gateway -> optional isolated AGPL data gateway
+        |
+Specialist engines
   | TradingAgents  -> qualitative multi-agent challenge
   | Vibe-Trading   -> research, alpha exploration, broad backtests
-  | NautilusTrader -> deterministic event-driven validation and paper path
+  | NautilusTrader -> deterministic validation and paper path
   | Backtrader     -> legacy reproduction and simple baseline
-  | Fincept        -> licensed standalone visual terminal only
         |
 Risk + Compliance + Evidence Gates
         |
 Reports / Orders / Committee Outputs / Paper Execution
 ```
+
+Fincept is not an active engine, dependency, or fallback.
 
 ## Shared workspace
 
@@ -36,55 +43,49 @@ Reports / Orders / Committee Outputs / Paper Execution
 ├── project-policy.json
 ├── engine-registry.json
 ├── memory/
-│   ├── index.json
-│   ├── identity/
-│   ├── mandates/
-│   ├── portfolios/
-│   ├── strategies/
-│   ├── decisions/
-│   ├── research-runs/
-│   ├── source-register/
-│   ├── open-items/
-│   └── artifacts/
 ├── interchange/
-│   ├── instrument-master/
-│   ├── data-manifests/
-│   ├── strategy-specs/
-│   ├── order-ledgers/
-│   ├── fill-ledgers/
-│   ├── positions/
-│   └── performance/
 ├── engines/
+│   ├── egonon-terminal/
+│   │   ├── envs/
+│   │   │   ├── terminal-ui/
+│   │   │   ├── portfolio-lab/
+│   │   │   ├── qlib/
+│   │   │   └── openbb/
+│   │   ├── cache/
+│   │   └── exports/
 │   ├── tradingagents/
 │   ├── vibe/
 │   ├── nautilus/
-│   ├── backtrader/
-│   └── fincept/
+│   └── backtrader/
 ├── logs/
 └── receipts/
 ```
 
-## Engine status rules
+## Component policy
 
-Use `INSTALLED` only after exact version or immutable commit, environment path, executable/import check, smoke test, policy check, and receipt are present. Use `AVAILABLE` only when the current runtime can invoke it. Otherwise use `NOT VALIDATED`, `BLOCKED`, or `LICENSE BLOCKED`.
+- **terminal-ui**: Dash 4.4.1, FinanceToolkit 2.1.3, FinanceDatabase 2.4.0, jQuantStats 0.9.6.
+- **portfolio-lab**: skfolio 0.20.1 and Riskfolio-Lib 7.3.0.
+- **qlib-lab**: pyqlib 0.9.7.
+- **openbb-gateway**: OpenBB 4.7.2, optional and isolated because it is AGPL-3.0-only.
+- All runtime groups use Python 3.12 unless a later validated compatibility matrix supersedes it.
 
-## Memory rules
-
-Use append-and-supersede semantics. Preserve facts, assumptions, calculations, inferences, sources, artifacts, confidence, open items, and superseded records separately. Reconcile actual holdings to a dated bank or depositary source before labelling them actual. Never store passwords, tokens, account identifiers, private certificates, unverifiable rumors, or undated market prices as durable truth.
+Use `INSTALLED` only after exact version, environment path, import test, smoke test, policy check, and immutable receipt are present. Otherwise use `PLANNED`, `NOT VALIDATED`, `OPTIONAL NOT INSTALLED`, `PYTHON UNAVAILABLE`, `INSTALL FAILED`, or `SMOKE TEST FAILED`.
 
 ## Quant research path
 
-1. Define the research question and data contract.
-2. Challenge hypotheses with TradingAgents and/or Vibe-Trading.
-3. Run point-in-time backtests and robustness checks.
-4. Rebuild finalists in NautilusTrader for deterministic validation.
-5. Compare order and fill ledgers across engines.
-6. Apply risk, compliance, licensing, and operational gates.
-7. Paper trade with monitoring and kill switches.
-8. Treat live activation as a separate explicitly approved project.
+1. Define the research question and point-in-time data contract.
+2. Use FinanceToolkit and FinanceDatabase for analytics and universe construction.
+3. Use skfolio and Riskfolio-Lib for robust portfolio challenger work.
+4. Use Qlib for isolated AI/ML experiments with train/validation/test separation.
+5. Challenge hypotheses with TradingAgents and/or Vibe-Trading.
+6. Rebuild finalists in NautilusTrader for deterministic validation.
+7. Compare order and fill ledgers across engines.
+8. Apply risk, compliance, licensing, and operational gates.
+9. Paper trade with monitoring and kill switches.
+10. Treat live activation as a separate explicitly approved project.
 
 ## Licensing and execution
 
-TradingAgents is Apache-2.0, Vibe-Trading is MIT, NautilusTrader is LGPL-3.0-or-later, and Backtrader is GPL-3.0-or-later. Fincept Terminal is license-gated: EGONON SA business or internal use requires an executed commercial-license reference.
+Dash, FinanceToolkit, FinanceDatabase, jQuantStats, and Qlib are MIT. skfolio and Riskfolio-Lib are BSD-3-Clause. OpenBB is AGPL-3.0-only and must remain an optional isolated gateway; do not copy it into the proprietary EGONON core.
 
-Live trading is disabled by default. Installation, research, backtesting, and paper trading do not authorize real-capital execution.
+Live trading is disabled by default. Installation, research, dashboards, backtesting, and paper trading do not authorize real-capital execution.
