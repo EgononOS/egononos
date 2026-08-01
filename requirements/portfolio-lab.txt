@@ -1,0 +1,2 @@
+skfolio==0.20.1
+riskfolio-lib==7.3.0
