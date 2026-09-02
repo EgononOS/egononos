@@ -1,0 +1,40 @@
+{
+  "name": "Aggiornamento Settimanale Asset Allocation EGONON",
+  "description": "I will scrape the live composition data from https://markets.vontobel.com/it-ch/prodotti/thematic/certificati-strategic/CH1408235179, map the 5 asset classes (Fondo ETF, Bond, Cash, Prodotto Strutturato, Azioni) to the 5 display buckets on the EGONON website (Liquidit\u00e0 EUR = Cash + overnight ETFs, Obbligazioni EUR = Bond total, Azioni USA = Azioni, Commodities = Prodotto Strutturato, Altro = remaining ETF funds), update the Asset Allocation section in egonon_site/index.html with the new percentages and today's date, then push the updated file to GitHub Pages at https://egononos.github.io/egononos/",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 6 * * 1",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "aggiornamento_settimanale_asset_allocation_egonon",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Scheduled task triggered: Aggiornamento Settimanale Asset Allocation EGONON]\nDescription: I will scrape the live composition data from https://markets.vontobel.com/it-ch/prodotti/thematic/certificati-strategic/CH1408235179, map the 5 asset classes (Fondo ETF, Bond, Cash, Prodotto Strutturato, Azioni) to the 5 display buckets on the EGONON website (Liquidit\u00e0 EUR = Cash + overnight ETFs, Obbligazioni EUR = Bond total, Azioni USA = Azioni, Commodities = Prodotto Strutturato, Altro = remaining ETF funds), update the Asset Allocation section in egonon_site/index.html with the new percentages and today's date, then push the updated file to GitHub Pages at https://egononos.github.io/egononos/"
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

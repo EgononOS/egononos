@@ -1,0 +1,40 @@
+{
+  "name": "Generazione Tweet Settimanale EGONON SA",
+  "description": "I will generate 7 new tweets for EGONON SA's X account covering the week ahead. I will write them across the 5 content pillars (Performance, Macro, Psychology, NAV Data, Educational), add dates, times, categories and hashtags, then append them to the Google Sheet at https://docs.google.com/spreadsheets/d/15Nif_fpC9tMtK5SY2oYPs1VfQtCWvQOU-l-e0chhSLU/edit in the 'Tweet Queue' tab. I will then send a WhatsApp message to Emanuele summarizing the new tweets and reminding him to publish them via Buffer or directly on X.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 6 * * 1",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "generazione_tweet_settimanale_egonon_sa",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Scheduled task triggered: Generazione Tweet Settimanale EGONON SA]\nDescription: I will generate 7 new tweets for EGONON SA's X account covering the week ahead. I will write them across the 5 content pillars (Performance, Macro, Psychology, NAV Data, Educational), add dates, times, categories and hashtags, then append them to the Google Sheet at https://docs.google.com/spreadsheets/d/15Nif_fpC9tMtK5SY2oYPs1VfQtCWvQOU-l-e0chhSLU/edit in the 'Tweet Queue' tab. I will then send a WhatsApp message to Emanuele summarizing the new tweets and reminding him to publish them via Buffer or directly on X."
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

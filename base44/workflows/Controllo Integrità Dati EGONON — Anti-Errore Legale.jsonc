@@ -1,0 +1,40 @@
+{
+  "name": "Controllo Integrit\u00e0 Dati EGONON \u2014 Anti-Errore Legale",
+  "description": "I will scrape the live EGONON website (https://egononos.github.io/egononos/), extract all performance figures displayed (12m, 3y, 5y, Sharpe, Max DD, NAV), recalculate the correct values from the certified CSV (.agents/egonon_nav_database.csv), compare them, and if ANY discrepancy is found \u2014 even 0.01% \u2014 I will immediately send Emanuele a WhatsApp alert with the exact values that are wrong and block any further publication until he confirms. This is a legal compliance check for a FINMA-regulated financial product. Zero tolerance for errors.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "15 6 * * *",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "controllo_integrit_dati_egonon_anti_errore_legale",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Scheduled task triggered: Controllo Integrit\u00e0 Dati EGONON \u2014 Anti-Errore Legale]\nDescription: I will scrape the live EGONON website (https://egononos.github.io/egononos/), extract all performance figures displayed (12m, 3y, 5y, Sharpe, Max DD, NAV), recalculate the correct values from the certified CSV (.agents/egonon_nav_database.csv), compare them, and if ANY discrepancy is found \u2014 even 0.01% \u2014 I will immediately send Emanuele a WhatsApp alert with the exact values that are wrong and block any further publication until he confirms. This is a legal compliance check for a FINMA-regulated financial product. Zero tolerance for errors."
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

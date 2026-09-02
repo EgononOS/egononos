@@ -1,0 +1,40 @@
+{
+  "name": "Briefing Settimanale EGONON SA",
+  "description": "Ogni luned\u00ec mattina alle 08:30 invio ad Emanuele su WhatsApp un briefing completo dello stato della campagna EGONON SA. Il briefing include: 1) NAV aggiornato della settimana, 2) stato campagna outreach (quante email inviate, quante risposte, follow-up in scadenza), 3) prossime azioni consigliate (es. Wave successiva, follow-up, prospect da enrichire), 4) tweet della settimana pronti, 5) qualsiasi anomalia o opportunit\u00e0 rilevata. Scrivo in modo sintetico e operativo, come un report mattutino da chief of staff.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "30 6 * * 1",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "briefing_settimanale_egonon_sa",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Scheduled task triggered: Briefing Settimanale EGONON SA]\nDescription: Ogni luned\u00ec mattina alle 08:30 invio ad Emanuele su WhatsApp un briefing completo dello stato della campagna EGONON SA. Il briefing include: 1) NAV aggiornato della settimana, 2) stato campagna outreach (quante email inviate, quante risposte, follow-up in scadenza), 3) prossime azioni consigliate (es. Wave successiva, follow-up, prospect da enrichire), 4) tweet della settimana pronti, 5) qualsiasi anomalia o opportunit\u00e0 rilevata. Scrivo in modo sintetico e operativo, come un report mattutino da chief of staff."
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

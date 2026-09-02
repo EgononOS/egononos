@@ -1,0 +1,40 @@
+{
+  "name": "Aggiornamento Settimanale EGONON Global Macro Index",
+  "description": "Ogni luned\u00ec alle 08:00 eseguo la pipeline dati certificata EGONON SA:\n1. Leggo il NAV live da B\u00f6rse D\u00fcsseldorf (ISIN DE000A2UG4F2) tramite scraping\n2. Confronto con l'ultimo NAV nel CSV \u2014 se il mese \u00e8 cambiato, calcolo la variazione % e aggiungo la nuova riga mensile al CSV\n3. Ricalcolo tutti i KPI (1Y, 3Y, 5Y, YTD, inception, vol, Sharpe, max DD) direttamente dalla serie storica certificata\n4. Aggiorno index.html con i nuovi KPI\n5. Aggiorno egononJS.ts con il SIM_MONTHLY aggiornato\n6. Eseguo push su GitHub Pages\nFonte unica di verit\u00e0: .agents/egonon_nav_database.csv + B\u00f6rse D\u00fcsseldorf live. Zero stime manuali.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 6 * * 1",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "aggiornamento_settimanale_egonon_global_macro_index",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Scheduled task triggered: Aggiornamento Settimanale EGONON Global Macro Index]\nDescription: Ogni luned\u00ec alle 08:00 eseguo la pipeline dati certificata EGONON SA:\n1. Leggo il NAV live da B\u00f6rse D\u00fcsseldorf (ISIN DE000A2UG4F2) tramite scraping\n2. Confronto con l'ultimo NAV nel CSV \u2014 se il mese \u00e8 cambiato, calcolo la variazione % e aggiungo la nuova riga mensile al CSV\n3. Ricalcolo tutti i KPI (1Y, 3Y, 5Y, YTD, inception, vol, Sharpe, max DD) direttamente dalla serie storica certificata\n4. Aggiorno index.html con i nuovi KPI\n5. Aggiorno egononJS.ts con il SIM_MONTHLY aggiornato\n6. Eseguo push su GitHub Pages\nFonte unica di verit\u00e0: .agents/egonon_nav_database.csv + B\u00f6rse D\u00fcsseldorf live. Zero stime manuali."
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

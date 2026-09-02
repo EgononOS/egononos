@@ -1,0 +1,40 @@
+{
+  "name": "Monitor Risposte Prospect EGONON SA",
+  "description": "I will check the inbox of ebferreri@egonon.ch via Outlook for any new replies from prospects who received EGONON SA outreach emails. I will look for emails from domains that match known prospect contacts in the CRM. If I find any replies, I will send Emanuele a WhatsApp notification with the sender name, subject, and a preview of the message so he can follow up promptly.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 7 * * *",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "monitor_risposte_prospect_egonon_sa",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Scheduled task triggered: Monitor Risposte Prospect EGONON SA]\nDescription: I will check the inbox of ebferreri@egonon.ch via Outlook for any new replies from prospects who received EGONON SA outreach emails. I will look for emails from domains that match known prospect contacts in the CRM. If I find any replies, I will send Emanuele a WhatsApp notification with the sender name, subject, and a preview of the message so he can follow up promptly."
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

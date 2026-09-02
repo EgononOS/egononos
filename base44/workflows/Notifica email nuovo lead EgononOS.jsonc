@@ -1,0 +1,33 @@
+{
+  "name": "Notifica email nuovo lead EgononOS",
+  "description": "I will send an email notification to info@egonon.ch via Outlook whenever a new LeadAnalisi record is created in the CRM, including all contact details (nome, cognome, email, telefono, professione, patrimonio_stimato, messaggio).",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "events": [
+        "create"
+      ],
+      "entity_name": "LeadAnalisi"
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "notifica_email_nuovo_lead_egononos",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_agent_step": {
+          "call": "invoke_superagent_step",
+          "with": {
+            "message": "[Entity automation triggered: Notifica email nuovo lead EgononOS]\nDescription: I will send an email notification to info@egonon.ch via Outlook whenever a new LeadAnalisi record is created in the CRM, including all contact details (nome, cognome, email, telefono, professione, patrimonio_stimato, messaggio).\n\nTriggered by:\n${ .trigger | tojson | .[0:5000] }"
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}
