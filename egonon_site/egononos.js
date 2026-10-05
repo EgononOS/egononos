@@ -218,11 +218,11 @@ function runSim(){
 
   // Scorecard
   const sc=[
-    {l:"1 anno",cagr:9.34,vol:7.3,dd:-3.39,sh:0.71,so:0.92,ca:2.75},
-    {l:"3 anni",cagr:9.56,vol:5.9,dd:-6.41,sh:0.9,so:1.23,ca:1.49},
-    {l:"5 anni",cagr:5.92,vol:7.1,dd:-12.27,sh:0.28,so:0.3,ca:0.48},
-    {l:"10 anni",cagr:4.24,vol:7.2,dd:-12.27,sh:0.06,so:0.06,ca:0.35},
-    {l:"Inception",cagr:4.65,vol:6.3,dd:-12.27,sh:0.12,so:0.12,ca:0.38},
+    {l:"1 anno",cagr:4.54,vol:8.7,dd:-4.18,sh:0.09,so:0.11,ca:1.09},
+    {l:"3 anni",cagr:8.63,vol:6.3,dd:-6.41,sh:0.71,so:0.87,ca:1.35},
+    {l:"5 anni",cagr:5.2,vol:7.2,dd:-12.27,sh:0.19,so:0.2,ca:0.42},
+    {l:"10 anni",cagr:3.93,vol:7.3,dd:-12.27,sh:0.02,so:0.02,ca:0.32},
+    {l:"Inception",cagr:4.44,vol:6.4,dd:-12.27,sh:0.09,so:0.09,ca:0.36},
   ];
   let sh=`<thead><tr><th>Orizzonte</th><th>CAGR</th><th>VOL</th><th>MAX DD</th><th>SHARPE</th><th>SORTINO</th><th>CALMAR</th></tr></thead><tbody>`;
   sc.forEach(r=>{sh+=`<tr><td>${r.l}</td><td class="pos">${sfmt(r.cagr)}</td><td>${r.vol.toFixed(1)}%</td><td class="neg">${sfmt(r.dd)}</td><td>${r.sh.toFixed(2)}</td><td>${r.so.toFixed(2)}</td><td>${r.ca.toFixed(2)}</td></tr>`;});
