@@ -2,8 +2,10 @@ name: Aggiornamento mensile simulatore (Börse Düsseldorf)
 
 on:
   schedule:
-    # 2° giorno di ogni mese, 06:17 UTC (07:17 / 08:17 ora di Lugano)
+    # 2° giorno di ogni mese, 06:17 UTC (07:17 / 08:17 ora di Lugano): nuovo mese nel simulatore
     - cron: "17 6 2 * *"
+    # ogni lunedì 04:47 UTC: indicatori ufficiali Börse Düsseldorf (12 mesi, 3/5 anni, Sharpe, drawdown)
+    - cron: "47 4 * * 1"
   workflow_dispatch: {}
 
 permissions:
