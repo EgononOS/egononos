@@ -422,6 +422,8 @@ window.addEventListener("DOMContentLoaded",()=>{
       try { runSim(); } catch(e){ console.warn("runSim init error:",e); }
     } else if(attempts > 0) {
       setTimeout(()=>tryRunSim(attempts-1), 100);
+    } else {
+      try { runSim(); } catch(e){ console.warn("runSim init error:",e); }
     }
   }
   tryRunSim(20);
