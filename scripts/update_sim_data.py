@@ -45,20 +45,54 @@ def http_get(url, referer=None):
         return r.read().decode("utf-8", "replace")
 
 
-def fetch_history():
-    html = http_get(PAGE)
-    m = re.search(r"var instrument_data\s*=\s*(\{.*?\});", html, re.S)
-    if not m:
-        sys.exit("ERRORE: blocco instrument_data non trovato nella pagina Börse Düsseldorf")
-    cfg = json.loads(m.group(1))
-    endpoint = cfg.get("client_request_endpoint") or "https://www.boerse-duesseldorf.de/wp-admin/admin-ajax.php"
-    q = {"action": "client_instrument_data", "data_type": "historie", "isin": ISIN,
-         "boerse": "dus", "instrument_type": "etc", "einheitscode": "1", "nonce": cfg["nonce"]}
-    raw = http_get(endpoint + "?" + urllib.parse.urlencode(q), referer=PAGE)
-    j = json.loads(raw)
+_CFG = None
+
+
+def fetch(data_type):
+    global _CFG
+    if _CFG is None:
+        html = http_get(PAGE)
+        m = re.search(r"var instrument_data\s*=\s*(\{.*?\});", html, re.S)
+        if not m:
+            sys.exit("ERRORE: blocco instrument_data non trovato nella pagina Börse Düsseldorf")
+        _CFG = json.loads(m.group(1))
+    endpoint = _CFG.get("client_request_endpoint") or "https://www.boerse-duesseldorf.de/wp-admin/admin-ajax.php"
+    q = {"action": "client_instrument_data", "data_type": data_type, "isin": ISIN,
+         "boerse": "dus", "instrument_type": "etc", "einheitscode": "1", "nonce": _CFG["nonce"]}
+    j = json.loads(http_get(endpoint + "?" + urllib.parse.urlencode(q), referer=PAGE))
     if not j.get("success"):
-        sys.exit("ERRORE: risposta Börse Düsseldorf non valida")
+        sys.exit(f"ERRORE: risposta Börse Düsseldorf non valida ({data_type})")
     return j["data"]
+
+
+def fetch_history():
+    return fetch("historie")
+
+
+def pnum(s):
+    """'+26,22%' -> 26.22 ; '1.330,84' -> 1330.84 ; '0,0834' -> 0.0834"""
+    return float(str(s).replace("%", "").replace("+", "").replace(".", "").replace(",", ".").strip())
+
+
+def build_kpi(k, rows, today):
+    """Indicatori ufficiali Börse Düsseldorf + anno in corso dalle chiusure."""
+    out = {"asOf": today.isoformat(), "source": "Börse Düsseldorf, indicatori ufficiali (Kennzahlen)"}
+    for h in ("1y", "3y", "5y"):
+        out["perf_" + h] = pnum(k["perf_" + h])
+        out["maxdd_" + h] = pnum(k["max_verlust_" + h])
+        out["sharpe_" + h] = pnum(k["sharpe_ratio_" + h])
+        out["vola_" + h] = pnum(k["vola_" + h])
+    # prezzo corrente coerente con gli indicatori: riferimento 1 anno x (1 + perf 1 anno)
+    price = pnum(k["letzter_1y"]) * (1 + out["perf_1y"] / 100)
+    out["price"] = round(price, 2)
+    rows = sorted(((r["date_orderable"], num(r["letzter"])) for r in rows if r.get("letzter")), key=lambda x: x[0])
+    prev_year = [r for r in rows if r[0] < f"{today.year:04d}0101"]
+    if prev_year:
+        d, c = prev_year[-1]
+        out["ytd_from"] = f"{d[:4]}-{d[4:6]}-{d[6:]}"
+        out["ytd_from_close"] = c
+        out["ytd"] = round((price / c - 1) * 100, 2)
+    return out
 
 
 def num(s):
@@ -87,9 +121,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="file JSON con la risposta 'historie' già scaricata")
     ap.add_argument("--today", help="data di riferimento YYYY-MM-DD (test)")
+    ap.add_argument("--kpi-json", help="file JSON con la risposta 'kennzahlen' (test)")
     a = ap.parse_args()
 
     rows = json.load(open(a.json))["data"] if a.json else fetch_history()
+    kz = json.load(open(a.kpi_json))["data"] if a.kpi_json else (None if a.json else fetch("kennzahlen"))
     me, last = month_end_closes(rows)
     today = dt.date.fromisoformat(a.today) if a.today else dt.date.today()
     current = f"{today.year:04d}-{today.month:02d}"
@@ -119,6 +155,11 @@ def main():
     data["monthly"] = {y: dict(sorted(v.items(), key=lambda kv: int(kv[0])))
                        for y, v in sorted(data["monthly"].items())}
 
+    if kz:
+        kpi = build_kpi(kz, rows, today)
+        if data.get("kpi") != kpi:
+            changes.append(("kpi", data.get("kpi"), kpi))
+        data["kpi"] = kpi
     for cur, old, r in changes:
         print(f"{cur}: {old} -> {r}")
     if not changes:
