@@ -698,7 +698,7 @@ function acceptDisclaimer(){
       </div>
       <div class="stat-box">
         <div class="stat-value">−12,27%</div>
-        <div class="stat-label">Max Drawdown storico</div>
+        <div class="stat-label">Max Drawdown storico (serie dal 2010, incl. backtest)</div>
       </div>
     </div>
     <div class="egonon-quote">
@@ -725,7 +725,7 @@ function acceptDisclaimer(){
           <tr><td>5 anni</td><td>+28,87%</td></tr>
         </tbody>
       </table>
-      <p class="track-note">Dati al 30.09.2026. Fonte: Börse Düsseldorf · EGONON Global Macro Index Opus (ISIN XS2999220143, BNP Paribas EUR). Le performance passate non sono garanzia di rendimenti futuri.</p>
+      <p class="track-note">Dati al 30.09.2026. Fonte: Börse Düsseldorf · EGONON Global Macro Index Opus (ISIN DE000A2UG4F2). Le performance passate non sono garanzia di rendimenti futuri.</p>
     </div>
     <div>
                         <p style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-bottom:20px;">Asset Allocation — 26.10.2026</p>
@@ -956,7 +956,7 @@ function acceptDisclaimer(){
 <section id="simulatore" class="sim-section">
   <div class="section-tag">Simulatore</div>
   <h2 class="section-title">EGONON Global Macro<br>Index Opus — Simulazione.</h2>
-  <p class="section-subtitle">Inserisca importo e data di inizio per simulare l'andamento del suo investimento con i dati storici reali dell'indice.</p>
+  <p class="section-subtitle">Inserisca importo e data di inizio per simulare l'andamento del suo investimento sulla serie storica dell'indice. Fino a giugno 2019 i dati sono una simulazione retrospettiva della strategia (backtest); da luglio 2019 riflettono il certificato DE000A2UG4F2 quotato alla Börse Düsseldorf, aggiornato ogni mese.</p>
 
   <div class="sim-input-card">
     <div class="sim-input-grid">
@@ -1055,7 +1055,7 @@ function acceptDisclaimer(){
     </div>
 
     <div class="sim-ath" id="simAth" style="display:none">
-      ✅ Il valore EGONON Global Macro Index Opus è oggi al suo massimo storico (30/06/2026). Qualsiasi investimento effettuato in questo strumento nel periodo 2010–2026 sarebbe oggi in guadagno o in pari.
+      Fino a 06/2019: simulazione retrospettiva della strategia (backtest). Da 07/2019: certificato DE000A2UG4F2 (Börse Düsseldorf). Le performance passate, reali o simulate, non sono indicative né garanzia di risultati futuri.
     </div>
 
     <!-- EQUITY LINE -->
@@ -1346,6 +1346,7 @@ ${calendar ? calendar.outerHTML : '<p>—</p>'}
 }
 </script>
 
-<script src="https://superagent-df474b25.base44.app/functions/egononJS"></script>
+<script src="sim_data.js"></script>
+<script src="egononos.js?v=20261026"></script>
 </body>
 </html>

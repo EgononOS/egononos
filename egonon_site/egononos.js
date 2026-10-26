@@ -1,4 +1,4 @@
-// EGONON SA — EgononOS v5
+// EGONON SA — EgononOS v5.1 (dati simulatore da sim_data.js)
 // Script unificato (esterno) — nessun inline per compatibilità CSP
 
 
@@ -47,35 +47,56 @@
 
 
 // ── DATI STORICI MENSILI ──
-const SIM_MONTHLY = {
-  "2010": {4:0.0,5:1.3,6:1.1,7:-0.5,8:3.2,9:-0.7,10:0.1,11:-1.3,12:0.0},
-  "2011": {1:-1.8,2:1.5,3:-0.1,4:3.5,5:-0.9,6:-0.7,7:2.8,8:-0.3,9:-0.8,10:1.6,11:-0.1,12:0.6},
-  "2012": {1:2.3,2:0.7,3:-0.2,4:1.0,5:0.3,6:0.4,7:2.2,8:0.6,9:0.5,10:-0.4,11:1.0,12:-0.3},
-  "2013": {1:-0.4,2:1.1,3:1.1,4:2.0,5:-1.7,6:-2.2,7:0.6,8:-0.5,9:2.0,10:1.9,11:1.6,12:-0.1},
-  "2014": {1:0.1,2:1.9,3:0.0,4:0.3,5:1.7,6:1.0,7:0.5,8:2.2,9:-0.3,10:0.4,11:2.1,12:0.3},
-  "2015": {1:2.4,2:1.4,3:1.2,4:-1.5,5:-0.8,6:-3.1,7:1.3,8:-3.6,9:-0.8,10:1.9,11:0.4,12:-1.2},
-  "2016": {1:0.6,2:0.6,3:0.2,4:-0.2,5:-0.2,6:2.3,7:0.9,8:-0.4,9:0.3,10:-1.1,11:-3.0,12:0.3},
-  "2017": {1:1.2,2:1.8,3:-0.4,4:0.4,5:0.5,6:-1.3,7:0.6,8:1.5,9:-0.9,10:1.8,11:0.7,12:0.4},
-  "2018": {1:1.3,2:-1.1,3:-1.2,4:1.1,5:1.0,6:0.4,7:0.1,8:0.8,9:-0.6,10:-2.2,11:0.1,12:-2.4},
-  "2019": {1:2.8,2:1.0,3:2.6,4:0.9,5:-2.7,6:2.9,7:-0.1,8:-0.1,9:-0.1,10:-0.2,11:0.3,12:0.7},
-  "2020": {1:0.7,2:-1.0,3:-9.5,4:3.3,5:-0.7,6:-0.2,7:0.3,8:3.1,9:-1.7,10:1.0,11:-0.6,12:5.8},
-  "2021": {1:2.5,2:-0.1,3:-2.1,4:2.0,5:-1.1,6:3.8,7:1.4,8:2.7,9:-2.8,10:5.1,11:1.9,12:-0.1},
-  "2022": {1:-2.0,2:-0.3,3:0.9,4:-0.9,5:-4.8,6:-2.7,7:3.8,8:-1.8,9:-4.8,10:0.8,11:0.0,12:-0.4},
-  "2023": {1:1.2,2:-1.4,3:2.7,4:0.1,5:2.4,6:1.1,7:2.4,8:-0.3,9:-1.7,10:-0.3,11:3.8,12:1.3},
-  "2024": {1:2.5,2:3.4,3:1.7,4:-0.3,5:1.8,6:1.8,7:-1.1,8:0.3,9:0.3,10:0.2,11:0.2,12:0.2},
-  "2025": {1:1.4,2:-0.9,3:-1.8,4:0.1,5:2.6,6:1.2,7:1.2,8:-0.3,9:1.4,10:2.0,11:-1.3,12:0.1},
-  "2026": {1:4.5,2:-0.3,3:-3.1,4:3.5,5:2.0,6:-0.5,7:-3.7,8:2.3}
-};
-const SIM_DD = [
-  {ev:"2022 rates/inflation",dd:-12.27,tr:10,rc:16},
-  {ev:"COVID-19",dd:-10.40,tr:2,rc:10},
-  {ev:"2015 commodity/China",dd:-8.23,tr:6,rc:28},
-  {ev:"Q4 2018 risk-off",dd:-5.13,tr:4,rc:3},
-  {ev:"2013 consolidation",dd:-3.82,tr:2,rc:4},
-  {ev:"2010/11 euro risk-off",dd:-3.52,tr:5,rc:3},
-  {ev:"2026 Q1 risk-off",dd:-3.39,tr:2,rc:2},
-  {ev:"2021 mini shock",dd:-2.80,tr:1,rc:1},
-];
+// Serie in egonon_site/sim_data.js (aggiornata ogni mese da Börse Düsseldorf, ISIN DE000A2UG4F2).
+const SIM_META = window.EGONON_SIM || {monthly:{}};
+const SIM_MONTHLY = {};
+Object.keys(SIM_META.monthly).forEach(y=>{SIM_MONTHLY[y]={};Object.keys(SIM_META.monthly[y]).forEach(m=>{SIM_MONTHLY[y][+m]=SIM_META.monthly[y][m];});});
+const SIM_SERIES = (()=>{const out=[];Object.keys(SIM_MONTHLY).map(Number).sort((a,b)=>a-b).forEach(y=>{Object.keys(SIM_MONTHLY[y]).map(Number).sort((a,b)=>a-b).forEach(m=>out.push({y,m,r:SIM_MONTHLY[y][m]}));});return out;})();
+const SIM_FIRST = SIM_SERIES[0] || {y:2010,m:4};
+const SIM_LAST = SIM_SERIES[SIM_SERIES.length-1] || {y:2026,m:6};
+const MESI_LUNGHI = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+const SIM_END_LABEL = MESI_LUNGHI[SIM_LAST.m-1]+" "+SIM_LAST.y;
+const SIM_END_SHORT = String(SIM_LAST.m).padStart(2,"0")+"/"+SIM_LAST.y;
+const SIM_LIVE_FROM = SIM_META.liveFrom || "2019-07";
+const SIM_NOTE = (()=>{const [y,m]=SIM_LIVE_FROM.split("-").map(Number);const pm=m===1?12:m-1,py=m===1?y-1:y;
+  return "Fino a "+String(pm).padStart(2,"0")+"/"+py+": simulazione retrospettiva della strategia (backtest), non performance realizzata. Da "+String(m).padStart(2,"0")+"/"+y+": certificato DE000A2UG4F2 (fonte Börse Düsseldorf). Dati al "+SIM_END_SHORT+".";})();
+
+function simStats(rets){
+  if(!rets.length) return null;
+  let nav=1,peak=1,mdd=0;
+  rets.forEach(r=>{nav*=(1+r/100);if(nav>peak)peak=nav;const dd=(nav/peak-1)*100;if(dd<mdd)mdd=dd;});
+  const nY=rets.length/12;
+  const cagr=(Math.pow(nav,1/nY)-1)*100;
+  const mean=rets.reduce((a,b)=>a+b,0)/rets.length;
+  const sd=Math.sqrt(rets.reduce((a,b)=>a+Math.pow(b-mean,2),0)/Math.max(1,rets.length-1));
+  const down=Math.sqrt(rets.reduce((a,b)=>a+Math.pow(Math.min(0,b),2),0)/rets.length);
+  const vol=sd*Math.sqrt(12);
+  return {cagr,vol,dd:mdd,sh:sd>0?(mean*12)/(sd*Math.sqrt(12)):0,so:down>0?(mean*12)/(down*Math.sqrt(12)):0,ca:mdd<0?cagr/Math.abs(mdd):0};
+}
+function simScorecard(){
+  const all=SIM_SERIES.map(p=>p.r);
+  return [["1 anno",12],["3 anni",36],["5 anni",60],["10 anni",120],["Dal "+SIM_FIRST.y,all.length]]
+    .filter(([,n])=>n<=all.length).map(([l,n])=>Object.assign({l},simStats(all.slice(-n))));
+}
+function simDDEpisodes(){
+  const out=[];let nav=1,peak=1,peakI=-1,ep=null;
+  SIM_SERIES.forEach((p,i)=>{
+    nav*=(1+p.r/100);
+    if(nav>=peak){ if(ep){ep.rc=i-ep.troughI;ep.ok=true;out.push(ep);ep=null;} peak=nav;peakI=i; return; }
+    const dd=(nav/peak-1)*100;
+    if(!ep) ep={startI:peakI+1,dd:0,troughI:i};
+    if(dd<ep.dd){ep.dd=dd;ep.troughI=i;}
+  });
+  if(ep){ep.rc=null;ep.ok=false;out.push(ep);}
+  const lbl=i=>{const p=SIM_SERIES[Math.max(0,i)];return MESI_LUNGHI[p.m-1].slice(0,3)+" "+p.y;};
+  const live=+SIM_LIVE_FROM.replace("-","");
+  return out.filter(e=>e.dd<=-2).sort((a,b)=>a.dd-b.dd).slice(0,8).map(e=>{
+    const t=SIM_SERIES[e.troughI];
+    return {ev:lbl(e.startI)+" – "+lbl(e.troughI)+((t.y*100+t.m)<live?" (simulato)":""),
+            dd:+e.dd.toFixed(2), tr:e.troughI-e.startI+1, rc:e.rc, ok:e.ok};
+  });
+}
+const SIM_DD = simDDEpisodes();
 const MESI = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
 let simData = null;
 
@@ -168,7 +189,7 @@ function runSim(){
   const navSeries=[{v:imp,lbl:MESI[sm-1]+" "+sy}];
   const monthRets=[];
   let y=sy,m=sm;
-  const endY=2026,endM=6;
+  const endY=SIM_LAST.y,endM=SIM_LAST.m;
   while(y<endY||(y===endY&&m<=endM)){
     const yr=SIM_MONTHLY[String(y)];
     const r=yr&&yr[m]!==undefined?yr[m]:null;
@@ -198,7 +219,7 @@ function runSim(){
   simResultsEl.style.visibility = "visible";
   simResultsEl.style.opacity = "1";
   const invName=inv?`Investitore: ${inv}  |  `:"";
-  document.getElementById("simSubtitle").innerHTML=`${invName}Investimento: <strong>${sccy(imp,cur)}</strong> &nbsp;|&nbsp; Inizio: <strong>${MESI[sm-1]} ${sy}</strong> &nbsp;|&nbsp; Fine: <strong>Giugno 2026</strong>`;
+  document.getElementById("simSubtitle").innerHTML=`${invName}Investimento: <strong>${sccy(imp,cur)}</strong> &nbsp;|&nbsp; Inizio: <strong>${MESI[sm-1]} ${sy}</strong> &nbsp;|&nbsp; Fine: <strong>${SIM_END_LABEL}</strong>`;
   document.getElementById("simKpiValore").textContent=sccy(nav,cur);
   document.getElementById("simKpiAth").textContent="ATH: "+sccy(peak,cur);
   document.getElementById("simKpiRend").textContent=sfmt(totRet);
@@ -207,30 +228,25 @@ function runSim(){
   document.getElementById("simKpiVol").textContent=sfmt(vol);
   document.getElementById("simKpiDD").textContent=sfmt(maxDD);
   document.getElementById("simKpiDDDate").textContent="Data: "+maxDDDate;
-  if(isATH)document.getElementById("simAth").style.display="block";
-  else document.getElementById("simAth").style.display="none";
+  const athEl=document.getElementById("simAth");
+  if(athEl){athEl.style.display="block";
+    athEl.textContent=(isATH?"Al "+SIM_END_SHORT+" il valore simulato coincide con il massimo del periodo selezionato. ":"")+SIM_NOTE+" Le performance passate, reali o simulate, non sono indicative né garanzia di risultati futuri.";}
 
   // Grafico Canvas nativo — requestAnimationFrame garantisce layout aggiornato
   requestAnimationFrame(() => {
     drawNativeChart(document.getElementById("simChart"), navSeries, cur);
   });
-  document.getElementById("simChartSub").textContent=`Dal ${MESI[sm-1]}/${sy} al 6/2026 — ${nM} mesi  |  ATH: ${sccy(peak,cur)}`;
+  document.getElementById("simChartSub").textContent=`Dal ${MESI[sm-1]}/${sy} al ${SIM_END_SHORT} — ${nM} mesi  |  ATH: ${sccy(peak,cur)}`;
 
   // Scorecard
-  const sc=[
-    {l:"1 anno",cagr:4.54,vol:8.7,dd:-4.18,sh:0.09,so:0.11,ca:1.09},
-    {l:"3 anni",cagr:8.63,vol:6.3,dd:-6.41,sh:0.71,so:0.87,ca:1.35},
-    {l:"5 anni",cagr:5.2,vol:7.2,dd:-12.27,sh:0.19,so:0.2,ca:0.42},
-    {l:"10 anni",cagr:3.93,vol:7.3,dd:-12.27,sh:0.02,so:0.02,ca:0.32},
-    {l:"Inception",cagr:4.44,vol:6.4,dd:-12.27,sh:0.09,so:0.09,ca:0.36},
-  ];
-  let sh=`<thead><tr><th>Orizzonte</th><th>CAGR</th><th>VOL</th><th>MAX DD</th><th>SHARPE</th><th>SORTINO</th><th>CALMAR</th></tr></thead><tbody>`;
-  sc.forEach(r=>{sh+=`<tr><td>${r.l}</td><td class="pos">${sfmt(r.cagr)}</td><td>${r.vol.toFixed(1)}%</td><td class="neg">${sfmt(r.dd)}</td><td>${r.sh.toFixed(2)}</td><td>${r.so.toFixed(2)}</td><td>${r.ca.toFixed(2)}</td></tr>`;});
+  const sc=simScorecard();
+  let sh=`<thead><tr><th>Orizzonte</th><th>CAGR</th><th>VOL</th><th>MAX DD</th><th>SHARPE*</th><th>SORTINO*</th><th>CALMAR</th></tr></thead><tbody>`;
+  sc.forEach(r=>{sh+=`<tr><td>${r.l}</td><td class="${r.cagr>=0?"pos":"neg"}">${sfmt(r.cagr)}</td><td>${r.vol.toFixed(1)}%</td><td class="neg">${sfmt(r.dd)}</td><td>${r.sh.toFixed(2)}</td><td>${r.so.toFixed(2)}</td><td>${r.ca.toFixed(2)}</td></tr>`;});
   document.getElementById("simScorecard").innerHTML=sh+"</tbody>";
 
   // DD table
   let dh=`<thead><tr><th>Evento</th><th>Max DD</th><th>Mesi Trough</th><th>Mesi Recovery</th><th>Stato</th></tr></thead><tbody>`;
-  SIM_DD.forEach(d=>{dh+=`<tr><td>${d.ev}</td><td class="neg">${sfmt(d.dd)}</td><td>${d.tr}</td><td>${d.rc}</td><td><span class="badge-ok">RECOVERED</span></td></tr>`;});
+  SIM_DD.forEach(d=>{dh+=`<tr><td>${d.ev}</td><td class="neg">${sfmt(d.dd)}</td><td>${d.tr}</td><td>${d.rc==null?"—":d.rc}</td><td>${d.ok?'<span class="badge-ok">RECOVERED</span>':"IN CORSO"}</td></tr>`;});
   document.getElementById("simDDTable").innerHTML=dh+"</tbody>";
 
   // Calendar
@@ -248,11 +264,13 @@ function runSim(){
     }
     const ap=(ar-1)*100;
     if(ap>0)posY++;
-    const sfx=yr===2026?" YTD":"%";
+    const sfx=yr===SIM_LAST.y&&SIM_LAST.m<12?" YTD":"%";
     ch+=`<td class="${ap>=0?"ann-pos":"ann-neg"}">${(ap>=0?"+":"")+ap.toFixed(1)+sfx}</td></tr>`;
   });
   document.getElementById("simCalendar").innerHTML=ch+"</tbody>";
-  document.getElementById("simCalSub").textContent=`Rendimento medio annuo: +5.88%  |  Anni positivi: ${posY}/${yrs.length}`;
+  const fullYrs=yrs.filter(yr=>Object.keys(SIM_MONTHLY[String(yr)]).length===12);
+  const avgY=fullYrs.length?fullYrs.reduce((a,yr)=>a+(Object.values(SIM_MONTHLY[String(yr)]).reduce((p,r)=>p*(1+r/100),1)-1)*100,0)/fullYrs.length:0;
+  document.getElementById("simCalSub").textContent=`Rendimento medio annuo (anni completi): ${sfmt(avgY,2)}  |  Anni positivi: ${posY}/${yrs.length}  |  ${SIM_NOTE}  *Sharpe e Sortino con tasso privo di rischio 0%.`;
 
   document.getElementById("simResults").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -272,14 +290,14 @@ function simGeneraPDF(){
   doc.text("Gestione Patrimoniale Indipendente  ·  Autorizzata FINMA",ml,22);
   doc.text("Via della Posta 7, 6900 Lugano  ·  info@egonon.ch  ·  +41 58 566 60 69",ml,29);
   doc.setFontSize(9);doc.setTextColor(255,255,255);
-  doc.text("SIMULAZIONE EGONON GLOBAL MACRO INDEX OPUS — ISIN XS2999220143",ml,37);
+  doc.text("SIMULAZIONE EGONON GLOBAL MACRO INDEX OPUS — ISIN DE000A2UG4F2",ml,37);
   y=50;
   // Subtitle
   doc.setFontSize(11);doc.setFont("helvetica","bold");doc.setTextColor(26,39,68);
   const invN=d.inv?`${d.inv}  —  `:"";
   doc.text(`${invN}Investimento: ${sccy(d.imp,d.cur)}`,ml,y);y+=7;
   doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(100,100,100);
-  doc.text(`Inizio: ${MESI[d.sm-1]} ${d.sy}  |  Fine: Giugno 2026  |  Durata: ${d.nM} mesi`,ml,y);y+=12;
+  doc.text(`Inizio: ${MESI[d.sm-1]} ${d.sy}  |  Fine: ${SIM_END_LABEL}  |  Durata: ${d.nM} mesi`,ml,y);y+=12;
   // KPIs
   const kpis=[
     {l:"VALORE FINALE",v:sccy(d.nav,d.cur),c:[26,39,68]},
@@ -301,15 +319,15 @@ function simGeneraPDF(){
   });
   y+=30;
   // ATH
-  doc.setFillColor(240,255,244);doc.rect(ml,y,W-2*ml,9,"F");
-  doc.setFontSize(8);doc.setFont("helvetica","italic");doc.setTextColor(26,122,60);
-  doc.text("✓  Massimo storico raggiunto al 30/06/2026. Ogni investimento dal 2010 è in guadagno.",ml+3,y+6);
-  y+=15;
+  doc.setFillColor(255,248,230);doc.rect(ml,y,W-2*ml,12,"F");
+  doc.setFontSize(7.5);doc.setFont("helvetica","italic");doc.setTextColor(120,80,0);
+  doc.text(doc.splitTextToSize(SIM_NOTE+" Performance passate, reali o simulate, non garantiscono risultati futuri.",W-2*ml-6),ml+3,y+5);
+  y+=18;
   // Scorecard
   doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(26,39,68);
   doc.text("SCORECARD MULTI-ORIZZONTE",ml,y);y+=6;
-  const scH=["Orizzonte","CAGR","Volatilità","Max DD","Sharpe","Sortino","Calmar"];
-  const scD=[["1 anno","+8.70%","9.6%","-3.39%","0.91","0.60","2.57"],["3 anni","+10.38%","6.8%","-12.27%","1.53","2.27","0.85"],["5 anni","+7.91%","7.5%","-12.27%","1.05","1.49","0.64"],["10 anni","+7.29%","5.8%","-12.27%","1.25","1.92","0.59"],["Inception","+6.70%","7.3%","-12.27%","0.92","1.28","0.55"]];
+  const scH=["Orizzonte","CAGR","Volatilità","Max DD","Sharpe*","Sortino*","Calmar"];
+  const scD=simScorecard().map(r=>[r.l,sfmt(r.cagr,2),r.vol.toFixed(1)+"%",sfmt(r.dd,2),r.sh.toFixed(2),r.so.toFixed(2),r.ca.toFixed(2)]);
   const cw=(W-2*ml)/scH.length;
   doc.setFillColor(26,39,68);doc.rect(ml,y,W-2*ml,8,"F");
   doc.setTextColor(255,255,255);doc.setFontSize(7.5);doc.setFont("helvetica","bold");
@@ -327,7 +345,7 @@ function simGeneraPDF(){
   doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(26,39,68);
   doc.text("DRAWDOWN RECOVERY TIMELINE",ml,y);y+=6;
   const ddH=["Evento","Max DD","Trough","Recovery","Stato"];
-  const ddCW=[65,25,22,28,24];
+  const ddCW=[70,22,20,26,26];
   doc.setFillColor(26,39,68);doc.rect(ml,y,W-2*ml,8,"F");
   doc.setTextColor(255,255,255);doc.setFontSize(7.5);doc.setFont("helvetica","bold");
   let cx=ml;ddH.forEach((h,i)=>{doc.text(h,cx+2,y+5.5);cx+=ddCW[i];});y+=8;
@@ -335,7 +353,7 @@ function simGeneraPDF(){
     doc.setFillColor(ri%2===0?255:247,ri%2===0?255:247,ri%2===0?255:245);
     doc.rect(ml,y,W-2*ml,7,"F");doc.setFontSize(8);
     cx=ml;
-    [d2.ev,sfmt(d2.dd),String(d2.tr),String(d2.rc),"RECOVERED"].forEach((v,ci)=>{
+    [d2.ev,sfmt(d2.dd),String(d2.tr),d2.rc==null?"—":String(d2.rc),d2.ok?"RECOVERED":"IN CORSO"].forEach((v,ci)=>{
       doc.setTextColor(ci===1?192:ci===4?26:40,ci===1?57:ci===4?122:40,ci===1?43:ci===4?60:40);
       doc.setFont("helvetica",ci===0||ci===4?"bold":"normal");
       doc.text(v,cx+2,y+5);cx+=ddCW[ci];
@@ -372,7 +390,7 @@ function simGeneraPDF(){
   doc.text("EGONON SA  ·  www.egonon.ch  ·  +41 58 566 60 69  ·  Autorizzata FINMA",ml,H-17);
   doc.setFontSize(6.5);doc.setTextColor(100,115,150);
   doc.text("Documento simulativo. Le performance passate non garantiscono risultati futuri. EGONON SA è autorizzata ai sensi della LIsFi.",ml,H-10);
-  doc.text("ISIN XS2999220143 · EGONON Global Macro Index Opus.",ml,H-5);
+  doc.text("ISIN DE000A2UG4F2 · EGONON Global Macro Index Opus · Fonte: Börse Düsseldorf · *Sharpe/Sortino con risk-free 0%.",ml,H-5);
   const dt=new Date().toISOString().split("T")[0];
   const nm=d.inv?d.inv.replace(/\s+/g,"_"):"Simulazione";
   doc.save(`EGONON_${nm}_${dt}.pdf`);
