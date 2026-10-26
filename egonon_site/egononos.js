@@ -276,7 +276,9 @@ function runSim(){
 }
 
 function simGeneraPDF(){
-  if(!simData)return;
+  if(!simData){ try{runSim();}catch(e){} }
+  if(!simData){ alert("Prima esegua la simulazione per generare il report."); return; }
+  if(!window.jspdf||!window.jspdf.jsPDF){ alert("Generatore PDF non disponibile: ricarichi la pagina e riprovi."); return; }
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
   const W=210,H=297,ml=18;
@@ -303,7 +305,7 @@ function simGeneraPDF(){
     {l:"VALORE FINALE",v:sccy(d.nav,d.cur),c:[26,39,68]},
     {l:"RENDIMENTO",v:sfmt(d.totRet),c:[26,122,60]},
     {l:"CAGR",v:sfmt(d.cagr),c:[26,122,60]},
-    {l:"VOLATILITÀ",v:sfmt(d.vol),c:[60,60,60]},
+    {l:"VOLATILITÀ",v:d.vol.toFixed(1)+"%",c:[60,60,60]},
     {l:"MAX DRAWDOWN",v:sfmt(d.maxDD),c:[192,57,43]},
   ];
   const bw=(W-2*ml-16)/5;
