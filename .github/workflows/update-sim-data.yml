@@ -1,0 +1,40 @@
+name: Aggiornamento mensile simulatore (Börse Düsseldorf)
+
+on:
+  schedule:
+    # 2° giorno di ogni mese, 06:17 UTC (07:17 / 08:17 ora di Lugano)
+    - cron: "17 6 2 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-sim-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Aggiorna egonon_site/sim_data.js
+        run: python3 scripts/update_sim_data.py
+      - name: Commit e push se ci sono variazioni
+        run: |
+          if git diff --quiet -- egonon_site/sim_data.js; then
+            echo "Nessuna variazione."
+            exit 0
+          fi
+          git config user.name "EGONON Sim Updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add egonon_site/sim_data.js
+          git commit -m "Simulatore: dati mensili Börse Düsseldorf DE000A2UG4F2 al $(date -u +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 20
+          done
+          exit 1
