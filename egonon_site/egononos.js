@@ -270,7 +270,7 @@ function runSim(){
   document.getElementById("simCalendar").innerHTML=ch+"</tbody>";
   const fullYrs=yrs.filter(yr=>Object.keys(SIM_MONTHLY[String(yr)]).length===12);
   const avgY=fullYrs.length?fullYrs.reduce((a,yr)=>a+(Object.values(SIM_MONTHLY[String(yr)]).reduce((p,r)=>p*(1+r/100),1)-1)*100,0)/fullYrs.length:0;
-  document.getElementById("simCalSub").textContent=`Rendimento medio annuo (anni completi): ${sfmt(avgY,2)}  |  Anni positivi: ${posY}/${yrs.length}  |  ${SIM_NOTE}  *Sharpe e Sortino con tasso privo di rischio 0%.`;
+  document.getElementById("simCalSub").textContent=`Rendimento medio annuo (anni completi): ${sfmt(avgY,2)}  |  Anni positivi: ${posY}/${yrs.length}  |  ${SIM_NOTE}  *Indicatori del simulatore calcolati su rendimenti di fine mese (gli indicatori ufficiali di borsa usano prezzi giornalieri); Sharpe e Sortino con tasso privo di rischio 0%.`;
 
   document.getElementById("simResults").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -395,6 +395,37 @@ function simGeneraPDF(){
   const nm=d.inv?d.inv.replace(/\s+/g,"_"):"Simulazione";
   doc.save(`EGONON_${nm}_${dt}.pdf`);
 }
+
+// ── KPI SITO (indicatori ufficiali Börse Düsseldorf da sim_data.js) ──
+function egnPct(v,d){d=d==null?2:d;return (v>=0?"+":"−")+Math.abs(v).toFixed(d).replace(".",",")+"%";}
+function egnNum(v,d){return (v<0?"−":"")+Math.abs(v).toFixed(d).replace(".",",");}
+function egnDate(iso){const p=String(iso).split("-");return p[2]+"."+p[1]+"."+p[0];}
+function egnYearsBack(iso,n){const p=String(iso).split("-");return p[2]+"."+p[1]+"."+(+p[0]-n);}
+function egnFillKpi(){
+  const k=(window.EGONON_SIM||{}).kpi; if(!k) return;
+  const asOf=egnDate(k.asOf);
+  document.querySelectorAll(".stat-box").forEach(b=>{
+    const l=b.querySelector(".stat-label"), v=b.querySelector(".stat-value"); if(!l||!v) return;
+    const t=l.textContent;
+    if(/sharpe/i.test(t)){v.textContent=egnNum(k.sharpe_1y,2);l.textContent="Sharpe Ratio (1 anno)";}
+    else if(/drawdown/i.test(t)){v.textContent=egnPct(k.maxdd_5y);l.textContent="Max drawdown (5 anni)";}
+    else if(/12 mesi|1 anno/i.test(t)){v.textContent=egnPct(k.perf_1y);l.textContent="Performance 12 mesi";}
+    else if(/3 anni/i.test(t)){v.textContent=egnPct(k.perf_3y);l.textContent="Performance 3 anni";}
+    else if(/5 anni/i.test(t)){v.textContent=egnPct(k.perf_5y);l.textContent="Performance 5 anni";}
+  });
+  const hn=document.getElementById("egnKpiNote");
+  if(hn) hn.textContent="Certificato DE000A2UG4F2 · indicatori ufficiali Börse Düsseldorf al "+asOf+". Le performance passate non sono indicative né garanzia di risultati futuri.";
+  document.querySelectorAll(".track-table tbody tr").forEach(tr=>{
+    const c=tr.cells; if(c.length<2) return; const t=c[0].textContent;
+    if(/^\s*ultimo anno/i.test(t)){c[0].textContent="Ultimo anno ("+egnYearsBack(k.asOf,1)+" – "+asOf+")";c[1].textContent=egnPct(k.perf_1y);}
+    else if(/^\s*anno in corso/i.test(t)&&k.ytd!=null){c[0].textContent="Anno in corso ("+egnDate(k.ytd_from)+" – "+asOf+")";c[1].textContent=egnPct(k.ytd);}
+    else if(/^\s*3 anni/i.test(t)){c[0].textContent="3 anni ("+egnYearsBack(k.asOf,3)+" – "+asOf+")";c[1].textContent=egnPct(k.perf_3y);}
+    else if(/^\s*5 anni/i.test(t)){c[0].textContent="5 anni ("+egnYearsBack(k.asOf,5)+" – "+asOf+")";c[1].textContent=egnPct(k.perf_5y);}
+  });
+  const tn=document.querySelector("#track-record .track-note");
+  if(tn) tn.textContent="Dati al "+asOf+". Fonte: Börse Düsseldorf, indicatori ufficiali del certificato DE000A2UG4F2 (EGONON Global Macro Index Opus); anno in corso calcolato sulle chiusure Börse Düsseldorf dal "+egnDate(k.ytd_from)+". Max drawdown 5 anni "+egnPct(k.maxdd_5y)+", volatilità 1 anno "+egnPct(k.vola_1y).replace("+","")+". Le performance passate non sono indicative né garanzia di risultati futuri.";
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",egnFillKpi); else egnFillKpi();
 
 // Auto-run on load
 function toggleMenu(){
