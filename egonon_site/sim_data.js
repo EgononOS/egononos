@@ -247,21 +247,21 @@ window.EGONON_SIM = {
  "kpi": {
   "asOf": "2026-11-02",
   "source": "Börse Düsseldorf, indicatori ufficiali (Kennzahlen)",
-  "perf_1y": 2.12,
+  "perf_1y": 0.72,
   "maxdd_1y": -5.35,
   "sharpe_1y": 0.0532,
   "vola_1y": 8.12,
-  "perf_3y": 25.88,
+  "perf_3y": 24.16,
   "maxdd_3y": -6.22,
   "sharpe_3y": 0.8818,
   "vola_3y": 6.64,
-  "perf_5y": 21.21,
+  "perf_5y": 19.55,
   "maxdd_5y": -13.62,
   "sharpe_5y": 0.3043,
   "vola_5y": 6.68,
-  "price": 1365.75,
+  "price": 1347.03,
   "ytd_from": "2025-12-30",
   "ytd_from_close": 1320.64,
-  "ytd": 3.42
+  "ytd": 2.0
  }
 };
