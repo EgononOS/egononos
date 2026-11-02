@@ -1,14 +1,14 @@
 // GENERATO DA scripts/update_sim_data.py — non modificare a mano
 window.EGONON_SIM = {
- "asOf": "2026-09-30",
- "lastClose": 1368.65,
- "lastCloseDate": "2026-09-30",
+ "asOf": "2026-10-30",
+ "lastClose": 1365.71,
+ "lastCloseDate": "2026-10-30",
  "isin": "DE000A2UG4F2",
  "source": "Börse Düsseldorf (boerse-duesseldorf.de), chiusure di fine mese",
  "liveFrom": "2019-07",
  "rebasedFrom": "2025-11",
  "note": "Dati fino a 06/2019: simulazione retrospettiva della strategia. Da 07/2019: certificato DE000A2UG4F2 quotato. Dal mese indicato in rebasedFrom i rendimenti mensili sono ricalcolati dalle chiusure Börse Düsseldorf e agganciati alla serie storica totale del simulatore.",
- "updatedAt": "2026-10-26",
+ "updatedAt": "2026-11-02",
  "monthly": {
   "2010": {
    "4": 0,
@@ -240,27 +240,28 @@ window.EGONON_SIM = {
    "6": -0.53,
    "7": -3.7,
    "8": 2.35,
-   "9": -0.74
+   "9": -0.74,
+   "10": -0.21
   }
  },
  "kpi": {
-  "asOf": "2026-10-26",
+  "asOf": "2026-11-02",
   "source": "Börse Düsseldorf, indicatori ufficiali (Kennzahlen)",
-  "perf_1y": 2.22,
+  "perf_1y": 2.12,
   "maxdd_1y": -5.35,
-  "sharpe_1y": 0.0834,
-  "vola_1y": 8.08,
-  "perf_3y": 26.22,
+  "sharpe_1y": 0.0532,
+  "vola_1y": 8.12,
+  "perf_3y": 25.88,
   "maxdd_3y": -6.22,
-  "sharpe_3y": 0.898,
-  "vola_3y": 6.67,
-  "perf_5y": 21.58,
+  "sharpe_3y": 0.8818,
+  "vola_3y": 6.64,
+  "perf_5y": 21.21,
   "maxdd_5y": -13.62,
-  "sharpe_5y": 0.3177,
-  "vola_5y": 6.67,
-  "price": 1360.38,
+  "sharpe_5y": 0.3043,
+  "vola_5y": 6.68,
+  "price": 1365.75,
   "ytd_from": "2025-12-30",
   "ytd_from_close": 1320.64,
-  "ytd": 3.01
+  "ytd": 3.42
  }
 };
